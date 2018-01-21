@@ -40,7 +40,7 @@ CREATE table teachers(
 
 CREATE table classroom(
 	classroom_id int(2) primary key auto_increment,
-	class_color varchar((20) not null unique,
+	class_color varchar(20) not null unique,
 	teacher_id int(6),
 	INDEX (teacher_id),
 	FOREIGN KEY (teacher_id)
@@ -60,7 +60,7 @@ CREATE table students(
 
 CREATE table facilitation_times(
 	slot_id int(7) primary key auto_increment,
-	classroom_id int(2) primary key auto_increment,
+	classroom_id int(2),
 	date_scheduled date,
 	time_start datetime,
 	time_end datetime,
