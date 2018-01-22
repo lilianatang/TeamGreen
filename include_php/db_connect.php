@@ -1,4 +1,10 @@
 <?php
+
+// This class is to initiate the connection to the database 
+// Usage: $connection = new DB_Connect();
+// Return: a connection to the database
+// Author: Liliana Quyen Tang
+
 class DB_Connect {
     private $connection;
 
