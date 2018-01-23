@@ -1,3 +1,11 @@
+/*--------------------------------------------------------------------------------------------------------
+* This document contains event handling objects and methods for the CodyHouse Schedule template
+* Source: https://codyhouse.co/gem/schedule-template/
+* 
+* Additional alterations to the original code have been made to accommodate the facilitation sign up process.
+* Edited by Komal 
+*--------------------------------------------------------------------------------------------------------*/
+
 jQuery(document).ready(function($){
 	var transitionEnd = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
 	var transitionsSupported = ( $('.csstransitions').length > 0 );
@@ -6,6 +14,7 @@ jQuery(document).ready(function($){
 	
 	//should add a loading while the events are organized 
 
+	// From the original author
 	function SchedulePlan( element ) {
 		this.element = element;
 		this.timeline = this.element.find('.timeline');
@@ -27,17 +36,19 @@ jQuery(document).ready(function($){
 		this.modalBodyBg = this.modal.find('.body-bg'); 
 		this.modalMaxWidth = 800;
 		this.modalMaxHeight = 480;
-
+		
 		this.animating = false;
 
 		this.initSchedule();
 	}
 
+	// From the original author
 	SchedulePlan.prototype.initSchedule = function() {
 		this.scheduleReset();
 		this.initEvents();
 	};
 
+	// From the original author
 	SchedulePlan.prototype.scheduleReset = function() {
 		var mq = this.mq();
 		if( mq == 'desktop' && !this.element.hasClass('js-full') ) {
@@ -61,6 +72,7 @@ jQuery(document).ready(function($){
 		}
 	};
 
+	// From the original author
 	SchedulePlan.prototype.initEvents = function() {
 		var self = this;
 
@@ -86,6 +98,7 @@ jQuery(document).ready(function($){
 		});
 	};
 
+	// From the original author
 	SchedulePlan.prototype.placeEvents = function() {
 		var self = this;
 		this.singleEvents.each(function(){
@@ -105,26 +118,30 @@ jQuery(document).ready(function($){
 		this.element.removeClass('loading');
 	};
 
+	// From the original author
 	 SchedulePlan.prototype.openModal = function(event) {
 		var self = this;
 		var mq = self.mq();
 		this.animating = true;
-
+		
 		//update event name and time
 		this.modalHeader.find('.event-name').text(event.find('.event-name').text());
 		this.modalHeader.find('.event-date').text(event.find('.event-date').text());
 		this.modal.attr('data-event', event.parent().attr('data-event'));
-
-		//update event content
+		
+		//update event content based on an html file
 		this.modalBody.find('.event-info').load("facilitation-sign-up.html", function(data){
 			//once the event content has been loaded
 			self.element.addClass('content-loaded');
+			
+			
+			// ADD TO THE FILE LOADED IN HERE
+			
+			//console.log(createIntervals(event.find('.event-date').text()));
+			
+			//self.modalBody.find("#date-and-time").text(self.currentEvent.find(".event-date").text());
 		});
-
-		var button = $("<button> SIGN UP FROM JS. </button>");
-		this.modalBody.find('.body .event-info').append(button);
-		console.log(this.modalBody.find('.body .event-info'));
-		
+				
 		this.element.addClass('modal-is-open');
 
 		setTimeout(function(){
@@ -197,8 +214,11 @@ jQuery(document).ready(function($){
 
 		//if browser do not support transitions -> no need to wait for the end of it
 		if( !transitionsSupported ) self.modal.add(self.modalHeaderBg).trigger(transitionEnd);
+		
+		
 	};
-
+	
+	// From the original author
 	SchedulePlan.prototype.closeModal = function(event) {
 		var self = this;
 		var mq = self.mq();

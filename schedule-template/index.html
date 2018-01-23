@@ -1,23 +1,42 @@
+<!--------------------------------------------------------------------------------------------------------
+* This document contains all the calendar and date picker code
+* Source: https://codyhouse.co/gem/schedule-template/ & http://www.tikalk.com/incubator/week-picker-using-jquery-ui-datepicker/
+* 
+* Additional alterations to the original code have been made to accommodate the faciliation sign up process.
+* Edited by Komal 
+*-------------------------------------------------------------------------------------------------------->
+
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<!-- Style Sheets Used by the Original Author -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
 	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
 	<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">
   	
-	<title>Schedule Template | CodyHouse</title>
+	<title>Facilitation Sign Up</title>
 </head>
 <body>
+
+<!-- This is a TEMPORARY from I'm going to use to see if I can connect to the database ... -->
+<form id = "enter-data">
+
+<label>Enter Family ID</label> <input type = "text">   </input>
+<button	type = "Submit" > Submit </button>
+
+</form>
 
 <!-- Insert the Week Picker Calendar -->
 <div class="week-picker"></div>
 
 <!-- Creation of Schedule -->
 <div class="cd-schedule loading">
+
+	<!-- This timeline corresponds to the time grid on the left of the page -->
 	<div class="timeline">
 		<ul>
 			<li><span>08:00</span></li>
@@ -39,15 +58,18 @@
 		</ul>
 	</div> <!-- .timeline -->
 
+	
+	<!-- All the faciliation events are in the following div. Every ate consists of a the event name and information -->
+	
 	<div class="events">
 		<ul>
 			<li class="events-group">
-				<div class="top-info" id = "day-1"><span>Monday January 22</span></div>
+				<div class="top-info"><span class = "date" >Monday January 22 2018</span></div>
 
 				<ul>
 					<li class="single-event" data-start="08:45" data-end="12:00" data-content="facilitation-sign-up" data-event="event-1">
 						<a href="#0">
-							<em class="event-name">Morning Facilitation</em>
+							<em class="event-name" ></em>
 							<br>
 							<strong style = "color: white; font-size: 15px;"> 1 of 4 positions available </strong>
 						</a>
@@ -55,7 +77,7 @@
 
 					<li class="single-event" data-start="11:50" data-end="13:00" data-content="facilitation-sign-up" data-event="event-2">
 						<a href="#0">
-							<em class="event-name">Lunch Facilitation</em>
+							<em class="event-name" >Lunch Facilitation</em>
 							<br>
 							<strong style = "color: red; font-size: 15px;"> 0 of 4 positions available </strong>
 						</a>
@@ -72,7 +94,7 @@
 			</li>
 
 			<li class="events-group">
-				<div class="top-info" id = "day-2"><span>Tuesday January 23</span></div>
+				<div class="top-info"><span class = "date">Tuesday January 23 2018</span></div>
 
 				<ul>
 					<li class="single-event" data-start="08:45" data-end="12:00" data-content="facilitation-sign-up" data-event="event-1">
@@ -102,7 +124,7 @@
 			</li>
 
 			<li class="events-group">
-				<div class="top-info" id = "day-3"><span>Wednesday January 24</span></div>
+				<div class="top-info"><span class = "date">Wednesday January 24 2018</span></div>
 
 				<ul>
 					<li class="single-event" data-start="08:45" data-end="12:00" data-content="facilitation-sign-up" data-event="event-1">
@@ -132,7 +154,7 @@
 			</li>
 
 			<li class="events-group">
-				<div class="top-info" id = "day-4"><span>Thursday January 25</span></div>
+				<div class="top-info" ><span class = "date">Thursday January 25 2018</span></div>
 
 				<ul>
 					<li class="single-event" data-start="08:45" data-end="12:00" data-content="facilitation-sign-up" data-event="event-1">
@@ -162,7 +184,7 @@
 			</li>
 
 			<li class="events-group">
-				<div class="top-info" id = "day-5"><span>Friday January 26</span></div>
+				<div class="top-info"><span class = "date">Friday January BLAHHH 2018</span></div>
 
 				<ul>
 					<li class="single-event" data-start="08:45" data-end="15:45" data-content="facilitation-sign-up" data-event="event-1">
@@ -180,8 +202,10 @@
 		</ul>
 	</div>
 	
-	<!-- Event Modal Outline (Will be added to when user clicks a day) -->
+	<!-- Event Modal Outline - This is the window that pops up when you click an event. The tags below are populated when the user clicks an event. -->
 	<div class="event-modal">
+	
+		<!-- Modal Header - contains event information -->
 		<header class="header">
 			<div class="content">
 				<span class="event-date"></span>
@@ -192,8 +216,9 @@
 			<div class="header-bg"></div>
 		</header>
 
+		<!-- Modal Body - Contains the event form for booking fieldtrip or ordinary events -->
 		<div class="body">
-			<div class="event-info"> <!--Information is inserted here! -->  </div>
+			<div class="event-info"> <!--Information from the html file (Facilitation-sign-up) is inserted here! -->  </div>
 			<div class="body-bg" style = ""></div>
 		</div>
 
@@ -212,8 +237,9 @@
 	<!-- Week Picker Code -->	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-    
 	<script type="text/javascript">
+	
+	// From the original author
 	$(function() {
 	
 		var week = [];
@@ -237,7 +263,7 @@
 			var nums = date.split("/");
 			var stringDate = "";
 			
-			stringDate += months[parseInt(nums[0] - 1)];
+			stringDate = months[parseInt(nums[0] - 1)];
 			stringDate += " ";
 			stringDate += nums[1];
 			stringDate += " ";
@@ -251,6 +277,7 @@
 			window.setTimeout(function () {
 				$('.week-picker').find('.ui-datepicker-current-day a').addClass('ui-state-active')
 			}, 1);
+			
 		}
 		
 		// From the original author
@@ -260,27 +287,26 @@
 			onSelect: function(dateText, inst) { 
 				var date = $(this).datepicker('getDate');
 				
-				startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
-				endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
+				//startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
+				//endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
 				var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
 				
-				$('#startDate').text($.datepicker.formatDate( dateFormat, startDate, inst.settings ));
-				$('#endDate').text($.datepicker.formatDate( dateFormat, endDate, inst.settings ));
+				//$('#startDate').text($.datepicker.formatDate( dateFormat, startDate, inst.settings ));
+				//$('#endDate').text($.datepicker.formatDate( dateFormat, endDate, inst.settings ));
 				
-				<!-- Get all the dates for the week selected  ---- NEED TO UPDATE THE CALENDAR ACCORDINGLY -->   
+				var weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+				<!-- Get all the dates for the week selected and update the calendar accordingly -->   
 				for (var i = 1; i < 6; i++){
 					
 					var d = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + i);
-					var days = $(".top-info");
+					var days = $(".top-info .date");
+					//var formatted-date = $.datepicker.formatDate( dateFormat, d, inst.settings );
 					$(days[i-1])
-						.text(dateString($.datepicker.formatDate( dateFormat, d, inst.settings )))
-						.css("display", "inline-block")
-						.css("font-weight", "bold")
-						.css("margin-bottom", "10px");
+						.text(weekDays[i - 1] + " " + dateString($.datepicker.formatDate( dateFormat, d, inst.settings )))
+						.css("margin-bottom", "10px")
+						.css("text-align", "center");
+					$(days[i-1]).find(".single-event").attr('date', weekDays[i - 1] + " " + dateString($.datepicker.formatDate( dateFormat, d, inst.settings )));
 				}
-				
-				console.log(week);
-				
 				
 				selectCurrentWeek();
 			},
@@ -298,7 +324,12 @@
 		
 		$('.week-picker .ui-datepicker-calendar tr').live('mousemove', function() { $(this).find('td a').addClass('ui-state-hover'); });
 		$('.week-picker .ui-datepicker-calendar tr').live('mouseleave', function() { $(this).find('td a').removeClass('ui-state-hover'); });
+	
+		
+		$('.week-picker').trigger("click");
 	});
+	
+	
 	</script>
 
 

@@ -458,7 +458,7 @@ Main Components
 }
 
 .cd-schedule .event-modal .event-date {
-  display: none;
+  /*display: none;*/
 }
 
 .cd-schedule .event-modal.no-transition {
