@@ -18,10 +18,6 @@ class DB_Calendar {
 
 	}
 
-
-
-
-
 	//add your extra functions here 
 
 
