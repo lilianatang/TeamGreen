@@ -1,0 +1,47 @@
+/*-------------------------------------------------------------
+* This document styling for the user login page. 
+*
+* Author: Komal Aheer
+*--------------------------------------------------------------*/
+
+body {
+	text-align: center;
+	background-color: rgb(199,236,87);
+	margin: 25% 20% 20% 20%;
+}
+
+#logo {
+	
+	width: 450px;
+}
+
+#login-form {
+	
+	font-family: sans-serif;
+	font-weight: bold;
+	
+}
+
+#id-label {
+	margin: 20px 210px 20px 20px;
+}
+
+#password-label {
+	margin: 20px 190px 20px 20px;
+	
+}
+
+input {
+	margin: 10px 10px 10px 10px;
+	width: 250px;
+	height: 25px;
+}
+
+button {
+	
+	margin:10px 10px 10px 10px; 
+	height: 30px;
+	width: 80px;
+	
+}
+
