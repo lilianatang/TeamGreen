@@ -7,11 +7,24 @@
 body {
 	text-align: center;
 	background-color: rgb(199,236,87);
-	margin: 25% 20% 20% 20%;
+	margin-top: 55px;
 }
 
-#logo {
+input {
+	margin: 10px 10px 10px 10px;
+	width: 250px;
+	height: 25px;
+}
+
+button {
 	
+	margin:10px 10px 10px 10px; 
+	height: 30px;
+	width: 80px;
+	
+}
+
+#logo {	
 	width: 450px;
 }
 
@@ -31,17 +44,10 @@ body {
 	
 }
 
-input {
-	margin: 10px 10px 10px 10px;
-	width: 250px;
-	height: 25px;
+#password-input {
+	font-size: 15px;
+	font-family: caption;
 }
 
-button {
-	
-	margin:10px 10px 10px 10px; 
-	height: 30px;
-	width: 80px;
-	
-}
+
 
