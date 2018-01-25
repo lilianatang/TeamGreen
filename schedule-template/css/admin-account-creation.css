@@ -7,14 +7,12 @@
 
 
 body {
-	text-align: center;
 	margin-top: 55px;
 }
 
 .main_div_pages{
-	text-align: center;
 	margin: 20px;
-	float:left;
+	text-align: center;
 	clear:both;
 }
 
@@ -28,7 +26,7 @@ body {
 
 
 a.button {
-    display: block;
+    display: inline-block;
     width: 115px;
     height: 25px;
     background: rgb(199,236,87);
@@ -39,7 +37,7 @@ a.button {
     font-weight: bold;
 
 
-    float: left;
+    
     text-decoration: none;
     margin: 20px;
     
