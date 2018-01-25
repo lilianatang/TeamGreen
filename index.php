@@ -76,7 +76,8 @@ include("include_php/connection.php");
 			<br>
 			<input id = "password-input" type = "password" name="password"> </input>
 			<br>
-			<input type="submit" value="Submit">
+			<input type="submit" value="Submit"> </input>
+		
 			<br>
 		</form>
 		
