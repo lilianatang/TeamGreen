@@ -1,7 +1,37 @@
 <?php 
-ob_start();
 session_start();
-include("include_php/connection.php");
+require("include_php/connection.php");
+
+//check if the user pressed 'submit'
+
+if (isset($_POST)['username']) and isset($_POST)['password'])) {
+	//assign posted values to variables
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+
+	//check if values exist in the database
+	$query = "SELECT * FROM `users` WHERE username = '$username' and password = `password`";
+
+	$result = mysqli_query($connection, $query) or die(mysql_error($connection));
+	$count = mysqli_num_rows($result);
+
+
+	if ($count == 1){
+		$_SESSION['username'] = $username;
+	} else {
+		$msg = "Invalid Login Credentials";
+	}
+}
+
+if (isset($_SESSION['username'])){
+	$username = $_SESSION['username'];
+	echo "Hi . $username . ";
+	echo "This is Members Area";
+	echo "<a href='logout.php'>logout</a>";
+
+}
+else {
+
 ?>
 
 <html>
@@ -24,48 +54,7 @@ include("include_php/connection.php");
 	
 		<!-- Login Form -->
 		<form id = "login-form" method="post" action="">
-		<?php
-		if ($_SERVER["REQUEST_METHOD"] = "POST") {
-			$myusername = mysqli_real_escape_string($connection, $_POST['username']);
-			$mypassword1 = mysqli_real_escape_string($connection, $_POST['password']);
-			$mypassword = SHA1($mypassword1);
-
-			$sql_queries = "SELECT * FROM users WHERE username = '$myusername' and encrypted_password = '$mypassword'";
-			$result = mysqli_query($connection, $sql_queries);
-			$row = mysqli_fetch_array($result);
-			$_SESSION['user_id'] = $row['user_id'];
-			$_SESSION['role_id'] = $row['role_id'];
-
-			$count = msqli_num_rows($result);
-			if ($count == 1) {
-				if ($row['role_id'] == 1) {
-					header("location: admin_page.php");
-				}
-
-				else if ($row['role_id'] == 2) {
-					header("location: family_page.php");
-				}
-
-				else if ($row['role_id'] == 3) {
-					header("location: teacher_page.php");
-				}
 		
-				else if ($row['role_id'] == 4) {
-					header("location: punchin_page.php");
-				}
-
-				else {
-					header("location: board_page.php");
-				}
-			}
-
-			else {
-				$error = "Either your username or password is incorrect. Please try again!";
-
-			}
-		?>				
- 
-			
 			
 			<label id = "id-label" > User ID: </label>
 			<br>
@@ -77,9 +66,10 @@ include("include_php/connection.php");
 			<input id = "password-input" type = "password" name="password"> </input>
 			<br>
 			<input type="submit" value="Submit"> </input>
-		
+
 			<br>
 		</form>
 		
 	</body>
 </html>
+<?php } ?>
