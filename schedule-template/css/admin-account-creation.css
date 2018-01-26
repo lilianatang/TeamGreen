@@ -4,8 +4,6 @@
 * Author: Wesley Olson
 *--------------------------------------------------------------*/
 
-
-
 body {
 	margin-top: 55px;
 }
@@ -21,6 +19,7 @@ body {
 #account-creation-warning{
 	margin: 10px;
 	color: red;
+    float: left;
 
 }
 
@@ -29,7 +28,7 @@ a.button {
     display: inline-block;
     width: 115px;
     height: 25px;
-    background: rgb(199,236,87);
+    background: rgb(131,216,95);
     padding: 10px;
     text-align: center;
     border-radius: 5px;
@@ -39,7 +38,15 @@ a.button {
 
     
     text-decoration: none;
-    margin: 20px;
-    
-    
+    margin: 20px; 
+}
+
+.fancybigtext{
+    font-family:verdana;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.fancynormaltext{
+    font-family:calibri;
 }
