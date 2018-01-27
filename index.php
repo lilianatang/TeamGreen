@@ -8,7 +8,7 @@ class Check_User {
 
 
 	function __construct() {
-		require_once 'C:\wamp64\www\TeamGreen\include_php\connection.php';
+		require_once 'C:\wamp64\www\TeamGreen\include_php\db_connect.php';
 
 		$db = new DB_Connect();
 		$this->connection = $db->connect();
@@ -71,7 +71,7 @@ $credential->check_credentials();
 		<img id = "logo" src="media/portal-logo.png" alt="Caraway Facilitation Portal">
 	
 		<!-- Login Form -->
-		<form id = "login-form" action="login.php" method="post" autocomplete="off">
+		<form id = "login-form" action="C:\wamp64\www\TeamGreen\index.php" method="post" autocomplete="off">
 		<?= $_SESSION['message']; ?>
 			
 			<label id = "id-label" > User ID: </label>
