@@ -4,12 +4,8 @@
 * Author: Wesley Olson
 *--------------------------------------------------------------*/
 
-body {
-	margin-top: 55px;
-}
 
 .main_div_pages{
-	margin: 20px;
 	text-align: center;
 	clear:both;
 }
@@ -36,14 +32,16 @@ a.button {
     font-weight: bold;
     text-decoration: none;
     margin: 20px; 
+
 }
 
 .fancybigtext{
-    font-family:verdana;
-    font-size: 32px;
-    font-weight: bold;
+    font-family: 'Aclonica';
+    color: #4c7a34;
+    font-size: 26px;
 }
 
 .fancynormaltext{
     font-family:calibri;
+    font-size: 20px;
 }
