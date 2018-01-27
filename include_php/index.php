@@ -2,7 +2,6 @@
 session_start();
 $_SESSION['message'] = "";
 
-
 class Check_User {
 	private $connection;
 
@@ -25,9 +24,9 @@ class Check_User {
 			$password = $_POST['password'];
 
 	//check if values exist in the database
-			$query = "SELECT * FROM `users` WHERE username = '$username' and password = `$password`";
+			$query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
 
-			$result = mysqli_query($connection, $query) or die(mysql_error($connection));
+			$result = mysqli_query($this->connection, $query) or die(mysqli_error($this->connection));
 			$count = mysqli_num_rows($result);
 
 			if ($count == 1){
@@ -43,8 +42,9 @@ class Check_User {
 			echo "Hi . $username . ";
 			echo "This is Members Area";
 			echo "<a href='logout.php'>logout</a>";
+			header('location: create-user-form.php');
 		}
-
+		
 		$this->connection->close();
 	}
 }
@@ -71,7 +71,11 @@ $credential->check_credentials();
 		<img id = "logo" src="media/portal-logo.png" alt="Caraway Facilitation Portal">
 	
 		<!-- Login Form -->
+
+		<form id = "login-form" action="index.php" method="post" autocomplete="off">
+
 		<form id = "login-form" action="C:\wamp64\www\TeamGreen\index.php" method="post" autocomplete="off">
+
 		<?= $_SESSION['message']; ?>
 			
 			<label id = "id-label" > User ID: </label>
