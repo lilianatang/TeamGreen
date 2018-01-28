@@ -24,7 +24,7 @@ class Check_User {
 			$password = $_POST['password'];
 
 	//check if values exist in the database
-			$query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+			$query = "SELECT * FROM users WHERE username = '$username' AND encrypted_password = '$password'";
 
 			$result = mysqli_query($this->connection, $query) or die(mysqli_error($this->connection));
 			$count = mysqli_num_rows($result);
@@ -42,7 +42,7 @@ class Check_User {
 			echo "Hi . $username . ";
 			echo "This is Members Area";
 			echo "<a href='logout.php'>logout</a>";
-			header('location: create-user-form.php');
+			#header('location: include_php/create-user-form.php');
 		}
 		
 		$this->connection->close();
@@ -68,7 +68,7 @@ $credential->check_credentials();
 	<body>
 	
 		<!-- Caraway Logo Image -->
-		<img id = "logo" src="media/portal-logo.png" alt="Caraway Facilitation Portal">
+		<img id = "logo" src="schedule-template/media/portal-logo.png" alt="Caraway Facilitation Portal">
 	
 		<!-- Login Form -->
 
