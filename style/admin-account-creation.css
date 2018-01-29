@@ -5,13 +5,7 @@
 *--------------------------------------------------------------*/
 
 
-
-body {
-	margin-top: 55px;
-}
-
 .main_div_pages{
-	margin: 20px;
 	text-align: center;
 	clear:both;
 }
@@ -21,6 +15,7 @@ body {
 #account-creation-warning{
 	margin: 10px;
 	color: red;
+    float: left;
 
 }
 
@@ -29,17 +24,24 @@ a.button {
     display: inline-block;
     width: 115px;
     height: 25px;
-    background: rgb(199,236,87);
+    background: rgb(131,216,95);
     padding: 10px;
     text-align: center;
     border-radius: 5px;
     color: black;
     font-weight: bold;
-
-
-    
     text-decoration: none;
-    margin: 20px;
-    
-    
+    margin: 20px; 
+
+}
+
+.fancybigtext{
+    font-family: 'Aclonica';
+    color: #4c7a34;
+    font-size: 26px;
+}
+
+.fancynormaltext{
+    font-family:calibri;
+    font-size: 20px;
 }
