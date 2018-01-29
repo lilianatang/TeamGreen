@@ -16,11 +16,29 @@ class DB_Calendar {
 
 	function __destruct() {
 
+		msqli_close($connection);
 	}
 
-	//add your extra functions here 
+	function checkFamilyId( $id ){
+		
+		$query = "SELECT * FROM family WHERE family_id = $id";
+		$result = mysqli_query($connection, $query);
+			or die ("ERROR");
+		
+		while ($row = msqli_fetch_array($result) {
+			echo $row['family_id'];
+		}
+	}
 
 
 }
+
+$calendar = new DB_Calender();
+
+$id = $_POST['input-id'];
+echo $id;
+
+//checkFamilyId($id);
+
 
 ?>

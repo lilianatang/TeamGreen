@@ -5,7 +5,7 @@
 * Additional alterations to the original code have been made to accommodate the facilitation sign up process.
 * Edited by Komal 
 *--------------------------------------------------------------------------------------------------------*/
-
+jQuery(document).ready(
 // From the original author 
 $(function() {
 	
@@ -39,6 +39,24 @@ $(function() {
 		stringDate += nums[2];
 		
 		return stringDate;
+	}
+	
+	var sqlDateFormat function (date) {
+	
+		/* Split the date format into month, day, & year */
+		var nums = date.split("/");
+		var sqlDate = "";
+		
+		/* Find the year */
+		sqlDate = nums[2];
+		sqlDate += "-";
+		/* Find the month */
+		sqlDate = months[parseInt(nums[0] - 1)];
+		sqlDate += "-";
+		/* Find the day */
+		sqlDate += nums[1];
+		
+		return sqlDate;
 	}
 	
 	// From the original author
@@ -78,7 +96,13 @@ $(function() {
 					.css("margin-bottom", "10px")
 					.css("text-align", "center");
 				$(days[i-1]).find(".single-event").attr('date', weekDays[i - 1] + " " + dateString($.datepicker.formatDate( dateFormat, d, inst.settings )));
+			
 			}
+			
+			
+			
+			console.log($('.events'));
+			
 			
 			selectCurrentWeek();
 		},
@@ -92,10 +116,13 @@ $(function() {
 			selectCurrentWeek();
 		}
 		
+		
+		
 	});
+	
 	
 	$('.week-picker .ui-datepicker-calendar tr').live('mousemove', function() { $(this).find('td a').addClass('ui-state-hover'); });
 	$('.week-picker .ui-datepicker-calendar tr').live('mouseleave', function() { $(this).find('td a').removeClass('ui-state-hover'); });
 
 });
-
+);

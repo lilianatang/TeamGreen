@@ -7,6 +7,32 @@
 *--------------------------------------------------------------------------------------------------------*/
 
 jQuery(document).ready(function($){
+	
+	// This variable will hold the names of the facilitators for this family 
+	var facilitator_data;
+	
+	// On user submit ...
+	$("#submit").click(function (event) {
+		
+		// Retrieve the Family ID from the input box
+		var id = $('#input-id').val();
+		
+		// Prevent the page from resetting
+		event.preventDefault();
+		
+		$.post("include_php/db_calendar.php", { input: id }, function (data) 
+			{ 
+				// Take the data from the database for this family, and store it in an array
+				facilitator_data = data.split(",");
+				
+				// Get rid of the empty entry at the end
+				facilitator_data.pop();
+				
+			}
+		); 
+	
+	});
+	
 	var transitionEnd = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
 	var transitionsSupported = ( $('.csstransitions').length > 0 );
 	//if browser does not support transitions - use a different event to trigger them
@@ -130,16 +156,32 @@ jQuery(document).ready(function($){
 		this.modal.attr('data-event', event.parent().attr('data-event'));
 		
 		//update event content based on an html file
-		this.modalBody.find('.event-info').load("facilitation-sign-up.html", function(data){
+		this.modalBody.find('.event-info').load("fsignup.html", function(data){
+			
 			//once the event content has been loaded
 			self.element.addClass('content-loaded');
 			
 			
-			// ADD TO THE FILE LOADED IN HERE
+			// Clear any facilitator data that may be present already
+			self.modalBody.find("#select-facilitator").html("");
 			
-			//console.log(createIntervals(event.find('.event-date').text()));
+			// Go through all facilitators from the query and add them as a drop-down option
+			for (var i = 0; i < facilitator_data.length; i += 2){
+				
+				// Create an option for a facilitator 
+				var $selection = $(" <option value = " + facilitator_data[i] + ">" + 
+					facilitator_data[i+1] + "</option>" );
+				
+				// Add the option to the form 
+				$selection.appendTo(self.modalBody
+					.find("#select-facilitator"));
+				
+			}
 			
-			//self.modalBody.find("#date-and-time").text(self.currentEvent.find(".event-date").text());
+			// Add a guest option
+			$("<option value = \"Guest\">Guest</option>")
+				.appendTo(self.modalBody
+				.find("#select-facilitator"));
 		});
 				
 		this.element.addClass('modal-is-open');
