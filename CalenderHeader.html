@@ -1,58 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="no-js">
 <head>
-<style>
-div.main-container {
-    width: 100%;
-    border: 1px solid gray;
-}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-.navbar-container{
-  overflow: hidden;
-  background-color: #333;
-  border: thin solid white;
-  float; center;
-}
-
-.navbar-container a{
-  float:right;
-  font-size: 16px;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  border: thin solid white;
-}
-
-
-.navbar-container a:hover {
-    background-color: grey;
-}
-
-.head-container{
-  background-color: rgb(143, 223, 99);
-}
-
-#logo{
-
-  width: 100px;
-}
-#page-container{
-  width: 100px;
-  height: 500px;
-
-}
-#logout-button{
-  float: right;
-  margin: 10px;
-}
-#title{
-  float: right;
-}
-
-</style>
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+	<link rel="stylesheet" href="style/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="style/style.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">
 </head>
 <body>
+
+<!--- Calendar Header -->
 
 <div class="main-container">
   <header> 
@@ -63,28 +22,330 @@ div.main-container {
 
         <button id="logout-button" type="button">Log Out</button>
 
-        <p id="title"> Facilitation portal</p>
+        <p id="title"> Facilitation Portal</p>
       </div>
 
       <div class="navbar-container">
         <a href="#MyBookings">MyBookings</a>
         <a href="#news">Sign Up</a>
         <a href="#History">History</a>
-        <a href="#Dashboard">Dasboard</a>
+        <a href="#Dashboard">Dashboard</a>
       </div>
     </div>
   </header>
   <div id="page-container">
     
-
   </div>
-
-  <p>
-    
-  </p>
   
 </div>
+<title>Facilitation Sign Up</title>
+<form id = "enter-data">
 
+<label>Enter Family ID</label> <input type = "text">   </input>
+<button	type = "Submit" > Submit </button>
+
+</form>
+<!-- Insert the Week Picker Calendar -->
+<div class="week-picker"></div>
+
+<!-- Creation of Schedule -->
+<div class="cd-schedule loading">
+
+	<!-- This timeline corresponds to the time grid on the left of the page -->
+	<div class="timeline">
+		<ul>
+			<li><span>08:00</span></li>
+			<li><span>08:30</span></li>
+			<li><span>09:00</span></li>
+			<li><span>09:30</span></li>
+			<li><span>10:00</span></li>
+			<li><span>10:30</span></li>
+			<li><span>11:00</span></li>
+			<li><span>11:30</span></li>
+			<li><span>12:00</span></li>
+			<li><span>12:30</span></li>
+			<li><span>13:00</span></li>
+			<li><span>13:30</span></li>
+			<li><span>14:00</span></li>
+			<li><span>14:30</span></li>
+			<li><span>15:00</span></li>
+			<li><span>15:30</span></li>
+		</ul>
+	</div> <!-- .timeline -->
+
+	
+	<!-- All the faciliation events are in the following div. Every ate consists of a the event name and information -->
+	
+	<div class="events">
+		<ul>
+			<li class="events-group">
+				<div class="top-info"><span class = "date" >Monday January 22 2018</span></div>
+
+				<ul>
+					<li class="single-event" data-start="08:45" data-end="12:00" data-content="facilitation-sign-up" data-event="event-1">
+						<a href="#0">
+							<em class="event-name" ></em>
+							<br>
+							<strong style = "color: white; font-size: 15px;"> 1 of 4 positions available </strong>
+						</a>
+					</li>
+
+					<li class="single-event" data-start="11:50" data-end="13:00" data-content="facilitation-sign-up" data-event="event-2">
+						<a href="#0">
+							<em class="event-name" >Lunch Facilitation</em>
+							<br>
+							<strong style = "color: red; font-size: 15px;"> 0 of 4 positions available </strong>
+						</a>
+					</li>
+
+					<li class="single-event" data-start="12:50" data-end="15:45"  data-content="facilitation-sign-up" data-event="event-3">
+						<a href="#0">
+							<em class="event-name">Afternoon Facilitation</em>
+							<br>
+							<strong style = "color: red; font-size: 15px;"> 0 of 4 positions available </strong>
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="events-group">
+				<div class="top-info"><span class = "date">Tuesday January 23 2018</span></div>
+
+				<ul>
+					<li class="single-event" data-start="08:45" data-end="12:00" data-content="facilitation-sign-up" data-event="event-1">
+						<a href="#0">
+							<em class="event-name">Morning Facilitation</em>
+							<br>
+							<strong style = "color: red; font-size: 15px;"> 0 of 4 positions available </strong>
+						</a>
+					</li>
+
+					<li class="single-event" data-start="11:50" data-end="13:00" data-content="facilitation-sign-up" data-event="event-2">
+						<a href="#0">
+							<em class="event-name">Lunch Facilitation</em>
+							<br>
+							<strong style = "color: red; font-size: 15px;"> 0 of 4 positions available </strong>
+						</a>
+					</li>
+
+					<li class="single-event" data-start="12:50" data-end="15:45"  data-content="facilitation-sign-up" data-event="event-3">
+						<a href="#0">
+							<em class="event-name">Afternoon Facilitation</em>
+							<br>
+							<strong style = "color: red; font-size: 15px;"> 0 of 4 positions available </strong>
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="events-group">
+				<div class="top-info"><span class = "date">Wednesday January 24 2018</span></div>
+
+				<ul>
+					<li class="single-event" data-start="08:45" data-end="12:00" data-content="facilitation-sign-up" data-event="event-1">
+						<a href="#0">
+							<em class="event-name">Morning Facilitation</em>
+							<br>
+							<strong style = "color: red; font-size: 15px;"> 0 of 4 positions available </strong>
+						</a>
+					</li>
+
+					<li class="single-event" data-start="11:50" data-end="13:00" data-content="facilitation-sign-up" data-event="event-2">
+						<a href="#0">
+							<em class="event-name">Lunch Facilitation</em>
+							<br>
+							<strong style = "color: red; font-size: 15px;"> 0 of 4 positions available </strong>
+						</a>
+					</li>
+
+					<li class="single-event" data-start="12:50" data-end="15:45"  data-content="facilitation-sign-up" data-event="event-3">
+						<a href="#0">
+							<em class="event-name">Afternoon Facilitation</em>
+							<br>
+							<strong style = "color: red; font-size: 15px;"> 0 of 4 positions available </strong>
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="events-group">
+				<div class="top-info" ><span class = "date">Thursday January 25 2018</span></div>
+
+				<ul>
+					<li class="single-event" data-start="08:45" data-end="12:00" data-content="facilitation-sign-up" data-event="event-1">
+						<a href="#0">
+							<em class="event-name">Morning Facilitation</em>
+							<br>
+							<strong style = "color: red; font-size: 15px;"> 0 of 4 positions available </strong>
+						</a>
+					</li>
+
+					<li class="single-event" data-start="11:50" data-end="13:00" data-content="facilitation-sign-up" data-event="event-2">
+						<a href="#0">
+							<em class="event-name">Lunch Facilitation</em>
+							<br>
+							<strong style = "color: red; font-size: 15px;"> 0 of 4 positions available </strong>
+						</a>
+					</li>
+
+					<li class="single-event" data-start="12:50" data-end="15:45"  data-content="facilitation-sign-up" data-event="event-3">
+						<a href="#0">
+							<em class="event-name">Afternoon Facilitation</em>
+							<br>
+							<strong style = "color: red; font-size: 15px;"> 0 of 4 positions available </strong>
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="events-group">
+				<div class="top-info"><span class = "date">Friday January BLAHHH 2018</span></div>
+
+				<ul>
+					<li class="single-event" data-start="08:45" data-end="15:45" data-content="facilitation-sign-up" data-event="event-1">
+						<a href="#0">
+							<em class="event-name">Field Trip to Galaxy Land</em>
+							<br>
+							<strong style = "color: red; font-size: 15px;"> 0 of 4 positions available </strong>
+							<br> <br>
+							<strong style = "color: white; font-size: 15px;"> Parents are always welcome to attend but with the knowledge they will need to pay their entrance fees if we have reached the maximum number of helpers needed.</strong>
+						</a>
+					</li>
+
+				</ul>
+			</li>
+		</ul>
+	</div>
+	
+	<!-- Event Modal Outline - This is the window that pops up when you click an event. The tags below are populated when the user clicks an event. -->
+	<div class="event-modal">
+	
+		<!-- Modal Header - contains event information -->
+		<header class="header">
+			<div class="content">
+				<span class="event-date"></span>
+				<h3 class="event-name"></h3>
+				
+			</div>
+
+			<div class="header-bg"></div>
+		</header>
+
+		<!-- Modal Body - Contains the event form for booking fieldtrip or ordinary events -->
+		<div class="body">
+			<div class="event-info"> <!--Information from the html file (Facilitation-sign-up) is inserted here! -->  </div>
+			<div class="body-bg" style = ""></div>
+		</div>
+
+		<a href="#0" class="close">Close</a>
+	</div> 
+
+	<div class="cover-layer"></div>
+</div> <!-- .cd-schedule -->
+<script src="js/modernizr.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script>
+	if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
+</script>
+<script src="js/main.js"></script> <!-- Resource jQuery -->
+
+	<!-- Week Picker Code -->	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+	<script type="text/javascript">
+	
+	// From the original author
+	$(function() {
+	
+		var week = [];
+		var startDate;
+		var endDate;
+		
+		/* ------------------------------------------------------------------
+		* dateString Function
+		* This function takes a string in the form of MM/DD/YY and 
+		* converts it to a date with the month as a word. 
+		*
+		* Parameters: date - A string in the form of MM/DD/YY
+		* Returns: stringDate - A string version of date the month in words
+		*
+		* Author: Komal Aheer
+		*--------------------------------------------------------------------*/
+		var dateString = function (date){
+			
+			var months = ["January", "February", "March", "April", "May", "June", "July", "August" ,"September", "October", "November", "December"];
+			
+			var nums = date.split("/");
+			var stringDate = "";
+			
+			stringDate = months[parseInt(nums[0] - 1)];
+			stringDate += " ";
+			stringDate += nums[1];
+			stringDate += " ";
+			stringDate += nums[2];
+			
+			return stringDate;
+		}
+		
+		// From the original author
+		var selectCurrentWeek = function() {
+			window.setTimeout(function () {
+				$('.week-picker').find('.ui-datepicker-current-day a').addClass('ui-state-active')
+			}, 1);
+			
+		}
+		
+		// From the original author
+		$('.week-picker').datepicker( {
+			showOtherMonths: true,
+			selectOtherMonths: true,
+			onSelect: function(dateText, inst) { 
+				var date = $(this).datepicker('getDate');
+				
+				//startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
+				//endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
+				var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
+				
+				//$('#startDate').text($.datepicker.formatDate( dateFormat, startDate, inst.settings ));
+				//$('#endDate').text($.datepicker.formatDate( dateFormat, endDate, inst.settings ));
+				
+				var weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+				<!-- Get all the dates for the week selected and update the calendar accordingly -->   
+				for (var i = 1; i < 6; i++){
+					
+					var d = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + i);
+					var days = $(".top-info .date");
+					//var formatted-date = $.datepicker.formatDate( dateFormat, d, inst.settings );
+					$(days[i-1])
+						.text(weekDays[i - 1] + " " + dateString($.datepicker.formatDate( dateFormat, d, inst.settings )))
+						.css("margin-bottom", "10px")
+						.css("text-align", "center");
+					$(days[i-1]).find(".single-event").attr('date', weekDays[i - 1] + " " + dateString($.datepicker.formatDate( dateFormat, d, inst.settings )));
+				}
+				
+				selectCurrentWeek();
+			},
+			beforeShowDay: function(date) {
+				var cssClass = '';
+				if(date >= startDate && date <= endDate)
+					cssClass = 'ui-datepicker-current-day';
+				return [true, cssClass];
+			},
+			onChangeMonthYear: function(year, month, inst) {
+				selectCurrentWeek();
+			}
+			
+		});
+		
+		$('.week-picker .ui-datepicker-calendar tr').live('mousemove', function() { $(this).find('td a').addClass('ui-state-hover'); });
+		$('.week-picker .ui-datepicker-calendar tr').live('mouseleave', function() { $(this).find('td a').removeClass('ui-state-hover'); });
+	
+		
+		$('.week-picker').trigger("click");
+	});
+	
+	
+	</script>
 </body>
 </html>
 
