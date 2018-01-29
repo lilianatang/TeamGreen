@@ -4,6 +4,37 @@
 * Author: Wesley & Komal
 *--------------------------------------------------------*/
 
+/* Imports the Aclonica Font */
+@font-face { 
+	font-family: Aclonica; 
+	src: url('Aclonica-Regular.ttf'); 
+} 
+
+body {
+	font-family: sans-serif;
+}
+
+h1 {
+	font-family: Aclonica, sans-serif;
+	color: #4c7a34;
+	font-size: 26px;
+	text-align: center;
+	margin: 50px 50px 50px 50px;
+}
+
+h2, label{
+	font-weight: bold;
+	color: #4c7a34;
+	font-size: 18px;
+}
+
+h3 {
+	font-size: 18px;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+
 div.main-container {
     width: 100%;
 }
@@ -29,8 +60,8 @@ div.main-container {
   border: thin solid white;
 }
 
-p {
-	color: red;
+body {
+	font-family: sans-serif;
 }
 
 .navbar-container a:hover {
@@ -45,9 +76,8 @@ p {
   width: 150px;
 }
 #page-container{
-  width: 100px;
-  height: 500px;
-
+  /*width: 100px;
+  height: 500px;*/
 }
 #logout-button{
   float: right;

@@ -1,0 +1,51 @@
+/* Admin style page */
+/* Source for 'The magic Float Center Code' https://codepen.io/alexandredees/pen/ojaFr*/
+
+#selections {
+	margin-top: 20px;
+	margin-bottom: 40px;
+	margin-right: 50px;
+
+	/* The Magic Float Center Code */
+	float: right;
+	position: relative;
+	left: -50%; /* or right 50% */
+	text-align: left;
+	
+	/* background-color: blue; */
+}
+
+/* The Magic Float Center Code */
+#selections > .selection {
+  position: relative;
+  left: 50%;
+}
+
+#family-info{
+	/* float: bottom; */
+	float: left;
+	background-color: orange;
+	margin-left: 50px;
+}
+
+#table {
+	float: right;
+	background-color: yellow;
+	
+	margin-right: 50px;
+}
+
+.selection{
+	text-align: left;
+	margin-left: 100px;
+	overflow: hidden;
+	float: left;
+}
+
+select {
+	font-size: 15px;
+}
+
+table {
+	border: black;
+}
