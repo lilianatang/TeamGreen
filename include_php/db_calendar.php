@@ -41,7 +41,6 @@ class DB_Calendar {
 			echo $row["facilitator_id"] . "," . $row["name"] . ",";
 		}
 	}
-
 }
 	// Gets the id passed from jQuery segment and retrieves matching facilitator names
 	$calendar = new DB_Calendar();

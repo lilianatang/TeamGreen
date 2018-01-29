@@ -28,8 +28,8 @@ jQuery(document).ready(function($){
 				// Get rid of the empty entry at the end
 				facilitator_data.pop();
 				
-				console.log("0-00------");
-				console.log(facilitator_data);
+				
+				console.log(data);
 				
 			}
 		); 
