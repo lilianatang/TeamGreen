@@ -31,10 +31,11 @@
 	-->
 	<body>
 
+			<div class="main-container">
 
 
 
-		 <header> 
+		 <!--<header> 
 	      	<div class="header-div-container">
 	        	<img id = "logo" src="../images/portal-logo.png" alt="Caraway Facilitation Portal">
 
@@ -52,10 +53,11 @@
 	        	<a href="#Export_data">Export data</a>
 	        	<a href="#Approve_leave">Approve Leave</a>
 	      	</div>	   
-  		</header>
+  		</header>-->
 
 
 		<div class="main_div_pages">
+		</div>
 			<p id="account-creation-warning">
 				<em>- Please Note: you must create family account<br> 
 				before you can creating Family Members.</em>
@@ -109,7 +111,14 @@
 			<a class="button" href="#Student_creation_page">Student</a>
 
 		</div>
-		
+				<!-- This section of code inserts the admin header for the page -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+		<script type="text/javascript"> 
+		jQuery(document).ready(function($){
+			$("body .main-container").load("adminHeader.html");
+			console.log("000000");
+		});
+		</script>
 	
 	</body>
 </html>
