@@ -1,46 +1,50 @@
-<!--------------------------------------------------------------------------------------------------------
-* This document contains all the code for the large calendar
-* Source: https://codyhouse.co/gem/schedule-template/ 
-* 
-* Additional alterations to the original code have been made to accommodate the facilitation sign up process.
-* Edited by Komal 
-
-STILL NEEDS TO BE DONE
-- Date on start up needs to be today's date 
-- Submit the form data and connect with database  (Joe is working on this)
-- Field-trip form needed?
-- Connect calendar facilitation times with database  (Joe is working on this)
-
-*-------------------------------------------------------------------------------------------------------->
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
-
 <head>
-	
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- Style Sheets Used by the Original Author for the large calendar -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
-	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
-	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+	<link rel="stylesheet" href="style/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="style/style.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">
-  	
-	<title>Facilitation Sign Up</title>
-	
 </head>
 <body>
 
-<!-- This is a TEMPORARY from I'm going to use to see if I can connect to the database ... -->
+<!--- Calendar Header -->
+
+<div class="main-container">
+  <header> 
+    <div class="head-container">
+
+      <div id="logo-container">
+        <img id="logo" src="http://carawayschool.ca/files/2017/02/Caraway-logo-noSeeds-960x777.png">
+
+        <button id="logout-button" type="button">Log Out</button>
+
+        <p id="title"> Facilitation Portal</p>
+      </div>
+
+      <div class="navbar-container">
+        <a href="#MyBookings">MyBookings</a>
+        <a href="#news">Sign Up</a>
+        <a href="#History">History</a>
+        <a href="#Dashboard">Dashboard</a>
+      </div>
+    </div>
+  </header>
+  <div id="page-container">
+    
+  </div>
+  
+</div>
+<title>Facilitation Sign Up</title>
 <form id = "enter-data">
 
 <label>Enter Family ID</label> <input type = "text">   </input>
 <button	type = "Submit" > Submit </button>
 
 </form>
-<!-------------------------------------------------------------------------------------------->
-
 <!-- Insert the Week Picker Calendar -->
 <div class="week-picker"></div>
 
@@ -70,7 +74,7 @@ STILL NEEDS TO BE DONE
 	</div> <!-- .timeline -->
 
 	
-	<!-- All the facilitation events are in the following div. Every date consists of a the event name and information -->
+	<!-- All the faciliation events are in the following div. Every ate consists of a the event name and information -->
 	
 	<div class="events">
 		<ul>
@@ -213,18 +217,12 @@ STILL NEEDS TO BE DONE
 		</ul>
 	</div>
 	
-	
-	<!-------------------------------------------------------------------------------------------------------------------------
-	 * Event Modal Outline
-	 *	This is the window that pops up when you click an event. The tags below are populated when the user clicks an event. 
-	 -------------------------------------------------------------------------------------------------------------------------->
+	<!-- Event Modal Outline - This is the window that pops up when you click an event. The tags below are populated when the user clicks an event. -->
 	<div class="event-modal">
 	
-		<!-- Modal Header - contains event information (The colored part of the window) -->
+		<!-- Modal Header - contains event information -->
 		<header class="header">
-		
 			<div class="content">
-			
 				<span class="event-date"></span>
 				<h3 class="event-name"></h3>
 				
@@ -233,24 +231,17 @@ STILL NEEDS TO BE DONE
 			<div class="header-bg"></div>
 		</header>
 
-		<!-- Modal Body - Contains the event form for booking fieldtrip or ordinary events (The white part of the window) -->
+		<!-- Modal Body - Contains the event form for booking fieldtrip or ordinary events -->
 		<div class="body">
-		
-			<div class="event-info"> <!--Information from the html file (Facilitation-sign-up) is inserted here when the user clicks an event! -->  </div>
+			<div class="event-info"> <!--Information from the html file (Facilitation-sign-up) is inserted here! -->  </div>
 			<div class="body-bg" style = ""></div>
-		
 		</div>
 
 		<a href="#0" class="close">Close</a>
 	</div> 
 
 	<div class="cover-layer"></div>
-	
-</div>
-
-<!----------------------------------------------------------------------------- JavaScript & jQuery  ------------------------------------------------------------------------------>
-
-<!-- For the Large Calendar -->
+</div> <!-- .cd-schedule -->
 <script src="js/modernizr.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script>
@@ -258,12 +249,107 @@ STILL NEEDS TO BE DONE
 </script>
 <script src="js/main.js"></script> <!-- Resource jQuery -->
 
-
-<!-- For date-picker -->
-<script src="js/week-picker.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-
-
+	<!-- Week Picker Code -->	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+	<script type="text/javascript">
+	
+	// From the original author
+	$(function() {
+	
+		var week = [];
+		var startDate;
+		var endDate;
+		
+		/* ------------------------------------------------------------------
+		* dateString Function
+		* This function takes a string in the form of MM/DD/YY and 
+		* converts it to a date with the month as a word. 
+		*
+		* Parameters: date - A string in the form of MM/DD/YY
+		* Returns: stringDate - A string version of date the month in words
+		*
+		* Author: Komal Aheer
+		*--------------------------------------------------------------------*/
+		var dateString = function (date){
+			
+			var months = ["January", "February", "March", "April", "May", "June", "July", "August" ,"September", "October", "November", "December"];
+			
+			var nums = date.split("/");
+			var stringDate = "";
+			
+			stringDate = months[parseInt(nums[0] - 1)];
+			stringDate += " ";
+			stringDate += nums[1];
+			stringDate += " ";
+			stringDate += nums[2];
+			
+			return stringDate;
+		}
+		
+		// From the original author
+		var selectCurrentWeek = function() {
+			window.setTimeout(function () {
+				$('.week-picker').find('.ui-datepicker-current-day a').addClass('ui-state-active')
+			}, 1);
+			
+		}
+		
+		// From the original author
+		$('.week-picker').datepicker( {
+			showOtherMonths: true,
+			selectOtherMonths: true,
+			onSelect: function(dateText, inst) { 
+				var date = $(this).datepicker('getDate');
+				
+				//startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
+				//endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
+				var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
+				
+				//$('#startDate').text($.datepicker.formatDate( dateFormat, startDate, inst.settings ));
+				//$('#endDate').text($.datepicker.formatDate( dateFormat, endDate, inst.settings ));
+				
+				var weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+				<!-- Get all the dates for the week selected and update the calendar accordingly -->   
+				for (var i = 1; i < 6; i++){
+					
+					var d = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + i);
+					var days = $(".top-info .date");
+					//var formatted-date = $.datepicker.formatDate( dateFormat, d, inst.settings );
+					$(days[i-1])
+						.text(weekDays[i - 1] + " " + dateString($.datepicker.formatDate( dateFormat, d, inst.settings )))
+						.css("margin-bottom", "10px")
+						.css("text-align", "center");
+					$(days[i-1]).find(".single-event").attr('date', weekDays[i - 1] + " " + dateString($.datepicker.formatDate( dateFormat, d, inst.settings )));
+				}
+				
+				selectCurrentWeek();
+			},
+			beforeShowDay: function(date) {
+				var cssClass = '';
+				if(date >= startDate && date <= endDate)
+					cssClass = 'ui-datepicker-current-day';
+				return [true, cssClass];
+			},
+			onChangeMonthYear: function(year, month, inst) {
+				selectCurrentWeek();
+			}
+			
+		});
+		
+		$('.week-picker .ui-datepicker-calendar tr').live('mousemove', function() { $(this).find('td a').addClass('ui-state-hover'); });
+		$('.week-picker .ui-datepicker-calendar tr').live('mouseleave', function() { $(this).find('td a').removeClass('ui-state-hover'); });
+	
+		
+		$('.week-picker').trigger("click");
+	});
+	
+	
+	</script>
 </body>
 </html>
+
+
+<!--
+<img src="http://carawayschool.ca/files/2017/02/Caraway-logo-noSeeds-960x777.png" width="100">
+-->
