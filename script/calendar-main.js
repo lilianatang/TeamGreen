@@ -15,7 +15,7 @@ jQuery(document).ready(function($){
 	$("#submit").click(function (event) {
 		
 		// Retrieve the Family ID from the input box
-		var id = $('#input-ihttp://localhost:8080/k/TeamGreen/family/calendar.html#0d').val();
+		var id = $('#input-id').val();
 		
 		// Prevent the page from resetting
 		event.preventDefault();
@@ -27,6 +27,9 @@ jQuery(document).ready(function($){
 				
 				// Get rid of the empty entry at the end
 				facilitator_data.pop();
+				
+				console.log("0-00------");
+				console.log(facilitator_data);
 				
 			}
 		); 
@@ -156,7 +159,7 @@ jQuery(document).ready(function($){
 		this.modal.attr('data-event', event.parent().attr('data-event'));
 		
 		//update event content based on an html file
-		this.modalBody.find('.event-info').load("facilitation-sign-up.html", function(data){
+		this.modalBody.find('.event-info').load("../family/facilitation-sign-up.html", function(data){
 			
 			//once the event content has been loaded
 			self.element.addClass('content-loaded');
