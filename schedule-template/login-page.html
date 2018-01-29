@@ -1,8 +1,11 @@
 <!-------------------------------------------------------------
 * This document contains the html for the user login page. 
-*
+* 
 * Author: Komal Aheer
-*-------------------------------------------------------------->
+*-------------------------------------------------------------------
+* Added script in backend using php to communicate with the database
+* Author: Liliana Quyen Tang
+-------------------------------------------------------------------->
 
 <!doctype html>
 </html>
@@ -38,6 +41,24 @@
 		
 		</form>
 	
-	
+		<!-- Script for storing user in php--->
+		class Store_User { 
+
+			private $connection;
+
+			// the construction is to initiate the connection in Store_User class
+			// Author: Liliana Quyen Tang
+			function __construct()
+			{
+				require_once 'C:\wamp64\www\TeamGreen\include_php\db_connect.php';
+
+				$db = new DB_Connect();
+				$this->connection = $db->connect();
+			}
+
+			
+
+		
+
 	</body>
 </html>

@@ -28,6 +28,14 @@ a {
 Main Components 
 
 -------------------------------- */
+
+.positions {
+
+	color: white; 
+	font-size: 15px;
+	
+}
+
 .cd-schedule {
   position: relative;
   margin: 2em 0;
