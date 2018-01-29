@@ -1,0 +1,131 @@
+<!--------------------------------------------------------------------------------------------------------
+* This document contains the header for the family pages
+* 
+* NEED TO:
+* - Link nav bar to pages
+* - Link logout to login page
+*
+* Authors: Wesley & Komal
+*-------------------------------------------------------------------------------------------------------->
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title> Admin - Family Statistics </title>
+		
+		<!-- Link to External Stylesheet for the header -->
+		<link rel="stylesheet" href="headerStyle.css">
+		<!-- Link to External Stylesheet for the admin page -->
+		<link rel="stylesheet" href="adminStyle.css">
+		
+	</head>
+	
+	<body>
+	
+		<div class="main-container">
+			<!-- The header will be inserted here -->
+		</div>
+	
+		<div id="page-container">
+			
+			<h1 class = "page-title"> Family Statistics </h1>
+			
+			<div id = "selections">  <!-- Selection Containers -->
+				
+				<!-- Family Selection -->
+				<div class = "selection" id = "family-selection">
+					<label >Select a family: </label>
+					<br><br>
+					<select>
+						<option value = "insert-familyid-here"> Family Name </option>
+					</select>
+				</div>
+				
+				<!-- Month Selection -->
+				<div class = "selection" id = "month-selection">
+					<label>Select a month: </label>	
+					<br><br>
+					<select>
+						<option value = 1> January </option>
+						<option value = 2> February </option>
+						<option value = 3> March </option>
+						<option value = 4> April </option>
+						<option value = 5> May </option>
+						<option value = 6> June </option>
+						<option value = 7> July </option>
+						<option value = 8> August </option>
+						<option value = 9> September </option>
+						<option value = 10> October </option>
+						<option value = 11> November </option>
+						<option value = 12> December </option>
+					</select>
+				</div>
+			
+				<!-- Year Selection -->
+				<div class = "selection" id = "year-selection">
+					<label class = "year-select">Select a year: </label>
+					<br><br>
+					<select class = "year-select">
+						<option value = 1>Year here... </option>
+					</select>
+				</div>
+			
+			</div> <!-- Selection Containers End -->
+			
+			<br><br><br><br>
+			<!-- Text that appears upon selection of a family -->
+			<div id = "family-info">
+				
+				<h2> Family Information </h2>
+				
+				<!-- List of facilitators in the family -->
+				<h3> Facilitators: </h3>
+				<ul>
+					<li> Facilitator name here ... </li>
+				</ul>
+				
+				<!-- List of students in the family -->
+				<h3> Students: </h3>
+				<ul>
+					<li> Student name and class here ... </li>
+				</ul>
+				
+				<!-- Yearly and monthly totals for the family -->
+				<h3> Monthly Total: <span> INSERT TOTAL HERE </span> </h3> 
+				<h3> Yearly Total: <span> INSERT TOTAL HERE </span> </h3>
+				
+			</div>
+
+			<br><br>
+		<div id = "table" >
+			<table >
+				<tr>
+					<th>Week</th>
+					<th>Total Hours</th>
+					<th>Requirements Met</th>
+				</tr>
+				<tr>
+					<td>...</td>
+					<td>...</td>
+					<td>...</td>
+				</tr>
+			
+			</table>
+		
+		</div>
+			
+		</div>
+		
+
+		<!-- This section of code inserts the admin header for the page -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+		<script type="text/javascript"> 
+		jQuery(document).ready(function($){
+			$("body .main-container").load("adminHeader.html");
+		});
+		</script>
+		
+	</body>
+</html>
