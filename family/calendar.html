@@ -8,6 +8,7 @@
 STILL NEEDS TO BE DONE
 - Date on start up needs to be today's date 
 - Change dates based on query 
+- fix classid - hard coded as 1 right now
 
 *-------------------------------------------------------------------------------------------------------->
 
@@ -27,7 +28,6 @@ STILL NEEDS TO BE DONE
   	
 	<title>Facilitation Sign Up</title>
 	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
 	
 </head>
 <body>
@@ -77,31 +77,7 @@ STILL NEEDS TO BE DONE
 		<ul>
 			<li class="events-group">
 				<div class="top-info"><span class = "date" >Monday January 22 2018</span></div>
-
 				<ul>
-					<li class="single-event" data-start="08:45" data-end="12:00" data-content="facilitation-sign-up" data-event="event-1">
-						<a href="#0">
-							<em class="event-name"> Morning Facilitation </em>
-							<br>
-							<strong class = "positions"> 1 of 4 positions available </strong>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="11:50" data-end="13:00" data-content="facilitation-sign-up" data-event="event-2">
-						<a href="#0">
-							<em class="event-name" >Lunch Facilitation</em>
-							<br>
-							<strong class = "positions"> 0 of 4 positions available </strong>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="12:50" data-end="15:45"  data-content="facilitation-sign-up" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Afternoon Facilitation</em>
-							<br>
-							<strong class = "positions"> 0 of 4 positions available </strong>
-						</a>
-					</li>
 				</ul>
 			</li>
 
@@ -199,7 +175,7 @@ STILL NEEDS TO BE DONE
 				<div class="top-info"><span class = "date">Friday January 26 2018</span></div>
 
 				<ul>
-					<li class="single-event" data-start="08:45" data-end="15:45" data-content="facilitation-sign-up" data-event="event-1">
+					<li class='single-event' data-start='08:45' data-end="15:45" data-content="facilitation-sign-up" data-event="event-1">
 						<a href="#0">
 							<em class="event-name">Field Trip to Galaxy Land</em>
 							<br>
@@ -257,154 +233,16 @@ STILL NEEDS TO BE DONE
 <script>
 	if( !window.jQuery ) document.write('<script src="../script/jquery-3.0.0.min.js"><\/script>');
 </script>
-<script src="../script/calendar-main.js"></script> <!-- Resource jQuery -->
+<script type = "text/javascript" src="../script/calendar-main.js"></script> <!-- Resource jQuery -->
 
-<!------------------------------------ For week picker ----------------------------->
-<!--<script src="js/week-picker.js"></script> IGNORE THIS FOR NOW -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-<script type="text/javascript">
-
-$(function() {
-	
-	var startDate;
-	var endDate;
-	
-	/* ------------------------------------------------------------------
-	* dateString Function
-	* This function takes a string in the form of MM/DD/YYYY and 
-	* converts it to a date with the month as a word. 
-	*
-	* Parameters: date - A string in the form of MM/DD/YYYY
-	* Returns: stringDate - A string version of date the month in words
-	*
-	* Author: Komal Aheer
-	*--------------------------------------------------------------------*/
-	var dateString = function (date){
-		
-		/* Split the date format into month, day, & year */
-		var months = ["January", "February", "March", "April", "May", "June", "July", "August" ,"September", "October", "November", "December"];
-		var nums = date.split("/");
-		var stringDate = "";
-		
-		/* Find the month */
-		stringDate = months[parseInt(nums[0] - 1)];
-		stringDate += " ";
-		/* Find the day */
-		stringDate += nums[1];
-		stringDate += " ";
-		/* Find the year */
-		stringDate += nums[2];
-		
-		return stringDate;
-	}
-	
-	/* ------------------------------------------------------------------
-	* sqlDateFormat Function
-	* This function takes a string in the form of MM/DD/YYYY and 
-	* converts it to a date in sql format (YYYY-MM-DD) 
-	*
-	* Parameters: date - A string in the form of MM/DD/YYYY
-	* Returns: sqlDate - A sql string version of date 
-	*
-	* Author: Komal Aheer
-	*--------------------------------------------------------------------*/
-	var sqlDateFormat = function (date) {
-	
-		/* Split the date format into month, day, & year */
-		var nums = date.split("/");
-		var sqlDate = "";
-		
-		/* Find the year */
-		sqlDate = nums[2];
-		sqlDate += "-";
-		/* Find the month */
-		sqlDate += nums[0];
-		sqlDate += "-";
-		/* Find the day */
-		sqlDate += nums[1];
-		
-		return sqlDate;
-	}
-	
-	// From the original author
-	var selectCurrentWeek = function() {
-		window.setTimeout(function () {
-			$('.week-picker').find('.ui-datepicker-current-day a').addClass('ui-state-active')
-		}, 1);
-		
-	}
-	
-	// From the original author
-	$('.week-picker').datepicker( {
-		showOtherMonths: true,
-		selectOtherMonths: true,
-		onSelect: function(dateText, inst) { 
-		
-			var date = $(this).datepicker('getDate');
-			var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
-			
-			/* 
-				This code is used to change the large calendar according to the week selected in the small calendar. 
-				Added in by Komal
-			*/
-			var weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-			/* Get all the date tags from the index file */
-			var days = $(".top-info .date");
-			var sqlDays = "";
-			/* Cycle through each day of the week and display it accordingly */
-			for (var i = 1; i < 6; i++){
-				
-				/* Get a date of the week */
-				var d = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + i);
-				
-				/* Convert the date to a String and display it */
-				$(days[i-1])
-					.text(weekDays[i - 1] + " " + dateString($.datepicker.formatDate( dateFormat, d, inst.settings )))
-					.css("margin-bottom", "10px")
-					.css("text-align", "center");
-				$(days[i-1]).find(".single-event").attr('date', weekDays[i - 1] + " " + dateString($.datepicker.formatDate( dateFormat, d, inst.settings )));
-				
-				sqlDays += sqlDateFormat($.datepicker.formatDate( dateFormat, d, inst.settings ))
-				sqlDays += " ";
-			}
-			
-			
-			// THIS IS WHERE WE USE PHP TO GET EVENTS UPDATED -----------------
-			
-			//console.log(sqlDays);
-			$.post("../include_php/change-calendar.php", { days: sqlDays }, function(data)
-				{ 
-					console.log(data); // right now this just prints the slot id that results from the week selected
-				
-					// Alter and events based on the query results!
-					
-				} );
-			// -----------------------------------------------------------------
-			
-			selectCurrentWeek();
-		},
-		beforeShowDay: function(date) {
-			var cssClass = '';
-			if(date >= startDate && date <= endDate)
-				cssClass = 'ui-datepicker-current-day';
-			return [true, cssClass];
-		},
-		onChangeMonthYear: function(year, month, inst) {
-			selectCurrentWeek();
-		}
-		
-	});
-	
-	
-	$('.week-picker .ui-datepicker-calendar tr').live('mousemove', function() { $(this).find('td a').addClass('ui-state-hover'); });
-	$('.week-picker .ui-datepicker-calendar tr').live('mouseleave', function() { $(this).find('td a').removeClass('ui-state-hover'); });
-
-});
-
+<script>
+console.log(objSchedulesPlan);
 </script>
 
-<!--<script src="change.js"> </script> -->
+<!------------------------------------ For week picker ----------------------------->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+<script type="text/javascript" src="week-picker.js"></script>
 
 </body>
 </html>
