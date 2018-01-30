@@ -8,6 +8,7 @@
 STILL NEEDS TO BE DONE
 - Date on start up needs to be today's date 
 - Change dates based on query 
+- fix classid - hard coded as 1 right now
 
 *-------------------------------------------------------------------------------------------------------->
 
@@ -373,7 +374,7 @@ $(function() {
 			// THIS IS WHERE WE USE PHP TO GET EVENTS UPDATED -----------------
 			
 			//console.log(sqlDays);
-			$.post("../include_php/change-calendar.php", { days: sqlDays }, function(data)
+			$.post("../include_php/change-calendar.php", { days: sqlDays, classid: 1 }, function(data)
 				{ 
 					console.log(data); // right now this just prints the slot id that results from the week selected
 				

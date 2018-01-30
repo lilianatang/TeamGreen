@@ -29,8 +29,6 @@ jQuery(document).ready(function($){
 				facilitator_data.pop();
 				
 				
-				console.log(data);
-				
 			}
 		); 
 	
