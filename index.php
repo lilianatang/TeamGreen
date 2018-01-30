@@ -29,20 +29,45 @@ class Check_User {
 			$result = mysqli_query($this->connection, $query) or die(mysqli_error($this->connection));
 			$count = mysqli_num_rows($result);
 
-			if ($count == 1){
+			if ($count == 1) {
 				$_SESSION['username'] = $username;
 				$_SESSION['message'] = "Logged in sucessfully";
+				$row = mysqli_fetch_array($result);
+				$_SESSION['role_id'] = $row['role_id'];
+				$count = mysqli_num_rows($result);
+
+				//admin page
+				
+				if ($role['role_id'] == 1) {
+					header("location: admin/admin.php");
+				}
+
+				//family page
+				else if ($role['role_id'] == 2) {
+					$_SESSION['role_id'] = $row['role_id'];
+					$query_family = "INSERT INTO family(user_id)
+									SELECT users.user_id from users WHERE username = '$username'";
+
+					$result_family = mysqli_query($this->connection, $query) or die (mysqli_error($this->connection));
+
+					header("location: family/family.php");
+				}
+
+				else if ($role['role_id'] == 3) {
+					$_SESSION['role_id'] = $row['role_id'];
+					header("location: board_member/board_member.php");
+				}
+
+				else {
+					$_SESSION['role_id'] = $row['role_id'];
+					header("location: teacher/teacher.php");
+				}
+
 			} else {
 				$_SESSION['message']= "Invalid Login Credentials";
 			}
-		}
 
-		if (isset($_SESSION['username'])) {
-			$username = $_SESSION['username'];
-			echo "Hi . $username . ";
-			echo "This is Members Area";
-			echo "<a href='logout.php'>logout</a>";
-			#header('location: include_php/create-user-form.php');
+
 		}
 		
 		$this->connection->close();
