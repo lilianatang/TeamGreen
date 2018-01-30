@@ -5,9 +5,18 @@
 * Additional alterations to the original code have been made to accommodate the facilitation sign up process.
 * Edited by Komal 
 *--------------------------------------------------------------------------------------------------------*/
-
-jQuery(document).ready(function($){
+/* objSchedulesPlan = [];
+jQuery(document).ready(function($){ */
 	
+
+	
+	
+	/* var script = document.createElement('script');
+	script.src = "../script/jquery-3.0.0.min.js";
+	script.type = 'text/javascript';
+	document.getElementsByTagName('head')[0].appendChild(script); */
+	
+
 	// This variable will hold the names of the facilitators for this family 
 	var facilitator_data;
 	
@@ -395,8 +404,11 @@ jQuery(document).ready(function($){
 		}
 	};
 
+	
+	
+	start = function (){
 	var schedules = $('.cd-schedule');
-	var objSchedulesPlan = [],
+	 objSchedulesPlan = [],
 		windowResize = false;
 	
 	if( schedules.length > 0 ) {
@@ -405,7 +417,8 @@ jQuery(document).ready(function($){
 			objSchedulesPlan.push(new SchedulePlan($(this)));
 		});
 	}
-
+	}
+	start();
 	$(window).on('resize', function(){
 		if( !windowResize ) {
 			windowResize = true;
@@ -445,4 +458,11 @@ jQuery(document).ready(function($){
 			'transform': value
 		});
 	}
-}); 
+
+	
+
+/* 	
+	
+	
+	
+});  */

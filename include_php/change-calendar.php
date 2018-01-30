@@ -37,7 +37,8 @@ class DB_Calendar {
 		
 		while ($row = $result->fetch_assoc()){
 			
-			echo $row["slot_id"] . "," . $row[""];
+			echo $row["slot_id"] . "," . $row["classroom_id"] . "," . $row["time_start"] .
+				"," . $row["time_end"] . "," . $row["facilitators_needed"] . "~";
 		}
 	}
 	
