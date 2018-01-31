@@ -7,10 +7,6 @@ $_SESSION['message']="";
  * the database.
  * Usage: $var = new Create_User()
  * Return: new connection to DB
- * NOTE: UNSURE IF THIS NEEDS TO BE ITS OWN CLASS RIGHT NOW, will talk to group memebers
- * accordingly.
- * NOTE: THE CONNECTION TO db_connect.php is hardcoded based on Joe;s filepath, need to make it
- * generalized for all users...
 */
 class Create_User 
 {
