@@ -7,7 +7,6 @@
 
 STILL NEEDS TO BE DONE
 - Date on start up needs to be today's date 
-- Change dates based on query 
 - fix classid - hard coded as 1 right now
 
 *-------------------------------------------------------------------------------------------------------->
@@ -25,31 +24,37 @@ STILL NEEDS TO BE DONE
 	<link rel="stylesheet" href="../style/reset.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="../style/calendarStyle.css"> <!-- Resource style -->
 	<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">
+	<!-- Link to External Stylesheet for the header -->
+	<link rel="stylesheet" href="../style/headerStyle.css">
+		
   	
-	<title>Facilitation Booking</title>
+	<title>Facilitation Sign Up</title>
 	
 	
 </head>
 <body>
+<div class="main-container"> 
+	<!-- Family header will be inserted here! -->
+</div>
+
+<h1> Book Facilitation  </h1>
+
 <!-- This is a TEMPORARY from I'm going to use to see if I can connect to the database ... -->
 
 <form id = "enter-data">
 
-	<label>MUST Enter Family ID IN ORDER TO SEE FACILITATOR SELECTIONS</label> <input type = "number" id = "input-id" name = "input">
-	<button	type = "Submit" name="submit" id = 'submit'> Submit </button>
+	<label>Family ID (temporary)</label> <input type = "number" id = "input-id" name = "input">
+	<label>Classroom Color: </label> 
+
+	<button	type = "Submit" name="submit" id = 'submit'> Submit </button> 
 	
 </form>
 
 <!-------------------------------------------------------------------------------------------->
 
-<!-- <!-- Insert the OLD Week Picker Calendar
-<div class="week-picker"></div> -->
 
 <!-- Insert the week picker -->
 <input class="week-picker">
-<br /><br />
-Week (<span id="weekNo"></span>): <span id="startDate"></span> - <span id="endDate"></span>
-
 
 <!-- Creation of Schedule -->
 <div class="cd-schedule loading">
@@ -82,102 +87,38 @@ Week (<span id="weekNo"></span>): <span id="startDate"></span> - <span id="endDa
 	<div class="events">
 		<ul>
 			<li class="events-group">
-				<div class="top-info"><span class = "date" >Monday January 22 2018</span></div>
+				<div class="top-info"><span class = "date" >Monday</span></div>
 				<ul>
-				
-				
+					<!-- Events will be populated here! -->
 				</ul>
 			</li>
 
 			<li class="events-group">
-				<div class="top-info"><span class = "date">Tuesday January 23 2018</span></div>
-
+				<div class="top-info"><span class = "date">Tuesday</span></div>
 				<ul>
-					<li class="single-event" data-start="08:00" data-end="12:00" data-content="facilitation-sign-up" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Morning Facilitation</em>
-							<br>
-							<strong class = "positions"> 0 of 4 positions available </strong>
-						</a>
-					</li>
+				<!-- Events will be populated here! -->
+				</ul>
+					
+			</li>
 
+			<li class="events-group">
+				<div class="top-info"><span class = "date">Wednesday</span></div>
+				<ul>
+					<!-- Events will be populated here! -->
 				</ul>
 			</li>
 
 			<li class="events-group">
-				<div class="top-info"><span class = "date">Wednesday January 24 2018</span></div>
-
+				<div class="top-info" ><span class = "date">Thursday</span></div>
 				<ul>
-					<li class="single-event" data-start="08:45" data-end="12:00" data-content="facilitation-sign-up" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Morning Facilitation</em>
-							<br>
-							<strong class = "positions"> 0 of 4 positions available </strong>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="11:50" data-end="13:00" data-content="facilitation-sign-up" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Lunch Facilitation</em>
-							<br>
-							<strong class = "positions"> 0 of 4 positions available </strong>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="12:50" data-end="15:45"  data-content="facilitation-sign-up" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Afternoon Facilitation</em>
-							<br>
-							<strong class = "positions"> 0 of 4 positions available </strong>
-						</a>
-					</li>
+					<!-- Events will be populated here! -->
 				</ul>
 			</li>
 
 			<li class="events-group">
-				<div class="top-info" ><span class = "date">Thursday January 25 2018</span></div>
-
+				<div class="top-info"><span class = "date">Friday</span></div>
 				<ul>
-					<li class="single-event" data-start="08:45" data-end="12:00" data-content="facilitation-sign-up" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Morning Facilitation</em>
-							<br>
-							<strong class = "positions"> 0 of 4 positions available </strong>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="11:50" data-end="13:00" data-content="facilitation-sign-up" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Lunch Facilitation</em>
-							<br>
-							<strong class = "positions"> 0 of 4 positions available </strong>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="12:50" data-end="15:45"  data-content="facilitation-sign-up" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Afternoon Facilitation</em>
-							<br>
-							<strong class = "positions"> 0 of 4 positions available </strong>
-						</a>
-					</li>
-				</ul>
-			</li>
-
-			<li class="events-group">
-				<div class="top-info"><span class = "date">Friday January 26 2018</span></div>
-
-				<ul>
-					<li class='single-event' data-start='08:45' data-end="15:45" data-content="facilitation-sign-up" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Field Trip to Galaxy Land</em>
-							<br>
-							<strong class = "positions"> 0 of 4 positions available </strong>
-							<br> <br>
-							<strong style = "color: white; font-size: 15px;"> Parents are always welcome to attend but with the knowledge they will need to pay their entrance fees if we have reached the maximum number of helpers needed.</strong>
-						</a>
-					</li>
-
+					<!-- Events will be populated here! -->
 				</ul>
 			</li>
 		</ul>
@@ -233,6 +174,12 @@ Week (<span id="weekNo"></span>): <span id="startDate"></span> - <span id="endDa
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script type = "text/javascript" src="../script/week-picker2.js"></script>
 
+<!-- This section of code inserts the admin header for the page -->
+<script type="text/javascript"> 
+jQuery(document).ready(function($){
+	$("body .main-container").load("familyHeader.html");
+});
+</script>
 
 </body>
 </html>

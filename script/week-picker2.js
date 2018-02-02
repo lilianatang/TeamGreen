@@ -99,13 +99,6 @@ jQuery(document).ready(function() {
 				
 			}
 			
-			/*-----------------------------------------------------------------------------------------------------------------*/
-			
-			/* From the original author GET RID OF THIS LATER! */
-            $('#startDate').text($.datepicker.formatDate(dateFormat, startDate, inst.settings));
-            $('#endDate').text($.datepicker.formatDate(dateFormat, endDate, inst.settings));
-            $('#weekNo').text($.datepicker.iso8601Week(date));
-			
     
 			/*----------------
 				This code queries the database for events and then updates the calendar accordingly
@@ -151,9 +144,10 @@ jQuery(document).ready(function() {
 						$("[name='" + date + "']").find("ul").append(day);
 					
 						/* Create new SchedulePlan objects for each date (as specified in calendar-main.js) */
-						start();
+						
 						prev_date = date;
 					}
+					start();
 					
 				} 
 			);
