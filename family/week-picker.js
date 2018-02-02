@@ -95,15 +95,22 @@ jQuery(document).ready(function() {
 				
 				/* Convert the date to a String and display it */
 				$(days[i-1])
+					/* Add a name = 'date' attribute to each events-group component */
 					.attr("name", sqlDateFormat($.datepicker.formatDate( dateFormat, d, inst.settings )))
+					/* Change the name of the date */
 					.find(".top-info .date")
 					.text(weekDays[i - 1] + " " + dateString($.datepicker.formatDate( dateFormat, d, inst.settings )))
 					.css("margin-bottom", "10px")
 					.css("text-align", "center");
-				$(days[i-1]).find(".single-event").attr('date', weekDays[i - 1] + " " + dateString($.datepicker.formatDate( dateFormat, d, inst.settings )));
+			
+				$(days[i-1]).find("ul").html("");
 				
-				sqlDays += sqlDateFormat($.datepicker.formatDate( dateFormat, d, inst.settings ));
+				var newSqlDay = sqlDateFormat($.datepicker.formatDate( dateFormat, d, inst.settings ))
+				sqlDays += newSqlDay;
 				sqlDays += " ";
+				
+				
+
 			}
 			
 			
@@ -131,7 +138,7 @@ jQuery(document).ready(function() {
 							"' data-content='facilitation-sign-up' data-event='event-1'> <a href='#0'> <em class='event-name'> Facilitation Slot </em> <br> <strong class = 'positions'>" +
 							"...... </strong> </a> </li>");
 						
-						console.log($("[name='" + date + "']").find("ul").html("").append(day));
+						$("[name='" + date + "']").find("ul").html("").append(day);
 					
 						start();
 					}

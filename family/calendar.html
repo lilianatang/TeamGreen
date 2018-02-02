@@ -26,7 +26,7 @@ STILL NEEDS TO BE DONE
 	<link rel="stylesheet" href="../style/calendarStyle.css"> <!-- Resource style -->
 	<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">
   	
-	<title>Facilitation Sign Up</title>
+	<title>Facilitation Booking</title>
 	
 	
 </head>
@@ -42,8 +42,14 @@ STILL NEEDS TO BE DONE
 
 <!-------------------------------------------------------------------------------------------->
 
-<!-- Insert the Week Picker Calendar -->
-<div class="week-picker"></div>
+<!-- <!-- Insert the OLD Week Picker Calendar
+<div class="week-picker"></div> -->
+
+<!-- Insert the week picker -->
+<input class="week-picker">
+<br /><br />
+Week (<span id="weekNo"></span>): <span id="startDate"></span> - <span id="endDate"></span>
+
 
 <!-- Creation of Schedule -->
 <div class="cd-schedule loading">
@@ -78,6 +84,8 @@ STILL NEEDS TO BE DONE
 			<li class="events-group">
 				<div class="top-info"><span class = "date" >Monday January 22 2018</span></div>
 				<ul>
+				
+				
 				</ul>
 			</li>
 
@@ -85,7 +93,7 @@ STILL NEEDS TO BE DONE
 				<div class="top-info"><span class = "date">Tuesday January 23 2018</span></div>
 
 				<ul>
-					<li class="single-event" data-start="08:45" data-end="12:00" data-content="facilitation-sign-up" data-event="event-1">
+					<li class="single-event" data-start="08:00" data-end="12:00" data-content="facilitation-sign-up" data-event="event-1">
 						<a href="#0">
 							<em class="event-name">Morning Facilitation</em>
 							<br>
@@ -93,21 +101,6 @@ STILL NEEDS TO BE DONE
 						</a>
 					</li>
 
-					<li class="single-event" data-start="11:50" data-end="13:00" data-content="facilitation-sign-up" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Lunch Facilitation</em>
-							<br>
-							<strong class = "positions"> 0 of 4 positions available </strong>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="12:50" data-end="15:45"  data-content="facilitation-sign-up" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Afternoon Facilitation</em>
-							<br>
-							<strong class = "positions"> 0 of 4 positions available </strong>
-						</a>
-					</li>
 				</ul>
 			</li>
 
@@ -235,14 +228,11 @@ STILL NEEDS TO BE DONE
 </script>
 <script type = "text/javascript" src="../script/calendar-main.js"></script> <!-- Resource jQuery -->
 
-<script>
-console.log(objSchedulesPlan);
-</script>
+<!-- For the week picker -->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script type = "text/javascript" src="week-picker2.js"></script>
 
-<!------------------------------------ For week picker ----------------------------->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-<script type="text/javascript" src="week-picker.js"></script>
 
 </body>
 </html>
