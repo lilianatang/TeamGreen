@@ -134,7 +134,8 @@ jQuery(document).ready(function() {
 						/* Create a new event node to add to the calendar html file */
 						var day = 
 						$(" <li class='single-event' data-start= '" + time_start + "' data-end='" + time_end + 
-							"' data-content='facilitation-sign-up' data-event='event-1'> <a href='#0'> <em class='event-name'> Facilitation Slot </em> <br> <strong class = 'positions'>" +
+							"' data-content='facilitation-sign-up' data-event='event-1" +
+							"'> <a href='#0'> <em class='event-name'> Facilitation Slot </em> <br> <strong class = 'positions'>" +
 							"...... </strong> </a> </li>");
 						
 						/* Add the new event to the calendar */
@@ -142,6 +143,7 @@ jQuery(document).ready(function() {
 					
 						/* Create new SchedulePlan objects for each date (as specified in calendar-main.js) */
 						start();
+						$(window).trigger('resize');
 					}
 					
 				} 

@@ -71,6 +71,7 @@ function SchedulePlan( element ) {
 
 // From the original author
 SchedulePlan.prototype.initSchedule = function() {
+
 	this.scheduleReset();
 	this.initEvents();
 };
@@ -141,6 +142,8 @@ SchedulePlan.prototype.placeEvents = function() {
 			top: (eventTop -1) +'px',
 			height: (eventHeight+1)+'px'
 		});
+		
+		
 	});
 
 	this.element.removeClass('loading');
@@ -397,7 +400,7 @@ SchedulePlan.prototype.checkEventModal = function(device) {
 };
 
 
-/* Edit by Komal - added code to a function start for use by the week-picker.js script */
+/* Edit by Komal - added code to a function start for use by the week-picker.js script - the function is called at the end of this script */
 start = function (){
 	var schedules = $('.cd-schedule');
 	 objSchedulesPlan = [],
@@ -405,15 +408,17 @@ start = function (){
 	
 	if( schedules.length > 0 ) {
 		schedules.each(function(){
+			
 			//create SchedulePlan objects
-			objSchedulesPlan.push(new SchedulePlan($(this)));
+			var new_event = new SchedulePlan($(this));
+			objSchedulesPlan.push(new_event);
+			
+			/* Fixes the slot size problem */
+			new_event.placeEvents();
+			
 		});
 	}
-	
 }
-
-start();
-
 
 $(window).on('resize', function(){
 	if( !windowResize ) {
@@ -454,3 +459,5 @@ function transformElement(element, value) {
 		'transform': value
 	});
 }
+
+start();
