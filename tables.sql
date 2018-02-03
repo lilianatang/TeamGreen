@@ -111,7 +111,7 @@ CREATE table notifications(
 
 
 CREATE table facilitating(
-	slot_id int(8) primary key, 
+	slot_id int(8), 
 	facilitator_id int(7),
 	approved int(3), /* 1 for requested, 2 for pending, 3 for approved */
 	notes varchar(40),
@@ -121,6 +121,7 @@ CREATE table facilitating(
 );
 
 CREATE table facilitation_times(
+	time_id int(6) primary key auto_increment,
 	slot_id int(7),
 	INDEX (slot_id),
 	FOREIGN KEY (slot_id)
