@@ -10,28 +10,19 @@
 // This variable will hold the names of the facilitators for this family 
 var facilitator_data;
 
-// On user submit ...
-$("#submit").click(function (event) {
-	
-	// Retrieve the Family ID from the input box
-	var id = $('#input-id').val();
-	
-	// Prevent the page from resetting
-	event.preventDefault();
-	
-	$.post("../include_php/db_calendar.php", { input: id }, function (data) 
-		{ 
-			// Take the data from the database for this family, and store it in an array
-			facilitator_data = data.split(",");
-			
-			// Get rid of the empty entry at the end
-			facilitator_data.pop();
-			
-			
-		}
-	); 
-
-});
+/* Temporary - family id will always be 1 - NEED COOKIES ! */	
+var id = 1;
+$.post("../include_php/calendar-get-facilitators.php", { input: id }, function (data) 
+	{ 
+		// Take the data from the database for this family, and store it in an array
+		facilitator_data = data.split(",");
+		
+		// Get rid of the empty entry at the end
+		facilitator_data.pop();
+		
+	}
+ ); 
+	 
 /*------------------------------------------*/
 
 var transitionEnd = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
@@ -161,12 +152,19 @@ SchedulePlan.prototype.placeEvents = function() {
 	this.modalHeader.find('.event-date').text(event.find('.event-date').text());
 	this.modal.attr('data-event', event.parent().attr('data-event'));
 	
+	/* Retrieve the slot id */
+	var slot_id = event.parent().attr('slot-id');
+		
+	/* 
+		This bit of code brings in the facilitation sign up form and sends data to the database when the user
+		clicks 'Book Facilitation'
+	*/
+	
 	//update event content based on an html file
 	this.modalBody.find('.event-info').load("../family/facilitation-sign-up.html", function(data){
 		
 		//once the event content has been loaded
 		self.element.addClass('content-loaded');
-		
 		
 		// Clear any facilitator data that may be present already
 		self.modalBody.find("#select-facilitator").html("");
@@ -185,9 +183,39 @@ SchedulePlan.prototype.placeEvents = function() {
 		}
 		
 		// Add a guest option
-		$("<option value = \"Guest\">Guest</option>")
-			.appendTo(self.modalBody
-			.find("#select-facilitator"));
+		$("<option value = 0>Guest</option>")
+			.appendTo(self.modalBody.find("#select-facilitator"));
+			
+		
+		/* Creates an action event to send data from the form to the database */
+		$("#submit-booking").click(function (event) {
+		
+			/* Prevent the page from reloading */
+			event.preventDefault();
+			
+			/* Slot id is already stored in slot_id */
+			
+			/* Get notes */
+			var notes = $(' #comments').text();
+			
+			/* Get facilitator id */
+			var facilitator_id = $("#select-facilitator").val();
+			
+			/* Initiate query to update the database */
+			$.post("../include_php/calendar-book-facilitation.php", { s_id: slot_id, comments: notes, f_id : facilitator_id }, function (data) 
+				{ 
+					/* Close the modal window */
+					self.closeModal(self.eventsGroup.find('.selected-event'));
+					
+					/* Display successful or unsuccessful */
+					$('#user-message').text(data).css("font-weight", "bold");
+					
+				}
+			); 
+
+		});
+			
+		
 	});
 			
 	this.element.addClass('modal-is-open');

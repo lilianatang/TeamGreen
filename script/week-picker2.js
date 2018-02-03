@@ -107,7 +107,6 @@ jQuery(document).ready(function() {
 			
 			$.post("../include_php/change-calendar.php", { days: all_days, classid: 1 }, function(data)
 				{ 
-					console.log(data); 
 				
 					/* Take the data retrieved from the query and extract the event data from it */
 					var new_days = data.split("~");
@@ -135,9 +134,9 @@ jQuery(document).ready(function() {
 						
 						/* Create a new event node to add to the calendar html file */
 						var day = 
-						$(" <li class='single-event' data-start= '" + time_start + "' data-end='" + time_end + 
+						$(" <li class='single-event' slot-id= " + slot_id + " data-start= '" + time_start + "' data-end='" + time_end + 
 							"' data-content='facilitation-sign-up' data-event='event-" + count + 
-							"'> <span class='event-date'></span> <a href='#0'> <em class='event-name'> Facilitation Slot </em> <br> <strong class = 'positions'>" +
+							"'><a href='#0'> <em class='event-name'> Facilitation Slot </em> <br> <strong class = 'positions'>" +
 							"...... </strong> </a> </li>");
 						
 						/* Add the new event to the calendar */
