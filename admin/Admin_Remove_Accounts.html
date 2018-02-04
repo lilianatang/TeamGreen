@@ -1,0 +1,98 @@
+<!-------------------------------------------------------------
+* This document contains the html for Admin Account Creation page. 
+*
+* Author: Wesley Olson
+*-------------------------------------------------------------->
+
+<!doctype html>
+</html>
+	
+		<head>
+	
+		<meta charset="UTF-8">
+		
+		<title>Caraway Admin Account Creation</title>
+		
+		<!-- Link to External CSS for the html head Located in the css folder -->
+		<link rel="stylesheet"  href="../style/headerStyle.css" type="text/css">
+
+		<!-- Link to External CSS for the html body Located in the css folder -->
+		<link rel="stylesheet"  href="../style/admin-account-creation.css" type="text/css">
+
+		<!-- Link to Google font Aclonica. -->
+		<link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+
+	
+	</head>
+	
+	<!--
+	main_div_pages - containers i used to move around the layout.
+	- using google as a place holder for the hyperlink to our own pages for the <q> tages
+	-->
+	<body>
+
+
+
+
+		 <div class="main-container">
+				<!---java script inserts header into here -->
+		</div>
+
+
+		<div class="main_div_pages">
+
+			<p class="fancybigtext">
+				Remove Account
+			</p>
+
+			<p class="fancynormaltext">
+				Select an Account to Remove:
+			</p>
+		</div>
+
+		<div class="main_div_pages">
+
+			<a class="button" href="#family_Remove_page">Family</a>
+
+			<a class="button" href="#teacher_Remove_page">Teacher</a>
+
+		</div>
+
+		<div class="main_div_pages">
+
+			<a class="button" href="#BoardMember_Remove_page">BoardMember</a>
+
+			<a class="button" href="#admin_Remove_page">Admin</a>
+
+		</div>
+
+		<div class="main_div_pages">
+
+			<p class="fancybigtext">
+				Remove a Family Member 
+			</p>
+
+			<p class="fancynormaltext">
+				Select a Family member to Remove:
+			</p>
+		</div>
+
+		<div class="main_div_pages">
+		
+			<a class="button" href="#Facilitator_Remove_page">Facilitator</a>
+
+			<a class="button" href="#Student_Remove_page">Student</a>
+
+		</div>
+		
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+	<script type="text/javascript"> 
+		jQuery(document).ready(function($){
+			$("body .main-container").load("adminHeader.html");
+			console.log("000000");
+		});
+	</script>
+	
+	</body>
+</html>
