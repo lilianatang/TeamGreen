@@ -21,7 +21,7 @@ class Check_User {
 	
 	//assign posted values to variables
 			$username = $_POST['username'];
-			$password = $_POST['password'];
+			$password = sha1($_POST['password']);
 
 	//check if values exist in the database
 			$query = "SELECT * FROM users WHERE username = '$username' AND encrypted_password = '$password'";
@@ -32,14 +32,15 @@ class Check_User {
 			if ($count == 1) {
 				$_SESSION['username'] = $username;
 				$_SESSION['message'] = "Logged in sucessfully";
-				$row = mysqli_fetch_array($result);
-				$_SESSION['role_id'] = $row['role_id'];
-				$count = mysqli_num_rows($result);
+				$userinfo = mysqli_fetch_assoc($result);
+				//$_SESSION['role_id'] = $row['role_id'];
+				//$count = mysqli_num_rows($result);
+				$role = $userinfo['role'];
 
 				//admin page
 				
 				if ($role['role_id'] == 1) {
-					header("location: admin/admin.php");
+					header("location: admin/adminFamilyStatistics.html");
 				}
 
 				//family page
