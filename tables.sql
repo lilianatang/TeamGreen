@@ -109,7 +109,6 @@ CREATE table notifications(
 	REFERENCES users(user_id)
 );
 
-
 CREATE table facilitating(
 	slot_id int(8), 
 	facilitator_id int(7),
@@ -117,15 +116,13 @@ CREATE table facilitating(
 	notes varchar(40),
 	INDEX (facilitator_id),
 	FOREIGN KEY (facilitator_id)
-	REFERENCES facilitator(slot_id)
+	REFERENCES facilitator(slot_id),
+	PRIMARY KEY (slot_id, facilitator_id)
 );
 
 CREATE table facilitation_times(
-	time_id int(6) primary key auto_increment,
-	slot_id int(7),
+	slot_id int(7) auto_increment,
 	INDEX (slot_id),
-	FOREIGN KEY (slot_id)
-	REFERENCES facilitating(slot_id),
 	classroom_id int(2),
 	date_scheduled date,
 	time_start datetime,
@@ -133,7 +130,10 @@ CREATE table facilitation_times(
 	facilitators_needed int(3),
 	INDEX (classroom_id),
 	FOREIGN KEY (classroom_id)
-	REFERENCES classroom(classroom_id)
+	REFERENCES classroom(classroom_id),
+	PRIMARY KEY (classroom_id, time_start, time_end)
+	
+);
 );
 
 CREATE table actions(
