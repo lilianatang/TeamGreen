@@ -29,6 +29,18 @@ Main Components
 
 -------------------------------- */
 
+#selections {
+	text-align: center;
+	font-size: 20px;
+	margin-top: 20px;
+}
+
+#class-select {
+	height: 25px;
+	width: 100px;
+	margin-right: 20px;
+}
+
 .positions {
 	color: white;
 	margin: 20px 0px 10px 0px;

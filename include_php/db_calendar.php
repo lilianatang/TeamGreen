@@ -127,15 +127,15 @@ class DB_Calendar {
 				 VALUES ($slot_id, $facilitator_id)
 				";
 			}
-				
+			
 			$result = $this->connection->query($query) or die ("An error occurred. 3");
 		
 			echo "Sign up successful!";
 			return;
 		}
-		
-		echo "Sign up unsuccessful due to time conflicts.";
-		
+		else {
+			echo "Sign up unsuccessful due to time conflicts.";
+		}
 	}
 	
 	function getClasses (){
