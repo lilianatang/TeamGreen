@@ -35,8 +35,8 @@ class Check_User {
 				$userinfo = mysqli_fetch_assoc($result);
 				//$_SESSION['role_id'] = $row['role_id'];
 				//$count = mysqli_num_rows($result);
-				$role = $userinfo['role'];
-
+				$role = $userinfo['role_id'];
+				echo "LOOK HJEREEWENFOIWENFWE " . $role;
 				//admin page
 				
 				if ($role['role_id'] == 1) {
@@ -44,7 +44,7 @@ class Check_User {
 				}
 
 				//family page
-				else if ($role['role_id'] == 2) {
+				else if ($role == 2) {
 					$_SESSION['role_id'] = $row['role_id'];
 					$query_family = "INSERT INTO family(user_id)
 									SELECT users.user_id from users WHERE username = '$username'";
@@ -54,13 +54,13 @@ class Check_User {
 					header("location: family/family.php");
 				}
 
-				else if ($role['role_id'] == 3) {
-					$_SESSION['role_id'] = $row['role_id'];
+				else if ($role == 3) {
+					$_SESSION['role_id'] = $role;
 					header("location: board_member/board_member.php");
 				}
 
 				else {
-					$_SESSION['role_id'] = $row['role_id'];
+					$_SESSION['role_id'] = $role;
 					header("location: teacher/teacher.php");
 				}
 
