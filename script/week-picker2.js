@@ -3,8 +3,107 @@
 jQuery(document).ready(function() {  
 
 
+	/* This string will hold all the dates in the selected week in SQL format so that that we can query the database for events */
+	var all_days = "";
+	var class_id = $("#class-select").val();
+	
+	$("#class-select").change(function (event) {
+	
+		/* Get classroom id */
+		class_id = $("#class-select").val();
+		
+		updateCalendar();
+	});
+	
+	
+
 	/* -------------- Added by Komal ---------------*/
 
+	var updateCalendar = function (){
+		
+		
+			/*----------------
+				This code queries the database for events and then updates the calendar accordingly
+				RIGHT NOW THE CLASS ID IS SET TO 1 - CHANGE THIS LATER 
+			*/
+			
+			$.post("../include_php/change-calendar.php", { days: all_days, classid: class_id }, function(data)
+				{ 
+				
+					var days = $(".events-group");
+					for (var i = 1; i < 6; i++){
+					
+				
+						/* Clear the calendar of events so that we can query the database and update the display*/
+						$(days[i-1]).find("ul").html("");
+					
+					}
+				
+					/* Take the data retrieved from the query and extract the event data from it */
+					
+					
+					var new_days = data.split("~");
+					new_days.pop();
+					
+					var prev_date = "";
+					var count = 0;
+					for (var i = 0; i < new_days.length; i ++){
+						
+						/* Extract event data */
+						var event = new_days[i].split(",");
+						var slot_id = event[0];
+						var classroom_id = event[1];
+						var date = event[2].split(" ")[0];
+						var time_start = event[2].split(" ")[1].slice(0,-3);
+						var time_end = event[3].split(" ")[1].slice(0,-3);
+						var facilitators_needed = event[4];
+						var facilitators_signed_up = event[5];
+						
+						if (date === prev_date){
+							count ++;
+						}
+						else {
+							count = 1;
+						}
+						
+						var slot_info;
+						if (facilitators_signed_up === facilitators_needed){
+							slot_info = "SLOT FULL";
+						}
+						else {
+							slot_info = facilitators_needed - facilitators_signed_up + " of " + facilitators_needed + " positions available";
+						}
+						
+						/* Create a new event node to add to the calendar html file */
+						var day = 
+						$(" <li class='single-event' slot-id= " + slot_id + " data-start= '" + time_start + "' data-end='" + time_end + 
+							"' data-content='facilitation-sign-up' data-event='event-" + count + 
+							"'><a href='#0'> <em class='event-name'> Facilitation Slot </em> <br> <strong class = 'positions'>" +
+							 slot_info +"</strong> </a> </li>");
+						
+						
+						/* Add the new event to the calendar */
+						$("[name='" + date + "']").find("ul").append(day);
+					
+						/* Create new SchedulePlan objects for each date (as specified in calendar-main.js) */
+						
+						prev_date = date;
+					}
+					
+					start();
+					
+				} 
+			);
+			
+			/*-----------------------*/
+		
+		
+		
+	}
+	
+	
+	
+	
 	/* ------------------------------------------------------------------
 	* dateString Function
 	* This function takes a string in the form of YYYY-MM-DD and 
@@ -64,9 +163,8 @@ jQuery(document).ready(function() {
 			/* Get all the event group tags from the index file - the event group tags correspond to each day of the week */
 			var days = $(".events-group");
 			
-			/* This string will hold all the dates in the selected week in SQL format so that that we can query the database for events */
-			var all_days = "";
-		
+			all_days = "";
+			
 			/* Cycle through each day of the week and display it accordingly */
 			for (var i = 1; i < 6; i++){
 				
@@ -90,8 +188,7 @@ jQuery(document).ready(function() {
 					.css("margin-bottom", "10px")
 					.css("text-align", "center");
 			
-				/* Clear the calendar of events so that we can query the database and update the display*/
-				$(days[i-1]).find("ul").html("");
+				
 				
 				/* Compile a string of all dates for this week for querying purposes */
 				all_days += date_picker_date;
@@ -99,60 +196,8 @@ jQuery(document).ready(function() {
 				
 			}
 			
-    
-			/*----------------
-				This code queries the database for events and then updates the calendar accordingly
-				RIGHT NOW THE CLASS ID IS SET TO 1 - CHANGE THIS LATER 
-			*/
+			updateCalendar();
 			
-			$.post("../include_php/change-calendar.php", { days: all_days, classid: 1 }, function(data)
-				{ 
-				
-					/* Take the data retrieved from the query and extract the event data from it */
-					var new_days = data.split("~");
-					new_days.pop();
-
-					var prev_date = "";
-					var count = 0;
-					for (var i = 0; i < new_days.length; i ++){
-						
-						/* Extract event data */
-						var event = new_days[i].split(",");
-						var slot_id = event[0];
-						var classroom_id = event[1];
-						var date = event[2].split(" ")[0];
-						var time_start = event[2].split(" ")[1].slice(0,-3);
-						var time_end = event[3].split(" ")[1].slice(0,-3);
-						var facilitators_needed = event[4];
-						
-						if (date === prev_date){
-							count ++;
-						}
-						else {
-							count = 1;
-						}
-						
-						/* Create a new event node to add to the calendar html file */
-						var day = 
-						$(" <li class='single-event' slot-id= " + slot_id + " data-start= '" + time_start + "' data-end='" + time_end + 
-							"' data-content='facilitation-sign-up' data-event='event-" + count + 
-							"'><a href='#0'> <em class='event-name'> Facilitation Slot </em> <br> <strong class = 'positions'>" +
-							"...... </strong> </a> </li>");
-						
-						/* Add the new event to the calendar */
-						$("[name='" + date + "']").find("ul").append(day);
-					
-						/* Create new SchedulePlan objects for each date (as specified in calendar-main.js) */
-						
-						prev_date = date;
-					}
-					start();
-					
-				} 
-			);
-			
-			/*-----------------------*/
-	
 			
         }
     }
@@ -194,4 +239,8 @@ jQuery(document).ready(function() {
     $calendarTR.on('mouseleave', function () {
         $(this).find('td a').removeClass('ui-state-hover');
     });
+	
+	
+	
+	
 });

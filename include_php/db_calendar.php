@@ -58,15 +58,22 @@ class DB_Calendar {
 		
 		while ($row = $result->fetch_assoc()){
 			
-			/* Determine how many facilitators signed up already! */
+			$slot_id = $row["slot_id"];
 			
+			/* Determine how many facilitators signed up for this slot_id already */
+			 $query = 
+			"SELECT count(*) as total 
+			 FROM facilitating 
+			 WHERE slot_id = $slot_id";
 			
+			$sub_result = $this->connection->query($query) or die ("An error occurred.");
 			
-			echo $row["slot_id"] . "," . $row["classroom_id"] . "," . $row["time_start"] .
-				"," . $row["time_end"] . "," . $row["facilitators_needed"] . "~";
+			$sub_row = $sub_result->fetch_assoc();
+			
+			echo $slot_id . "," . $row["classroom_id"] . "," . $row["time_start"] .
+				"," . $row["time_end"] . "," . $row["facilitators_needed"] . "," . $sub_row["total"] . "~";
 		}
 	}
-	
 	
 	function bookFacilitation ($facilitator_id, $notes, $slot_id){
 		
@@ -82,7 +89,7 @@ class DB_Calendar {
 		  WHERE slot_id = $slot_id";
 		
 		/* Run the first Query */
-		$result = $this->connection->query($query) or die ("An error occurred.");
+		$result = $this->connection->query($query) or die ("An error occurred 1.");
 		
 		while ($row = $result->fetch_assoc()){
 			$time_start = $row["time_start"];
@@ -100,12 +107,11 @@ class DB_Calendar {
 			time_end > '$time_start'"; 
 			
 		/* Run the second Query */
-		$result = $this->connection->query($query) or die ("An error occurred.");
+		$result = $this->connection->query($query) or die ("An error occurred. 2");
 		
 		while ($row = $result->fetch_assoc()){
 			$same_times = $row["same_times"];
 		}
-		
 		
 		if ($same_times == 0){
 			
@@ -116,19 +122,35 @@ class DB_Calendar {
 				";
 			}
 			else {
+				$query = 
 				"INSERT INTO facilitating (slot_id, facilitator_id)
 				 VALUES ($slot_id, $facilitator_id)
 				";
-				
 			}
 				
-			$result = $this->connection->query($query) or die ("An error occurred.");
+			$result = $this->connection->query($query) or die ("An error occurred. 3");
 		
 			echo "Sign up successful!";
+			return;
 		}
-		else {
-			echo "Sign up unsuccessful due to time conflicts.";
-		}
+		
+		echo "Sign up unsuccessful due to time conflicts.";
+		
+	}
+	
+	function getClasses (){
+		
+		$query = 
+			"SELECT classroom_id, class_color
+			 FROM classroom";
+		
+		
+		$result = $this->connection->query($query) or die ("An error occurred.");
+		
+		while ($row = $result->fetch_assoc()){
+			echo $row['classroom_id'] . " " . $row['class_color'] . ",";
+		};
+		
 	}
 	
 }

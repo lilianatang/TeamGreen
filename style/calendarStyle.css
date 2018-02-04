@@ -29,6 +29,10 @@ Main Components
 
 -------------------------------- */
 
+.positions {
+	color: white;
+	margin: 20px 0px 10px 0px;
+}
 
 .cd-schedule {
   position: relative;

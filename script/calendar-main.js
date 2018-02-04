@@ -6,12 +6,12 @@
 * Edited by Komal 
 *--------------------------------------------------------------------------------------------------------*/
 
-/*--This is the code for the temporary form at the top for family ids ----------------------------------*/
 // This variable will hold the names of the facilitators for this family 
 var facilitator_data;
 
 /* Temporary - family id will always be 1 - NEED COOKIES ! */	
 var id = 1;
+/* Update list of facilitators based on who's logged in */
 $.post("../include_php/calendar-get-facilitators.php", { input: id }, function (data) 
 	{ 
 		// Take the data from the database for this family, and store it in an array
@@ -22,6 +22,28 @@ $.post("../include_php/calendar-get-facilitators.php", { input: id }, function (
 		
 	}
  ); 
+ 
+ 
+ /* Get all the classes from the database and create a selector */
+ 
+  $.post("../include_php/get-classes.php",function (data) 
+	{ 
+		// Take the data from the database for this family, and store it in an array
+		var classes = data.split(",");
+		classes.pop();
+		
+		var class_selector = $("#class-select");
+		
+		for (var i = 0; i < classes.length; i ++){
+			var class_info = classes[i].split(" ");
+			var new_class = $("<option value =" + class_info[0] + ">" + 
+				class_info[1] + "</option>");
+			class_selector.append(new_class);
+		}
+		
+	}
+ ); 
+ 
 	 
 /*------------------------------------------*/
 
@@ -144,17 +166,27 @@ SchedulePlan.prototype.placeEvents = function() {
 // From the original author
  SchedulePlan.prototype.openModal = function(event) {
 	var self = this;
+	
+	var slot_info = event.find('.positions').text();
+	
+	// Exit if the slot is full 
+	if (slot_info === "SLOT FULL"){
+		return;
+	}
+	
 	var mq = self.mq();
 	this.animating = true;
 	
 	//update event name and time
 	this.modalHeader.find('.event-name').text(event.find('.event-name').text());
 	this.modalHeader.find('.event-date').text(event.find('.event-date').text());
+	this.modalHeader.find('.positions').text(slot_info);
 	this.modal.attr('data-event', event.parent().attr('data-event'));
 	
 	/* Retrieve the slot id */
 	var slot_id = event.parent().attr('slot-id');
-		
+	
+	
 	/* 
 		This bit of code brings in the facilitation sign up form and sends data to the database when the user
 		clicks 'Book Facilitation'
@@ -181,11 +213,6 @@ SchedulePlan.prototype.placeEvents = function() {
 				.find("#select-facilitator"));
 			
 		}
-		
-		// Add a guest option
-		$("<option value = 0>Guest</option>")
-			.appendTo(self.modalBody.find("#select-facilitator"));
-			
 		
 		/* Creates an action event to send data from the form to the database */
 		$("#submit-booking").click(function (event) {
@@ -217,6 +244,7 @@ SchedulePlan.prototype.placeEvents = function() {
 			
 		
 	});
+
 			
 	this.element.addClass('modal-is-open');
 
