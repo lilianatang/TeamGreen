@@ -1,3 +1,4 @@
+
 CREATE database carawayportal;
 USE carawayportal;
 
@@ -133,7 +134,6 @@ CREATE table facilitation_times(
 	REFERENCES classroom(classroom_id),
 	PRIMARY KEY (classroom_id, time_start, time_end)
 	
-);
 );
 
 CREATE table actions(
