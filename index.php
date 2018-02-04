@@ -7,7 +7,7 @@ class Check_User {
 
 
 	function __construct() {
-		require_once 'C:\wamp64\www\TeamGreen\include_php\db_connect.php';
+		require_once 'include_php\db_connect.php';
 
 		$db = new DB_Connect();
 		$this->connection = $db->connect();
@@ -68,7 +68,7 @@ $credential->check_credentials();
 	<body>
 	
 		<!-- Caraway Logo Image -->
-		<img id = "logo" src="schedule-template/media/portal-logo.png" alt="Caraway Facilitation Portal">
+		<img id = "logo" src="images\portal-logo.png" alt="Caraway Facilitation Portal">
 	
 		<!-- Login Form -->
 
