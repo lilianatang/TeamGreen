@@ -11,7 +11,8 @@ var facilitator_data;
 
 /* Temporary - family id will always be 1 - NEED COOKIES ! */	
 var id = 1;
-/* Update list of facilitators based on who's logged in */
+
+/* This call queries the database and updates the list of facilitators based on who's logged in */
 $.post("../include_php/calendar-get-facilitators.php", { input: id }, function (data) 
 	{ 
 		// Take the data from the database for this family, and store it in an array
@@ -24,20 +25,27 @@ $.post("../include_php/calendar-get-facilitators.php", { input: id }, function (
  ); 
  
  
- /* Get all the classes from the database and create a selector */
- 
-  $.post("../include_php/get-classes.php",function (data) 
+/* This call queries the database and updates the list of classrooms to populate the class selector */
+$.post("../include_php/get-classes.php",function (data) 
 	{ 
 		// Take the data from the database for this family, and store it in an array
 		var classes = data.split(",");
 		classes.pop();
 		
+		/* Find the class selector */
 		var class_selector = $("#class-select");
 		
+		/* Go through the data retrieved from the database and create selections for each class */
 		for (var i = 0; i < classes.length; i ++){
+			
+			// Extract classes 
 			var class_info = classes[i].split(" ");
+			
+			// Create a new class selection
 			var new_class = $("<option value =" + class_info[0] + ">" + 
 				class_info[1] + "</option>");
+				
+			// Add selection to the selector 
 			class_selector.append(new_class);
 		}
 		
@@ -45,8 +53,7 @@ $.post("../include_php/calendar-get-facilitators.php", { input: id }, function (
  ); 
  
 	 
-/*------------------------------------------*/
-
+/* From the original author */
 var transitionEnd = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
 var transitionsSupported = ( $('.csstransitions').length > 0 );
 //if browser does not support transitions - use a different event to trigger them
@@ -245,7 +252,7 @@ SchedulePlan.prototype.placeEvents = function() {
 		
 	});
 
-			
+	/* From the original author */
 	this.element.addClass('modal-is-open');
 
 	setTimeout(function(){
@@ -470,13 +477,14 @@ start = function (){
 			var new_event = new SchedulePlan($(this));
 			objSchedulesPlan.push(new_event);
 			
-			/* Fixes the slot size problem */
+			/* Fixes the slot size problem - replaces the events in the right positions */
 			new_event.placeEvents();
 			
 		});
 	}
 }
 
+/* From the original author */
 $(window).on('resize', function(){
 	if( !windowResize ) {
 		windowResize = true;

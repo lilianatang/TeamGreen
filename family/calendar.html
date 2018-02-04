@@ -4,11 +4,6 @@
 * 
 * Additional alterations to the original code have been made to accommodate the facilitation sign up process.
 * Edited by Komal 
-
-STILL NEEDS TO BE DONE
-- Date on start up needs to be today's date 
-- fix classid - hard coded as 1 right now
-
 *-------------------------------------------------------------------------------------------------------->
 
 <!doctype html>
@@ -24,10 +19,9 @@ STILL NEEDS TO BE DONE
 	<link rel="stylesheet" href="../style/reset.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="../style/calendarStyle.css"> <!-- Resource style -->
 	<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">
+	
 	<!-- Link to External Stylesheet for the header -->
 	<link rel="stylesheet" href="../style/headerStyle.css">
-  	<!-- 
-	<link rel="stylesheet" href="../style/facilitationSignUpFormStyle.css"> -->
 	
 	
 	<title>Facilitation Sign Up</title>
@@ -35,18 +29,19 @@ STILL NEEDS TO BE DONE
 	
 </head>
 <body>
+
 <div class="main-container"> 
 	<!-- Family header will be inserted here! -->
 </div>
 
-
+<!-- Page Title  -->
 <h1> Book Facilitation  </h1>
 <p id = "user-message" style = 'text-align: center;'> Select a week, classroom, and then a facilitation slot. </p>
 
+<!-- Selections for the date and the class color -->
 <div id = "selections">
 
-	<!-- Class selection -->
-	
+	<!-- Class selection -->	
 	<label>Classroom Color: </label> 
 	<select id = "class-select"> </select>
 
@@ -83,7 +78,7 @@ STILL NEEDS TO BE DONE
 	</div> <!-- .timeline -->
 
 	
-	<!-- All the facilitation events are in the following div. Every date consists of a the event name and information -->
+	<!-- All the facilitation events are in the following div. The facilitation events are populated within each unordered list as indicated below -->
 	
 	<div class="events">
 		<ul>
@@ -128,7 +123,7 @@ STILL NEEDS TO BE DONE
 	
 	<!-------------------------------------------------------------------------------------------------------------------------
 	 * Event Modal Outline
-	 *	This is the window that pops up when you click an event. The tags below are populated when the user clicks an event. 
+	 * This is the window that pops up when you click an event. The tags below are populated when the user clicks an event. 
 	 -------------------------------------------------------------------------------------------------------------------------->
 	<div class="event-modal">
 	
@@ -163,7 +158,7 @@ STILL NEEDS TO BE DONE
 
 <!----------------------------------------------------------------------------- JavaScript & jQuery  ------------------------------------------------------------------------------>
 
-<!-- For the Large Calendar -->
+<!-- FThe following are script links for the large calendar -->
 <script src="../script/modernizr.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script>
@@ -171,7 +166,7 @@ STILL NEEDS TO BE DONE
 </script>
 <script type = "text/javascript" src="../script/calendar-main.js"></script> <!-- Resource jQuery -->
 
-<!-- For the week picker -->
+<!-- The following are script links for the week picker -->
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script type = "text/javascript" src="../script/week-picker2.js"></script>
