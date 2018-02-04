@@ -244,6 +244,9 @@ SchedulePlan.prototype.placeEvents = function() {
 					/* Display successful or unsuccessful */
 					$('#user-message').text(data).css("font-weight", "bold");
 					
+					/* Update calendar */
+					updateCalendar();
+					
 				}
 			); 
 

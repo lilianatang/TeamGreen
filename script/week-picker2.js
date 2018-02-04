@@ -6,6 +6,8 @@
 * Edited by Komal 
 * Please note: All code from the author is specified.
 -----------------------------------------------------------------*/
+var updateCalendar;
+var clearCalendar;
 
 jQuery(document).ready(function() {  
 
@@ -30,7 +32,7 @@ jQuery(document).ready(function() {
 	*
 	* Parameters & returns: None
 	*-------------------------------------------------------------------------------*/
-	var clearCalendar = function(){
+	clearCalendar = function(){
 		
 		/* Find all events and clear the html within it */
 		var days = $(".events-group");
@@ -48,7 +50,7 @@ jQuery(document).ready(function() {
 	*
 	* Parameters & returns: None
 	*-------------------------------------------------------------------------------*/
-	var updateCalendar = function (){
+	updateCalendar = function (){
 	
 		/*
 			This code queries the database for events and then updates the calendar accordingly
