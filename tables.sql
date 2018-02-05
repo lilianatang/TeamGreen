@@ -58,6 +58,8 @@ CREATE table students(
 	student_id int(8) primary key auto_increment,
 	first_name varchar(40),
 	last_name varchar(40),
+	family_id int(5),
+	grade varchar(5),
 	classroom_id int(2),
 	INDEX (classroom_id),
 	FOREIGN KEY (classroom_id)
