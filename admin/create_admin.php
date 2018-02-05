@@ -83,11 +83,11 @@ $use->create_user();
 
 			<div class="main-container">
 			</div>
-<h1>Family Account Creation</h1>
+<h1>Admin Account Creation</h1>
 <form action="../admin/create_admin.php" method="post" autocomplete="off" />
 <?= $_SESSION['message']  ?>
-<p>Family User ID: <input type="text" name="username" required /></p>
-<p>Family Password: <input type="text" name="password" required /></p>
+<p>Admin User ID: <input type="text" name="username" required /></p>
+<p>Admin Password: <input type="text" name="password" required /></p>
 <input type="submit" value="Submit" name="Submit" />
 </form>
 
