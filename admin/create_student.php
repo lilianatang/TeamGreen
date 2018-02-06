@@ -86,7 +86,7 @@ $use->create_user();
 			</div>
 
 <h1>Student Creation</h1>
-<form action="create_student.php" method="post" autocomplete="off" />
+<form action="../admin/create_student.php" method="post" autocomplete="off" />
 <?= $_SESSION['message']  ?>
 <p>First Name: <input type="text" name="first_name" required /></p>
 <p>Last Name: <input type="text" name="last_name" required /></p>
