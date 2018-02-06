@@ -201,7 +201,7 @@ SchedulePlan.prototype.placeEvents = function() {
 	*/
 	
 	//update event content based on an html file
-	this.modalBody.find('.event-info').load("../family/facilitation-sign-up.html", function(data){
+	this.modalBody.find('.event-info').load(event.parent().attr('data-content')+'.html .event-info > *', function(data){
 		
 		//once the event content has been loaded
 		self.element.addClass('content-loaded');
