@@ -83,7 +83,8 @@ function SchedulePlan( element ) {
 	this.modalBodyBg = this.modal.find('.body-bg'); 
 	this.modalMaxWidth = 800;
 	this.modalMaxHeight = 480;
-	
+
+	this.processingBooking = false; // Komal added this to avoid the double clicking issue
 	this.animating = false;
 
 	this.initSchedule();
@@ -221,35 +222,44 @@ SchedulePlan.prototype.placeEvents = function() {
 			
 		}
 		
+		
+		
 		/* Creates an action event to send data from the form to the database */
 		$("#submit-booking").click(function (event) {
-		
-			/* Prevent the page from reloading */
+			
+			/* Prevent the page from reloading */			
 			event.preventDefault();
 			
-			/* Slot id is already stored in slot_id */
+			if (self.processingBooking === false) {
+				
+				// Indicate that a booking is currently being processed 
+				self.processingBooking = true;
 			
-			/* Get notes */
-			var notes = $(' #comments').text();
-			
-			/* Get facilitator id */
-			var facilitator_id = $("#select-facilitator").val();
-			
-			/* Initiate query to update the database */
-			$.post("../include_php/calendar-book-facilitation.php", { s_id: slot_id, comments: notes, f_id : facilitator_id }, function (data) 
-				{ 
-					/* Close the modal window */
-					self.closeModal(self.eventsGroup.find('.selected-event'));
-					
-					/* Display successful or unsuccessful */
-					$('#user-message').text(data).css("font-weight", "bold");
-					
-					/* Update calendar */
-					updateCalendar();
-					
-				}
-			); 
-
+				/* Slot id is already stored in slot_id */
+				
+				/* Get notes */
+				var notes = $(' #comments').text();
+				
+				/* Get facilitator id */
+				var facilitator_id = $("#select-facilitator").val();
+				
+				/* Initiate query to update the database */
+				$.post("../include_php/calendar-book-facilitation.php", { s_id: slot_id, comments: notes, f_id : facilitator_id }, function (data) 
+					{ 
+						/* Close the modal window */
+						self.closeModal(self.eventsGroup.find('.selected-event'));
+						
+						/* Display successful or unsuccessful */
+						$('#user-message').text(data).css("font-weight", "bold");
+						
+						/* Update calendar */
+						updateCalendar();
+						
+						// Indicate that a booking is no longer being processed
+						self.processingBooking = false;
+					}
+				); 
+			}
 		});
 			
 		

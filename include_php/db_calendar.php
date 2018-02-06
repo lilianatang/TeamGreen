@@ -121,7 +121,7 @@ class DB_Calendar {
 	* NOTE: This method echoes out the success or failure messages for access by the caller script
 	*------------------------------------------------------------------------------------------*/
 	function bookFacilitation ($facilitator_id, $notes, $slot_id){
-		
+
 		/*Variable declaration*/
 		$time_start = "";
 		$time_end = "";
@@ -186,6 +186,7 @@ class DB_Calendar {
 			return;
 		}
 		else {
+			
 			echo "Sign up unsuccessful due to time conflicts.";
 		}
 	}
