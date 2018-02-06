@@ -20,7 +20,7 @@ class Create_User
 	// Author: Liliana Quyen Tang
 	function __construct()
 	{
-		require_once 'C:\wamp64\www\TeamGreen\include_php\db_connect.php';
+		require_once '..\include_php\db_connect.php';
 
 		$db = new DB_Connect();
 		$this->connection = $db->connect();
