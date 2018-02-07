@@ -64,6 +64,7 @@ jQuery(document).ready(function() {
 				/* Clear the calendar of events so that we can query the database and update the display */
 				clearCalendar();
 			
+				
 				/* Take the data retrieved from the query and extract the event data from it */
 				var new_days = data.split("~");
 				new_days.pop();

@@ -6,17 +6,16 @@
 * -----------------------------------------------------------------*/
 
 
-/* These variables and functions are declared outside ready for access by other files */
-
-// This variable will hold the names of the facilitators for this family 
-var facilitator_data;
-var id;
+/* These functions are declared outside ready for access by other files */
 
 var fillModal;
 var create_event;
 
 jQuery(document).ready(function($){
-
+	
+	// This variable will hold the names of the facilitators for this family 
+	var facilitator_data;
+	
 	/* Temporary - family id will always be 1 - NEED COOKIES ! */	
 	id = 1;
 
@@ -78,9 +77,11 @@ jQuery(document).ready(function($){
 	*-----------------------------------------------------------------------------*/
 	fillModal = function(slot_id, event_element){
 		
+		// Find the insertion point in the document
+		var select_facilitator = event_element.modalBody.find("#select-facilitator");
 		
 		// Clear any facilitator data that may be present already
-		event_element.modalBody.find("#select-facilitator").html("");
+		select_facilitator.html("");
 		
 		// Go through all facilitators from the query and add them as a drop-down option
 		for (var i = 0; i < facilitator_data.length; i += 2){
@@ -90,8 +91,7 @@ jQuery(document).ready(function($){
 				facilitator_data[i+1] + "</option>" );
 			
 			// Add the option to the form 
-			$selection.appendTo(event_element.modalBody
-				.find("#select-facilitator"));
+			$selection.appendTo(select_facilitator);
 			
 		}
 		

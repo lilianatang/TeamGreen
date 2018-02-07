@@ -11,7 +11,7 @@ require_once 'db_calendar.php';
 // Gets the booking information from the caller
 $calendar = new DB_Calendar();
 
-// Ensure that the fields are empty
+// Ensure that the fields are not empty
 if ($_POST['s_id'] && $_POST['f_id']){
 	
 	// Check if the comment field was left empty

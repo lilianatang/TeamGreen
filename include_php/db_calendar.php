@@ -229,9 +229,41 @@ class DB_Calendar {
 		$result = $this->connection->query($query) or die ("An error occurred.");
 		
 		while ($row = $result->fetch_assoc()){
-			echo $row['classroom_id'] . " " . $row['class_color'] . ","; // The commas are added to make parsing simpler on the caller end
+			echo $row['classroom_id'] . " " . $row['class_color'] . ","; // The commas and spaces are added to make parsing simpler on the caller end
 		};
 		
+	}
+	
+	
+	/*---------------------------------------------------------------------------------
+	* getFacilitators
+	* This method retrieves all the facilitators facilitating for a given slot_id
+	*
+	* Parameters & Return: None
+	* 
+	* NOTE: This method echoes out facilitator information for access by the caller script
+	*------------------------------------------------------------------------------------------*/
+	function getFacilitators($slot_id){
+		
+		$query = 
+			"SELECT CONCAT(first_name, \" \", last_name) as name, notes
+			 FROM facilitating, facilitator
+			 WHERE 
+				facilitating.facilitator_id = facilitator.facilitator_id and 
+				slot_id = $slot_id";
+		
+		$result = $this->connection->query($query) or die ("An error occurred.");
+		
+		while ($row = $result->fetch_assoc()){
+			if ($row['notes'] == null){
+				echo $row['name'] . ",";
+			}
+			else {
+				echo $row['name'] . "(note: " . $row['notes'] . "),"; // The commas are added to make parsing simpler on the caller end	
+			}
+			
+			
+		};
 	}
 	
 }
