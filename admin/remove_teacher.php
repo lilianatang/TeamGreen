@@ -1,68 +1,58 @@
 <?php
-// Used to display message that user has been created.
+// Used to display message that user has been deleted.
 session_start();
 $_SESSION['message']="";
 
-/* This class creates a new user, encrypts the password and inserts it into
+/* This class deletes a user from the DB
  * the database.
- * Usage: $var = new Create_User()
+ * Usage: $var = new delete_User()
  * Return: new connection to DB
- * NOTE: UNSURE IF THIS NEEDS TO BE ITS OWN CLASS RIGHT NOW, will talk to group memebers
- * accordingly.
- * NOTE: THE CONNECTION TO db_connect.php is hardcoded based on Joe;s filepath, need to make it
- * generalized for all users...
 */
-class Create_User 
+class delete_User 
 {
 	private $connection;
 
-	// the construction is to initiate the connection in Create_User class
+	// the construction is to initiate the connection in delete_User class
 	// Author: Liliana Quyen Tang
 	function __construct()
 	{
-		require_once '..\include_php\db_connect.php';
+		require_once 'C:\wamp64\www\TeamGreen\include_php\db_connect.php';
 
 		$db = new DB_Connect();
 		$this->connection = $db->connect();
 	}
-	/* creates a user from the data entered into the form
-	* Usage: $user->create_user();
+	/* deletes a user from the database
+	* Usage: $user->delete_user();
 	* Return: None
 	*/
-	function create_user()
+	function delete_user()
 	{
 		if ($_SERVER['REQUEST_METHOD'] ==  "POST")
 		{
 			$username = $this->connection->real_escape_string($_POST['username']);
-			$password = sha1($_POST['password']); 
-			$roleID = 1;
 			
-			$sql = "INSERT INTO users (username, encrypted_password, role_id) VALUES"
-			. "('$username','$password', '$roleID')";
-
-			$result = mysqli_query($this->connection, $sql);
-			if($result)
+			$sql = "Delete FROM users where username = '$username'";
+			if(mysqli_query($this->connection, $sql))
 			{
-				$_SESSION['message'] = "New admin successfully created";
+				$_SESSION['message'] = "User successfully deleted";
 			}
 			else
 			{
 				die('Error: ' . mysqli_error($mysqli));
 			}
-
 			$this->connection->close();
 		}		
 	}
 }
-$use = new Create_User();
-$use->create_user();
+$use = new delete_User();
+$use->delete_user();
 ?>
 <html>
 <head>
 	
 		<meta charset="UTF-8">
 		
-		<title>Admin Account Creation</title>
+		<title>Teacher Account Removal</title>
 		
 		<!-- Link to External CSS for the html head Located in the css folder -->
 		<link rel="stylesheet"  href="../style/headerStyle.css" type="text/css">
@@ -83,11 +73,10 @@ $use->create_user();
 
 			<div class="main-container">
 			</div>
-<h1>Admin Account Creation</h1>
-<form action="../admin/create_admin.php" method="post" autocomplete="off" />
+<h1>Teacher Deletion</h1>
+<form action="../admin/remove_teacher.php" method="post" autocomplete="off" />
 <?= $_SESSION['message']  ?>
-<p>Admin User ID: <input type="text" name="username" required /></p>
-<p>Admin Password: <input type="text" name="password" required /></p>
+<p>Username to be deleted: <input type="text" name="username" required /></p>
 <input type="submit" value="Submit" name="Submit" />
 </form>
 
@@ -100,4 +89,3 @@ $use->create_user();
 		</script>
 </body>
 </html>
-

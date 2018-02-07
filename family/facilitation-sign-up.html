@@ -1,42 +1,39 @@
-
-<!-- This file holds the facilitation sign up form that will go on the modal -->
+<!--------------------------------------------------------------------------------------------------------
+* This file holds the facilitation sign up form that will be inserted into the modal
+*
+* Author: Komal 
+*-------------------------------------------------------------------------------------------------------->
 
 <div class="event-info">
 
-	<form id = "facilitation-sign-up" 
-		style = 
-			"text-align: center;
-			margin: 10%;"
+	<form id = "facilitation-sign-up" style = "text-align: center; margin: 10%;">
+		
+		<!-- Page Title -->
+		<h2 style = "size: 20px; font-size: 35px; color: black;"> Book Facilitation </h2>
+		<br>
+		
+		<!-- Facilitator Selection -->
+		<div style = " margin: 20px 0px 20px 0px;">
+			<label style = "color: black;">Select a facilitator: </label>
+			<br>
+			<select	id = "select-facilitator" style = "font-size: 20px; margin: 10px 50px 10px 50px;">
 			
-	>
-		
-		<h2 
-			style = 
-				"size: 20px; 
-				font-weight: bold; 
-				font-size: 35px;" 
-		> 
-			Book Facilitation 
-		</h2>
-		
-		<select 
-			id = "select-facilitator"
-			style = 
-				"font-size: 20px;
-				margin:50px 50px 10px 50px;"
-		
-		>
-		
-			<!-- This will be populated with facilitators to select when the user clicks a modal and a family id is given -->
+				<!-- This will be populated with facilitators to select when the user clicks a modal and a family id is given -->
+				
+			</select>
 			
-			
-		</select>
+		</div>
 		
+		<!-- A spot for comments -->
+		<label style = "color: black;" >Add additional comments (optional): </label>
+		<textarea id = "comments" style = "width: 300px; height: 500; margin: 10px 20px 10px 20px;"></textarea>
 		
+		<!-- Submit button -->
 		<button 
+			id = "submit-booking"
 			type = "Submit"
 			style = "font-size: 20px;
-			margin: 70px 50px 30px 50px;"
+			margin: 20px 50px 30px 50px;"
 		>
 			Book Facilitation Time
 		</button>
