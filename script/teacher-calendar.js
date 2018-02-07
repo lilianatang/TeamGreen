@@ -60,24 +60,26 @@ jQuery(document).ready(function($){
 		// Go gather a list of facilitators and their notes from the database 
 		$.post("../include_php/get-facilitators-from-slot-id.php", { s_id: slot_id }, function (data){
 		
-			console.log(data);
-		
 			var facilitator_info = data.split(",");
 			facilitator_info.pop();
 			
-			// Add each to the list 
-			for (var i = 0; i < facilitator_info.length; i ++){
+			/* Check if any facilitators have signed up */
+			if (facilitator_info.length === 0){
 				
-				var selection;
-				
-				// Create an option for a facilitator without a note
-				$selection = $(" <li>" + facilitator_info[i] + "</li>" );
-				
-				// Add the option to the form 
-				$selection.appendTo($facilitator_list);
-				
-			}
+				// If none have signed up, display a message
+				$(" <li> No facilitators have signed up for this slot. </li>" ).appendTo($facilitator_list);
 			
+			}
+			else {
+				
+				// Add each to the list 
+				for (var i = 0; i < facilitator_info.length; i ++){
+					
+					// Create an option for a facilitator
+					$(" <li>" + facilitator_info[i] + "</li>" ).appendTo($facilitator_list);
+					
+				}
+			}	
 		});
 		
 	}

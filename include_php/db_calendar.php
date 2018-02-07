@@ -259,9 +259,8 @@ class DB_Calendar {
 				echo $row['name'] . ",";
 			}
 			else {
-				echo $row['name'] . "(note: " . $row['notes'] . "),"; // The commas are added to make parsing simpler on the caller end	
+				echo $row['name'] . " (note: " . $row['notes'] . "),"; // The commas are added to make parsing simpler on the caller end	
 			}
-			
 			
 		};
 	}
