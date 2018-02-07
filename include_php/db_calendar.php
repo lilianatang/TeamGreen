@@ -126,10 +126,23 @@ class DB_Calendar {
 		$time_start = "";
 		$time_end = "";
 		$same_times = -1;
+		$num_facilitators = "";
+		$f_needed = "";
+		
+		/* Get number of people facilitating  */
+		$query = "SELECT count(*) as num_facilitators from facilitating where slot_id = $slot_id";
+		
+		/* Run Query */
+		$result = $this->connection->query($query) or die ("An error occurred 1.");
+		
+		/* Retrieve the data */
+		while ($row = $result->fetch_assoc()){
+			$num_facilitators = $row["num_facilitators"];
+		}
 		
 		/* Get the time information from the slot already booked */
 		$query = 
-		" SELECT time_start, time_end 
+		" SELECT time_start, time_end, facilitators_needed
 		  FROM facilitation_times 
 		  WHERE slot_id = $slot_id";
 		
@@ -139,7 +152,14 @@ class DB_Calendar {
 		while ($row = $result->fetch_assoc()){
 			$time_start = $row["time_start"];
 			$time_end = $row["time_end"];
+			$f_needed = $row["facilitators_needed"];
 		};
+		
+		//Make sure the slot isn't full
+		if ($f_needed <= $num_facilitators){
+				echo "This slot is full - you cannot sign up.";
+				return false;
+		}
 		
 		/* Check if the facilitator is already booked at the same time */
 		$query = 
