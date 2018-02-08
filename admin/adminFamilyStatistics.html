@@ -36,12 +36,12 @@
 			<div id = "selections">  <!-- Selection Containers -->
 				
 				<!-- Family Selection -->
-				<div class = "selection" id = "family-selection">
+				<div class = "selection">
 					<label>Select a family: </label>
-					<select class = "select">
-						<option value = "insert-familyid-here"> Mouse Family</option>
-						<option value = "insert-familyid-here"> Dog Family</option>
-						<option value = "insert-familyid-here"> Cat Family</option>
+					<select class = "select" id = "family-selection" >
+						<option value = ""> Mouse Family</option>
+						<option value = ""> Dog Family</option>
+						<option value = ""> Cat Family</option>
 					</select>
 				</div>
 				
@@ -49,15 +49,15 @@
 				<div class = "selection" id = "month-selection">
 					<label>Select a month: </label>	
 					<select class = "select">
-						<option value = 1> January </option>
-						<option value = 2> February </option>
-						<option value = 3> March </option>
-						<option value = 4> April </option>
-						<option value = 5> May </option>
-						<option value = 6> June </option>
-						<option value = 7> July </option>
-						<option value = 8> August </option>
-						<option value = 9> September </option>
+						<option value = 01> January </option>
+						<option value = 02> February </option>
+						<option value = 03> March </option>
+						<option value = 04> April </option>
+						<option value = 05> May </option>
+						<option value = 06> June </option>
+						<option value = 07> July </option>
+						<option value = 08> August </option>
+						<option value = 09> September </option>
 						<option value = 10> October </option>
 						<option value = 11> November </option>
 						<option value = 12> December </option>
@@ -68,12 +68,12 @@
 				<div class = "selection">
 					<label>Select a year: </label>
 					<select class = "select">
-						<option value = 1>2017</option>
-						<option value = 1>2018</option>
-						<option value = 1>2019</option>
-						<option value = 1>2020</option>
-						<option value = 1>2021</option>
-						<option value = 1>2022</option>
+						<option value = 2017>2017</option>
+						<option value = 2018>2018</option>
+						<option value = 2019>2019</option>
+						<option value = 2020>2020</option>
+						<option value = 2021>2021</option>
+						<option value = 2022>2022</option>
 					</select>
 				</div>
 			
@@ -109,41 +109,15 @@
 
 			<div class="main-info-sub-container">
 				<table id="stats-table">
-					<tr>
-						<th>Week</th>
-						<th>Total Hours</th>
-						<th>Requirements Met</th>
-					</tr>
+					<tbody id="stats-table-body">
+						<tr>
+							<th>Week</th>
+							<th>Total Hours</th>
+							<th>Requirements Met</th>
+						</tr>
+						<!--Table data will be inserted here -->
 
-					<tr>
-						<td>January 1 to January 7</td>
-						<td> insert hours from database here</td>
-						<td> &#10003;</td>
-					</tr>
-
-					<tr>
-						<td>January 8 to January 14</td>
-						<td> insert hours from database here</td>
-						<td> &#10005;</td>
-					</tr>
-
-					<tr>
-						<td>January 15 to January 21</td>
-						<td>insert hours from database here</td>
-						<td>&#10003;</td>
-					</tr>
-
-					<tr>
-						<td>January 22 to January 28</td>
-						<td>insert hours from database here</td>
-						<td>&#10003;</td>
-					</tr>
-
-					<tr>
-						<td>January 29 to February 4</td>
-						<td>insert hours from database here</td>
-						<td>&#10003;</td>
-					</tr>
+					</tbody>
 				</table>
 
 			</div>
@@ -166,6 +140,7 @@
 		</script>
 
 		<script type = "text/javascript" src="../script/admin-family-stats"></script> <!-- Resource jQuery -->
+
 		
 	</body>
 </html>
