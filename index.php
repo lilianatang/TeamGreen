@@ -51,7 +51,7 @@ class Check_User {
 
 					$result_family = mysqli_query($this->connection, $query) or die (mysqli_error($this->connection));
 
-					header("location: family/family.php");
+					header("location: family/calendar.html");
 				}
 
 				else if ($role == 3) {
@@ -61,7 +61,7 @@ class Check_User {
 
 				else {
 					$_SESSION['role_id'] = $role;
-					header("location: teacher/teacher.php");
+					header("location: teacher/calendar.html");
 				}
 
 			} else {
