@@ -8,10 +8,6 @@ $_SESSION['message']="";
  * the database.
  * Usage: $var = new Create_User()
  * Return: new connection to DB
- * NOTE: UNSURE IF THIS NEEDS TO BE ITS OWN CLASS RIGHT NOW, will talk to group memebers
- * accordingly.
- * NOTE: THE CONNECTION TO db_connect.php is hardcoded based on Joe;s filepath, need to make it
- * generalized for all users...
 */
 class Create_User 
 {
@@ -38,7 +34,7 @@ class Create_User
 			$last_name = $_POST['last_name']; 
 			$grade = $_POST['grade'];
 			$family_id = $_POST['family_id'];
-			$classroom = $_POST['classroom_id'];
+			$classroom_id = $_POST['classroom_id'];
 			
 			$sql = "INSERT INTO students (first_name, last_name, family_id, grade, classroom_id) VALUES"
 			. "('$first_name','$last_name', '$family_id', '$grade', '$classroom_id')";
@@ -82,37 +78,47 @@ $use->create_user();
 	-->
 	<body>
 
-			<div class="main-container">
-			</div>
+			
+		<div class="main-container"> <!-- Header will be inserted here! -->	</div>
 
-<h1>Student Creation</h1>
-<form action="../admin/create_student.php" method="post" autocomplete="off" style="text-align: center;" />
-<?= $_SESSION['message']  ?>
-<p>First Name: <input type="text" name="first_name" required /></p>
-<p>Last Name: <input type="text" name="last_name" required /></p>
-<p>Grade: <input type="text" name="grade" required /></p>
-<p>Family Name: <select name="family_id" size = "3">
-	<option value = "mouse_family">Mouse Family</option>
-	<option value = "dog_family">Dog Family</option>
-	<option value = "cat_family">Cat Family</<option>
-</select>
+		<h1>Student Creation</h1>
+		
+		<form action="../admin/create_student.php" method="post" autocomplete="off" style="text-align: center;" />
 
-<p>Classroom Color: <select name="classroom_id" size = "3">
-	<option value = 1>1. Pink</option>
-	<option value = 2>2. Green</option>
-	<option value = 3>3. Yellow</option>
-	
-</select>
+			<?= $_SESSION['message']  ?>
+			<p>First Name: <input type="text" name="first_name" required /></p>
+			<p>Last Name: <input type="text" name="last_name" required /></p>
+			<p>Grade: <input type="text" name="grade" required /></p>
+			<p>Family Username: 
+			
+			<select id = "choose-family" select name="family_id">
+				<!-- This will be populated dynamically -->
+			</select>
 
-<p><input type="submit" value="Submit" name="Submit" /></p>
-</form>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+			<p>Classroom Color: <select name="classroom_id" id = "class-select">
+				<!-- This will be populated dynamically -->
+			</select>
+
+			<p><input type="submit" value="Submit" name="Submit" /></p>
+		
+		</form>
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
+		
+		<!-- Inserts the header -->
 		<script type="text/javascript"> 
-		jQuery(document).ready(function($){
-			$("body .main-container").load("adminHeader.html");
-		});
+			jQuery(document).ready(function($){
+				$("body .main-container").load("adminHeader.html");			
+			});
 		</script>
-</body>
+		
+		<!-- Inserts the family usernames in the selection -->
+		<script type="text/javascript" src = "../script/load-families.js"> </script>
+		
+		<!-- Inserts the classes in the selection -->
+		<script type="text/javascript" src = "../script/load-classes.js"> </script>
+	
+	</body>
 </html>
 
 

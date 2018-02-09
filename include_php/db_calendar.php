@@ -214,11 +214,15 @@ class DB_Calendar {
 		
 	}
 	
-	
-	
+	/*------------------------------------------
+	* getFamilies
+	* This method gets the usernames of all families in the system 
+	*
+	* NOTE: This method echoes out family information for access by the caller script
+	*-------------------------------------------*/
 	function getFamilies() 
 	{
-		/* Create query to retrieve facilitator information */
+		/* Create query to retrieve family information */
 		$query = 
 			"SELECT family_id, username 
 			 FROM users, family

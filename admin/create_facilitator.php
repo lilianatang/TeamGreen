@@ -50,7 +50,7 @@ class Create_User
 			}
 			else
 			{
-				die('Error:');
+				die('Error:' . mysqli_error($this->connection));
 			}
 
 			$this->connection->close();
@@ -73,9 +73,6 @@ $use->create_user();
 		<link rel="stylesheet"  href="../style/headerStyle.css" type="text/css">
 
 		<!-- Link to External CSS for the html body Located in the css folder -->
-
-		<!-- Link to Google font Aclonica. -->
-		<link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
 
 	
 	</head>
@@ -107,37 +104,16 @@ $use->create_user();
 		</form>
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
+		
 		<script type="text/javascript"> 
 			jQuery(document).ready(function($){
 				
 				// This code loads the header 
 				$("body .main-container").load("adminHeader.html");
-				
-				// This code populates the family username selection 
-				$.post("../include_php/get-families.php", function(data){
-					
-					// Organize data from the query 
-					var family_info = data.split(",");
-					family_info.pop();
-					
-					// Go through each piece of data and create a selection out of it
-					for (var i = 0; i < family_info.length; i ++){
-						
-						// Split data so [0] = family id and [1] = family username
-						var family_specific = family_info[i].split(" ");
-						
-						// Create selection
-						var new_option = $("<option value = '" + family_specific[0] + 
-						"'>" + family_specific[1] + " </option>");
-						
-						// Add selection
-						$("#choose-family").append(new_option);
-					}
-					
-				});
-				
-			});
+			}
 		</script>
+		<script type="text/javascript" src = "../script/load-families.js"> </script>
+
 	</body>
 </html>
 
