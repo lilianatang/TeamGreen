@@ -16,7 +16,7 @@ class delete_User
 	// Author: Liliana Quyen Tang
 	function __construct()
 	{
-		require_once 'C:\wamp64\www\TeamGreen\include_php\db_connect.php';
+		require_once '..\include_php\db_connect.php';
 
 		$db = new DB_Connect();
 		$this->connection = $db->connect();
@@ -73,9 +73,9 @@ $use->delete_user();
 	<div class="main-container">
 	</div>
 	<h1>Facilitator Account Deletion</h1>
-	<form action="../admin/remove_facilitator.php" method="post" autocomplete="off" />
+	<form action="../admin/remove_facilitator.php" method="post" autocomplete="off" style = "text-align: center;"/>
 	<?= $_SESSION['message']  ?>
-	<p>Facilitaor's first name to be deleted: <input type="text" name="first_name" required /></p>
+	<p>Facilitator's first name to be deleted: <input type="text" name="first_name" required /></p>
 	<p>Facilitator's last name to be deleted: <input type="text" name="last_name" required /></p>
 	
 	<input type="submit" value="Submit" name="Submit" />

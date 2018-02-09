@@ -94,8 +94,9 @@ $use->create_user();
 <p>Email: <input type="text" name="email" required></p>
 <p>Address: <input type="text" name="address" required></p>
 <p>Family Name: <select name="family_id" size = "3">
+
 	<option value = "mouse_family">Mouse Family</option>
-	<option value = "dog_family">Dog Family</option>
+	<option value = "dog_family">Dog Family</option
 	<option value = "cat_family">Cat Family</option>
 	
 </select>
