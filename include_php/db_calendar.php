@@ -214,6 +214,24 @@ class DB_Calendar {
 		
 	}
 	
+	
+	
+	function getFamilies() 
+	{
+		/* Create query to retrieve facilitator information */
+		$query = 
+			"SELECT family_id, username 
+			 FROM users, family
+			 WHERE role_id = 2 and users.user_id = family.user_id";
+		
+		/* Perform the query */
+		$result = $this->connection->query($query) or die ("An error occurred.");
+		
+		/* Retrieve and echo results */
+		while ($row = $result->fetch_assoc()){
+			echo $row['family_id'] . " " . $row['username'] . ",";
+		};
+	}
 }
 	
 	
