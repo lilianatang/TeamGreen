@@ -1,11 +1,18 @@
 <?php 
+/*--------------------------------
+* This document serves as our login page.
+* 
+* Authors: Liliana & Komal 
+*------------------------------*/
+
 session_start();
 $_SESSION['message'] = "";
 
 class Check_User {
+	
 	private $connection;
 
-
+	// The construction is to initiate the connection in the Check_User class
 	function __construct() {
 		require_once 'include_php\db_connect.php';
 
@@ -13,7 +20,6 @@ class Check_User {
 		$this->connection = $db->connect();
 
 	}
-
 
 	/*check if the credentials are correct */
 	function check_credentials() {
@@ -33,12 +39,9 @@ class Check_User {
 				$_SESSION['username'] = $username;
 				$_SESSION['message'] = "Logged in sucessfully";
 				$userinfo = mysqli_fetch_assoc($result);
-				//$_SESSION['role_id'] = $row['role_id'];
-				//$count = mysqli_num_rows($result);
 				$role = $userinfo['role_id'];
-				echo "LOOK HJEREEWENFOIWENFWE " . $role;
-				//admin page
 				
+				//admin page				
 				if ($role['role_id'] == 1) {
 					header("location: admin/adminFamilyStatistics.html");
 				}
@@ -54,11 +57,13 @@ class Check_User {
 					header("location: family/calendar.html");
 				}
 
+				//board member page
 				else if ($role == 3) {
 					$_SESSION['role_id'] = $role;
 					header("location: board_member/board_member.php");
 				}
 
+				// teacher page 
 				else {
 					$_SESSION['role_id'] = $role;
 					header("location: teacher/calendar.html");
@@ -100,10 +105,6 @@ $credential->check_credentials();
 
 		<form id = "login-form" action="index.php" method="post" autocomplete="off">
 
-		<form id = "login-form" action="C:\wamp64\www\TeamGreen\index.php" method="post" autocomplete="off">
-
-		<?= $_SESSION['message']; ?>
-			
 			<label id = "id-label" > User ID: </label>
 			<br>
 
@@ -114,6 +115,8 @@ $credential->check_credentials();
 			<input id = "password-input" type = "password" name="password" required> </input>
 			<br>
 			<input type="submit" value="Submit" name="Submit"> </input>
+			<br>
+			<?= $_SESSION['message']; // Displays an error message if login is incorrect ?> 
 
 			<br>
 		</form>

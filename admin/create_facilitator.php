@@ -20,7 +20,7 @@ class Create_User
 	// Author: Liliana Quyen Tang
 	function __construct()
 	{
-		require_once 'C:\wamp64\www\TeamGreen\include_php\db_connect.php';
+		require_once '..\include_php\db_connect.php';
 
 		$db = new DB_Connect();
 		$this->connection = $db->connect();
@@ -86,7 +86,7 @@ $use->create_user();
 			<div class="main-container">
 			</div>
 <h1>Facilitator Creation</h1>
-<form action="../admin/create_facilitator.php" method="post" autocomplete="off" />
+<form action="../admin/create_facilitator.php" method="post" autocomplete="off" style="text-align: center;" />
 <?= $_SESSION['message']  ?>
 <p>First Name: <input type="text" name="first_name" required></p>
 <p>Last Name: <input type="text" name="last_name" required></p>
@@ -107,7 +107,6 @@ $use->create_user();
 		<script type="text/javascript"> 
 		jQuery(document).ready(function($){
 			$("body .main-container").load("adminHeader.html");
-			console.log("000000");
 		});
 		</script>
 </body>

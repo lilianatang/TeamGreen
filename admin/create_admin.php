@@ -84,7 +84,7 @@ $use->create_user();
 			<div class="main-container">
 			</div>
 <h1>Admin Account Creation</h1>
-<form action="../admin/create_admin.php" method="post" autocomplete="off" />
+<form action="../admin/create_admin.php" method="post" autocomplete="off" style="text-align: center;"/>
 <?= $_SESSION['message']  ?>
 <p>Admin User ID: <input type="text" name="username" required /></p>
 <p>Admin Password: <input type="text" name="password" required /></p>
@@ -95,7 +95,6 @@ $use->create_user();
 		<script type="text/javascript"> 
 		jQuery(document).ready(function($){
 			$("body .main-container").load("adminHeader.html");
-			console.log("000000");
 		});
 		</script>
 </body>

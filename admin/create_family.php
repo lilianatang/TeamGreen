@@ -7,9 +7,9 @@ $_SESSION['message']="";
  * the database.
  * Usage: $var = new Create_User()
  * Return: new connection to DB
- * NOTE: UNSURE IF THIS NEEDS TO BE ITS OWN CLASS RIGHT NOW, will talk to group memebers
+ * NOTE: UNSURE IF THIS NEEDS TO BE ITS OWN CLASS RIGHT NOW, will talk to group members
  * accordingly.
- * NOTE: THE CONNECTION TO db_connect.php is hardcoded based on Joe;s filepath, need to make it
+ * NOTE: THE CONNECTION TO db_connect.php is hardcoded based on Joe's filepath, need to make it
  * generalized for all users...
 */
 class Create_User 
@@ -20,7 +20,7 @@ class Create_User
 	// Author: Liliana Quyen Tang
 	function __construct()
 	{
-		require_once 'C:\wamp64\www\TeamGreen\include_php\db_connect.php';
+		require_once '../include_php/db_connect.php';
 
 		$db = new DB_Connect();
 		$this->connection = $db->connect();
@@ -76,7 +76,7 @@ $use->create_user();
 	</head>
 	
 	<!--
-	main_div_pages - containers i used to move around the layout.
+	main_div_pages - containers I used to move around the layout.
 	- using google as a place holder for the hyperlink to our own pages for the <q> tages
 	-->
 	<body>
@@ -84,7 +84,7 @@ $use->create_user();
 			<div class="main-container">
 			</div>
 <h1>Family Account Creation</h1>
-<form action="../admin/create_family.php" method="post" autocomplete="off" />
+<form action="../admin/create_family.php" method="post" autocomplete="off" style="text-align: center;" />
 <?= $_SESSION['message']  ?>
 <p>Family User ID: <input type="text" name="username" required /></p>
 <p>Family Password: <input type="text" name="password" required /></p>
@@ -95,7 +95,6 @@ $use->create_user();
 		<script type="text/javascript"> 
 		jQuery(document).ready(function($){
 			$("body .main-container").load("adminHeader.html");
-			console.log("000000");
 		});
 		</script>
 </body>
