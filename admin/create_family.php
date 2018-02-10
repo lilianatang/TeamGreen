@@ -7,9 +7,9 @@ $_SESSION['message']="";
  * the database.
  * Usage: $var = new Create_User()
  * Return: new connection to DB
- * NOTE: UNSURE IF THIS NEEDS TO BE ITS OWN CLASS RIGHT NOW, will talk to group memebers
+ * NOTE: UNSURE IF THIS NEEDS TO BE ITS OWN CLASS RIGHT NOW, will talk to group members
  * accordingly.
- * NOTE: THE CONNECTION TO db_connect.php is hardcoded based on Joe;s filepath, need to make it
+ * NOTE: THE CONNECTION TO db_connect.php is hardcoded based on Joe's filepath, need to make it
  * generalized for all users...
 */
 class Create_User 
@@ -20,7 +20,7 @@ class Create_User
 	// Author: Liliana Quyen Tang
 	function __construct()
 	{
-		require_once 'C:\wamp64\www\TeamGreen\include_php\db_connect.php';
+		require_once '../include_php/db_connect.php';
 
 		$db = new DB_Connect();
 		$this->connection = $db->connect();
@@ -33,6 +33,8 @@ class Create_User
 	{
 		if ($_SERVER['REQUEST_METHOD'] ==  "POST")
 		{
+			
+			/* This section inserts the new user into the user table */
 			$username = $this->connection->real_escape_string($_POST['username']);
 			$password = sha1($_POST['password']); 
 			$roleID = 2;
@@ -47,9 +49,44 @@ class Create_User
 			}
 			else
 			{
-				die('Error: ' . mysqli_error($mysqli));
+				$_SESSION['message'] = 'Error: ' . mysqli_error($this->connection);
+				return;
 			}
+			
+			/* This section retrieves the generated user_id from the previous query */
+			$sql = "SELECT user_id FROM users where username = '$username' and encrypted_password = '$password' and role_id = 2";
 
+			$result = mysqli_query($this->connection, $sql);
+			
+			$row = mysqli_fetch_assoc($result);
+			$user_id = $row['user_id'];
+				
+			if($result)
+			{
+				$_SESSION['message'] = "New user successfully created";
+			}
+			else
+			{
+				$_SESSION['message'] = 'Error: ' . mysqli_error($this->connection);
+				return;
+			}
+			
+			/* This section inserts the generated user into the family table */
+			$sql = "INSERT INTO family (user_id) VALUES"
+			. " ($user_id)";
+
+			$result = mysqli_query($this->connection, $sql);
+			
+			if($result)
+			{
+				$_SESSION['message'] = "New user successfully created";
+			}
+			else
+			{
+				$_SESSION['message'] = 'Error: ' . mysqli_error($this->connection);
+				return;
+			}
+			
 			$this->connection->close();
 		}		
 	}
@@ -76,27 +113,31 @@ $use->create_user();
 	</head>
 	
 	<!--
-	main_div_pages - containers i used to move around the layout.
+	main_div_pages - containers I used to move around the layout.
 	- using google as a place holder for the hyperlink to our own pages for the <q> tages
 	-->
 	<body>
 
-			<div class="main-container">
-			</div>
-<h1>Family Account Creation</h1>
-<form action="../admin/create_family.php" method="post" autocomplete="off" />
-<?= $_SESSION['message']  ?>
-<p>Family User ID: <input type="text" name="username" required /></p>
-<p>Family Password: <input type="text" name="password" required /></p>
-<input type="submit" value="Submit" name="Submit" />
-</form>
+		<div class="main-container"> <!-- Header is inserted here! --> 	</div>
+		
+		<h1>Family Account Creation</h1>
+		
+		<form action="../admin/create_family.php" method="post" autocomplete="off" style="text-align: center;" />
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+			<?= $_SESSION['message']  ?>
+			<p>Family User ID: <input type="text" name="username" required /></p>
+			<p>Family Password: <input type="text" name="password" required /></p>
+			<input type="submit" value="Submit" name="Submit" />
+	
+		</form>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+		
+		<!-- This section inserts the header -->
 		<script type="text/javascript"> 
-		jQuery(document).ready(function($){
-			$("body .main-container").load("adminHeader.html");
-			console.log("000000");
-		});
+			jQuery(document).ready(function($){
+				$("body .main-container").load("adminHeader.html");
+			});
 		</script>
 </body>
 </html>

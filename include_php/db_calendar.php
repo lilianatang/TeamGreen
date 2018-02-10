@@ -214,6 +214,51 @@ class DB_Calendar {
 		
 	}
 	
+	/*------------------------------------------
+	* getFamilies
+	* This method gets the usernames of all families in the system 
+	*
+	* NOTE: This method echoes out family information for access by the caller script
+	*-------------------------------------------*/
+	function getFamilies() 
+	{
+		/* Create query to retrieve family information */
+		$query = 
+			"SELECT family_id, username 
+			 FROM users, family
+			 WHERE role_id = 2 and users.user_id = family.user_id";
+		
+		/* Perform the query */
+		$result = $this->connection->query($query) or die ("An error occurred.");
+		
+		/* Retrieve and echo results */
+		while ($row = $result->fetch_assoc()){
+			echo $row['family_id'] . " " . $row['username'] . ",";
+		};
+	}
+	
+	/*------------------------------------------
+	* getTeachers
+	* This method gets the usernames and names of all teachers in the system
+	*
+	* NOTE: This method echoes out family information for access by the caller script
+	*-------------------------------------------*/
+	function getTeachers() 
+	{
+		/* Create query to retrieve family information */
+		$query = 
+			"SELECT user_id, CONCAT(first_name, \" \", last_name) as name  
+			 FROM teachers";
+		
+		/* Perform the query */
+		$result = $this->connection->query($query) or die ("An error occurred.");
+		
+		/* Retrieve and echo results */
+		while ($row = $result->fetch_assoc()){
+			echo $row['user_id'] . "~" . $row['name'] . ",";
+		};
+	}
+	
 }
 	
 	

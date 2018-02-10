@@ -20,7 +20,7 @@ class Create_User
 	// Author: Liliana Quyen Tang
 	function __construct()
 	{
-		require_once 'C:\wamp64\www\TeamGreen\include_php\db_connect.php';
+		require_once '..\include_php\db_connect.php';
 
 		$db = new DB_Connect();
 		$this->connection = $db->connect();
@@ -36,29 +36,32 @@ class Create_User
 			$first_name = $this->connection->real_escape_string($_POST['first_name']);
 			$last_name = $_POST['last_name']; 
 			$phone_number= $_POST['phone_number'];
-			$email = $POST['email'];
-			$address = $POST['address'];
-			$family_id 	= $POST['family_id'];	
+			$email = $_POST['email'];
+			$address = $_POST['address'];
+			$family_id 	= $_POST['family_id'];	
 			$sql = "INSERT INTO facilitator(family_id, first_name, last_name, email, address, phone_number) VALUES"
-			. "('$family_id, $first_name','$last_name', '$phone_number', '$email', '$address')";
-
+			. "($family_id, '$first_name','$last_name', '$phone_number', '$email', '$address')";
+			
 			$result = mysqli_query($this->connection, $sql);
+			
 			if($result)
 			{
 				$_SESSION['message'] = "New facilitator successfully created";
 			}
 			else
 			{
-				die('Error: ' . mysqli_error($mysqli));
+				die('Error:' . mysqli_error($this->connection));
 			}
 
 			$this->connection->close();
 		}		
 	}
+	
 }
 $use = new Create_User();
 $use->create_user();
 ?>
+<!DOCTYPE html>
 <html>
 <head>
 	
@@ -71,45 +74,46 @@ $use->create_user();
 
 		<!-- Link to External CSS for the html body Located in the css folder -->
 
-		<!-- Link to Google font Aclonica. -->
-		<link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
-
 	
 	</head>
 	
-	<!--
-	main_div_pages - containers i used to move around the layout.
-	- using google as a place holder for the hyperlink to our own pages for the <q> tages
-	-->
 	<body>
 
-			<div class="main-container">
-			</div>
-<h1>Facilitator Creation</h1>
-<form action="../admin/create_facilitator.php" method="post" autocomplete="off" />
-<?= $_SESSION['message']  ?>
-<p>First Name: <input type="text" name="first_name" required></p>
-<p>Last Name: <input type="text" name="last_name" required></p>
-<p>Phone Number: <input type="text" name="phone_number" required></p>
-<p>Email: <input type="text" name="email" required></p>
-<p>Address: <input type="text" name="address" required></p>
-<p>Family Name: <select name="family_id" size = "3">
-	<option value = "mouse_family">Mouse Family</option>
-	<option value = "dog_family">Dog Family</option>
-	<option value = "cat_family">Cat Family</option>
-	
-</select>
+		<div class="main-container"> <!-- Header will be inserted here! --> </div>
+		
+		<h1>Facilitator Creation</h1>
+		
+		<form action="../admin/create_facilitator.php" method="post" autocomplete="off" style="text-align: center;">
+		
+		<?= $_SESSION['message']  ?>
+		
+		<p>First Name: <input type="text" name="first_name" required></p>
+		<p>Last Name: <input type="text" name="last_name" required></p>
+		<p>Phone Number: <input type="text" name="phone_number" required></p>
+		<p>Email: <input type="text" name="email" required></p>
+		<p>Address: <input type="text" name="address" required></p>
+		
+		<label>Family Username: </label> 
+		<select id = "choose-family" name = "family_id" >
+			<!-- This will be populated dynamically -->
+		</select>
+		
+		<br><br>
+		<input type="submit" value="Submit" name="Submit">
+		
+		</form>
 
-<p><input type="submit" value="Submit" name="Submit"></p>
-</form>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
+		
 		<script type="text/javascript"> 
-		jQuery(document).ready(function($){
-			$("body .main-container").load("adminHeader.html");
-			console.log("000000");
-		});
+			jQuery(document).ready(function($){
+				
+				// This code loads the header 
+				$("body .main-container").load("adminHeader.html");
+			}
 		</script>
-</body>
+		<script type="text/javascript" src = "../script/load-families.js"> </script>
+
+	</body>
 </html>
 
