@@ -1,3 +1,8 @@
+/*------------------------------------------------
+* This file is used to populate a choose classroom selector 
+* Author: Komal
+*------------------------------------------------*/
+
 jQuery(document).ready(function($){
 
 	/* This call queries the database and updates the list of classrooms to populate the class selector */

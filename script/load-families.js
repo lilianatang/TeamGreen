@@ -1,3 +1,8 @@
+/*------------------------------------------------
+* This file is used to populate a choose-family selector 
+* Author: Komal
+*------------------------------------------------*/
+
 jQuery(document).ready(function($){
 				
 	// This code loads the header 
