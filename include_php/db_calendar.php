@@ -259,6 +259,12 @@ class DB_Calendar {
 		};
 	}
 	
+	/*--------------------------------------------------------------------------
+	* getBoardMembers
+	* This method gets the usernames and ids of all board members in the system
+	*
+	* NOTE: This method echoes out family information for access by the caller script
+	*--------------------------------------------------------------------------------*/
 	function getBoardMembers()
 	{
 		/* Create query to retrieve family information */
@@ -274,6 +280,7 @@ class DB_Calendar {
 		};
 		
 	}
+	
 	
 }
 	

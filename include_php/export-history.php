@@ -1,6 +1,41 @@
-<form action="export-history.php" method="post">
-  <input type="submit" value="Export History!">
-</form>
+<!DOCTYPE html>
+<html>
+
+	<head>
+	
+		<meta charset="UTF-8">
+		
+		<title>Caraway Export Facilitation History </title>
+		
+		<!-- Link to External CSS for the html head Located in the css folder -->
+		<link rel="stylesheet"  href="../style/headerStyle.css" type="text/css">
+	
+	</head>
+	<body>
+		
+		<div class="main-container">
+			<!---java script inserts header into here -->
+		</div>
+	
+		<h1>Export Facilitation History </h1>
+	
+		<!-- Download button -->
+		<form action="export-history.php" method="post" style = "text-align: center;">
+			<input type="submit" value="Download Facilitation History">
+		</form>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
+		
+		<!-- Inserts the header -->
+		<script type="text/javascript"> 
+			jQuery(document).ready(function($){
+				$("body .main-container").load("../admin/adminHeader.html");			
+			});
+		</script>
+		
+	</body>
+</html>
+
 
 <?php
 // Used to display message that user has been created.
@@ -67,3 +102,4 @@ class Export_History
 $use = new Export_History();
 $use->export();
 ?>
+

@@ -111,6 +111,7 @@ $use->create_user();
 				// This code loads the header 
 				$("body .main-container").load("adminHeader.html");
 			}
+			);
 		</script>
 		<script type="text/javascript" src = "../script/load-families.js"> </script>
 
