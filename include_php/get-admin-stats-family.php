@@ -7,4 +7,6 @@ require_once 'admin_family_stats.php';
 $family_stats = new Family_Stats();
 $family_stats->getFamilyDropDown();
 
+echo "Testing echo";
+
 ?>

@@ -68,7 +68,7 @@ class Family_Stats
 	*/
 	function getFamilyFacilitators($famID)
 	{
-		$query = "Select CONCAT (first_name,last_name) as Name
+		$query = "Select first_name, last_name 
 				  from facilitator
 				  where family_id = $famID";
 		
@@ -76,7 +76,7 @@ class Family_Stats
 		
 		while($row = $results->fetch_assoc())
 		{
-			echo $row["Name"] . ',';
+			echo $row["first_name"] . " " . $row["last_name"] . ',';
 		}
 	}
 	
@@ -90,7 +90,7 @@ class Family_Stats
 	*/
 	function getFamilyStudents($famID)
 	{
-			$query = "Select CONCAT(first_name, last_name) as Name
+			$query = "Select first_name, last_name
 					  from students
 					  where students.family_id = $famID";
 			
@@ -98,7 +98,7 @@ class Family_Stats
 			
 			while($row = $results->fetch_assoc())
 			{
-				echo $row["Name"] . ',';
+				echo $row["first_name"] . " " . $row["last_name"] . ',';
 			}
 		
 	}

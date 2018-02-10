@@ -7,30 +7,81 @@
 
 
 /*
+* When page first loads up.
 * Goes into database and find all the users(families log in data) and updates the select family 
 * drop down menu.
 */
+
 $.post("../include_php/get-admin-stats-family.php",function (data) 
 	{
 
 		/* Find the Family Selector ID*/
 		var family_selector = $("#family-selection");
 
-		// Extract family names 
+		// Extract family names and ID
 		var family_names_array = data.split(",");
 		family_names_array.pop();
 		
 		/* Go through the data retrieved from the database and create selections for each class */
 		for (var i = 0; i < family_names_array.length; i ++){
 
+			// split the "family name ID string" into an array of ["family name","ID"] to extract into selector.
+			family_info = family_names_array[i].split(" ");
+
 			// Create a new family selection to add
-			var add_family = $("<option value =" + family_names_array[i] + ">" + 
-				family_names_array[i] + "</option>");
+			var add_family = $("<option value =" + family_info[1] + ">" + family_info[0] + "</option>");
 				
 			// Add selection to the selector 
 			family_selector.append(add_family);
 		}
+
+		var userID = $('#family-selection').val();
+		//console.log(userID);
+
+		// Take the  userID and get the family ids associated with userid
+		$.post("../include_php/get-admin-stats-family-id.php", {u_id: userID} ,function (data) 
+		{
+			//gets the family id based on user id.
+			console.log(data);
+			var f_info = data.split(",");
+			f_info.pop();
+			// gets the family id.
+			var family_id = f_info[0];
+			console.log(family_id);
+
+			$.post("../include_php/get-admin-stats-family-facilitators.php", {f_id: family_id} ,function (data) 
+			{
+			//gets familitators based on family_id
+			console.log(data);
+			var facilitators = data.split(",");
+			facilitators.pop();
+
+			//find un-ordered list tag
+			f_list = $("#Facilitators-list");
+
+
+			for (var i = 0; i < facilitators.length; i ++){
+
+				// Create a new facilitator to add to info list
+				var add_facilitator = $("<li>" + facilitators[i] + "</li>");
+					
+				// Add facilitator name to info list 
+				f_list.append(add_facilitator);
+
+			}
+
+
+			//end of third post call back function
+			}
+			// end of third post request
+			);
+		//end of second post call back function
+		}
+		// end of second post request
+		);
+	// end of first post callback function
 	}
+// end of first post
 );
 
 
