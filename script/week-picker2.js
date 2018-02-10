@@ -5,12 +5,14 @@
 * 
 * Edited by Komal 
 * Please note: All code from the author is specified.
+* To incorporate the week-picker, one must specify a create_event function (See family-calendar.js for example)
 -----------------------------------------------------------------*/
+
+// These functions are declared outside for use by other files
 var updateCalendar;
 var clearCalendar;
 
 jQuery(document).ready(function() {  
-
 
 	/* This string will hold all the dates in the selected week in SQL format so that that we can query the database for events */
 	var all_days = "";
@@ -62,23 +64,15 @@ jQuery(document).ready(function() {
 				/* Clear the calendar of events so that we can query the database and update the display */
 				clearCalendar();
 			
+				
 				/* Take the data retrieved from the query and extract the event data from it */
 				var new_days = data.split("~");
 				new_days.pop();
 				
-				var prev_date = "";
-				var count = 0;
+				var prev_date = ""; // Used to keep track of date changes 
+				var count = 0; // Used to update event counts (makes each slot a unique color)
+				
 				for (var i = 0; i < new_days.length; i ++){
-					
-					/* Extract event data */
-					var event = new_days[i].split(",");
-					var slot_id = event[0];
-					var classroom_id = event[1];
-					var date = event[2].split(" ")[0];
-					var time_start = event[2].split(" ")[1].slice(0,-3);
-					var time_end = event[3].split(" ")[1].slice(0,-3);
-					var facilitators_needed = event[4];
-					var facilitators_signed_up = event[5];
 					
 					/* Adjust the event count accordingly */
 					if (date === prev_date){
@@ -88,22 +82,25 @@ jQuery(document).ready(function() {
 						count = 1;
 					}
 					
-					/* Indicate how many facilitators have signed up for the given slot */
-					var slot_info;
-					if (facilitators_signed_up === facilitators_needed){
-						slot_info = "SLOT FULL";
-					}
-					else {
-						slot_info = facilitators_needed - facilitators_signed_up + " of " + facilitators_needed + " positions available";
+					/* Extract event data */
+					var event = new_days[i].split(",");
+					
+					var event_data = 
+					{
+						slot_id: event[0],
+						classroom_id: event[1],
+						date: event[2].split(" ")[0], 
+						time_start: event[2].split(" ")[1].slice(0,-3),
+						time_end: event[3].split(" ")[1].slice(0,-3),
+					    facilitators_needed: event[4],
+						facilitators_signed_up: event[5],
+						count: count
 					}
 					
-					/* Create a new event node to add to the calendar html file */
-					var day = 
-					$(" <li class='single-event' slot-id= " + slot_id + " data-start= '" + time_start + "' data-end='" + time_end + 
-						"' data-content='facilitation-sign-up' data-event='event-" + count + 
-						"'><a href='#0'> <em class='event-name'> Facilitation Slot </em> <br> <strong class = 'positions'>" +
-						 slot_info +"</strong> </a> </li>");
+					var date = event_data['date'];
 					
+					/* Create a new event node to add to the DOM */
+					var day = create_event(event_data);
 					
 					/* Add the new event to the calendar */
 					$("[name='" + date + "']").find("ul").append(day);

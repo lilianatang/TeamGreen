@@ -4,6 +4,7 @@
 * 
 * Additional alterations to the original code have been made to accommodate the facilitation sign up process.
 * Edited by Komal 
+* Please note: To incorporate the large calendar and this file, one must create a fillModal function (see family-calendar.js for example)
 *--------------------------------------------------------------------------------------------------------*/
 
  
@@ -183,67 +184,12 @@ SchedulePlan.prototype.placeEvents = function() {
 	*/
 	
 	//update event content based on an html file
-	this.modalBody.find('.event-info').load(event.parent().attr('data-content')+'.html .event-info > *', function(data){
+	this.modalBody.find('.event-info').load(event.parent().attr('data-content')+'.html .event-info > *', function (data) {
 		
 		//once the event content has been loaded
 		self.element.addClass('content-loaded');
 		
-		// Clear any facilitator data that may be present already
-		self.modalBody.find("#select-facilitator").html("");
-		
-		// Go through all facilitators from the query and add them as a drop-down option
-		for (var i = 0; i < facilitator_data.length; i += 2){
-			
-			// Create an option for a facilitator 
-			var $selection = $(" <option value = " + facilitator_data[i] + ">" + 
-				facilitator_data[i+1] + "</option>" );
-			
-			// Add the option to the form 
-			$selection.appendTo(self.modalBody
-				.find("#select-facilitator"));
-			
-		}
-		
-		
-		
-		/* Creates an action event to send data from the form to the database */
-		$("#submit-booking").click(function (event) {
-			
-			/* Prevent the page from reloading */			
-			event.preventDefault();
-			
-			if (self.processingBooking === false) {
-				
-				// Indicate that a booking is currently being processed 
-				self.processingBooking = true;
-			
-				/* Slot id is already stored in slot_id */
-				
-				/* Get notes */
-				var notes = $(' #comments').text();
-				
-				/* Get facilitator id */
-				var facilitator_id = $("#select-facilitator").val();
-				
-				/* Initiate query to update the database */
-				$.post("../include_php/calendar-book-facilitation.php", { s_id: slot_id, comments: notes, f_id : facilitator_id }, function (data) 
-					{ 
-						/* Close the modal window */
-						self.closeModal(self.eventsGroup.find('.selected-event'));
-						
-						/* Display successful or unsuccessful */
-						$('#user-message').text(data).css("font-weight", "bold");
-						
-						/* Update calendar */
-						updateCalendar();
-						
-						// Indicate that a booking is no longer being processed
-						self.processingBooking = false;
-					}
-				); 
-			}
-		});
-			
+		fillModal(slot_id, self);
 		
 	});
 

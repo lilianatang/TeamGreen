@@ -126,10 +126,23 @@ class DB_Calendar {
 		$time_start = "";
 		$time_end = "";
 		$same_times = -1;
+		$num_facilitators = "";
+		$f_needed = "";
+		
+		/* Get number of people facilitating  */
+		$query = "SELECT count(*) as num_facilitators from facilitating where slot_id = $slot_id";
+		
+		/* Run Query */
+		$result = $this->connection->query($query) or die ("An error occurred 1.");
+		
+		/* Retrieve the data */
+		while ($row = $result->fetch_assoc()){
+			$num_facilitators = $row["num_facilitators"];
+		}
 		
 		/* Get the time information from the slot already booked */
 		$query = 
-		" SELECT time_start, time_end 
+		" SELECT time_start, time_end, facilitators_needed
 		  FROM facilitation_times 
 		  WHERE slot_id = $slot_id";
 		
@@ -139,7 +152,14 @@ class DB_Calendar {
 		while ($row = $result->fetch_assoc()){
 			$time_start = $row["time_start"];
 			$time_end = $row["time_end"];
+			$f_needed = $row["facilitators_needed"];
 		};
+		
+		//Make sure the slot isn't full
+		if ($f_needed <= $num_facilitators){
+				echo "This slot is full - you cannot sign up.";
+				return false;
+		}
 		
 		/* Check if the facilitator is already booked at the same time */
 		$query = 
@@ -209,7 +229,7 @@ class DB_Calendar {
 		$result = $this->connection->query($query) or die ("An error occurred.");
 		
 		while ($row = $result->fetch_assoc()){
-			echo $row['classroom_id'] . " " . $row['class_color'] . ","; // The commas are added to make parsing simpler on the caller end
+			echo $row['classroom_id'] . " " . $row['class_color'] . ","; // The commas and spaces are added to make parsing simpler on the caller end
 		};
 		
 	}
@@ -281,6 +301,35 @@ class DB_Calendar {
 		
 	}
 	
+	/*---------------------------------------------------------------------------------
+	* getFacilitators
+	* This method retrieves all the facilitators facilitating for a given slot_id
+	*
+	* Parameters & Return: None
+	* 
+	* NOTE: This method echoes out facilitator information for access by the caller script
+	*------------------------------------------------------------------------------------------*/
+	function getFacilitators($slot_id){
+		
+		$query = 
+			"SELECT CONCAT(first_name, \" \", last_name) as name, notes
+			 FROM facilitating, facilitator
+			 WHERE 
+				facilitating.facilitator_id = facilitator.facilitator_id and 
+				slot_id = $slot_id";
+		
+		$result = $this->connection->query($query) or die ("An error occurred.");
+		
+		while ($row = $result->fetch_assoc()){
+			if ($row['notes'] == null){
+				echo $row['name'] . ",";
+			}
+			else {
+				echo $row['name'] . " (note: " . $row['notes'] . "),"; // The commas are added to make parsing simpler on the caller end	
+			}
+			
+		};
+	}
 	
 }
 	
