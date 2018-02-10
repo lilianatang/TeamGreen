@@ -259,6 +259,22 @@ class DB_Calendar {
 		};
 	}
 	
+	function getBoardMembers()
+	{
+		/* Create query to retrieve family information */
+		$query = 
+			"SELECT user_id, username from users where role_id = 3";
+		
+		/* Perform the query */
+		$result = $this->connection->query($query) or die ("An error occurred.");
+		
+		/* Retrieve and echo results */
+		while ($row = $result->fetch_assoc()){
+			echo $row['user_id'] ." " . $row['username'] . ",";
+		};
+		
+	}
+	
 }
 	
 	

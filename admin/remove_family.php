@@ -29,8 +29,6 @@ class delete_User
 	{
 		if ($_SERVER['REQUEST_METHOD'] ==  "POST")
 		{
-			//$username = $this->connection->real_escape_string($_POST['username']);
-			
 			$family_id = $_POST['family_id'];
 			
 			$sql = 

@@ -42,7 +42,7 @@ class delete_User
 			}
 			else
 			{
-				die('Error: ' . mysqli_error($mysqli));
+				$_SESSION['message'] = 'Error: ' . mysqli_error($this->connection);
 			}
 			$this->connection->close();
 		}		
