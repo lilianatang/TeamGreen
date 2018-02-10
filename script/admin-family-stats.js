@@ -6,44 +6,19 @@
 
 
 
-$.post("../include_php/get-classes.php",function (data) 
-	{ 
-		// Take the data from the database for this family, and store it in an array
-		var classes = data.split(",");
-		classes.pop();
-		
-		/* Find the class selector */
-		var class_selector = $("#class-select");
-		
-		/* Go through the data retrieved from the database and create selections for each class */
-		for (var i = 0; i < classes.length; i ++){
-			
-			// Extract classes 
-			var class_info = classes[i].split(" ");
-			
-			// Create a new class selection
-			var new_class = $("<option value =" + class_info[0] + ">" + 
-				class_info[1] + "</option>");
-				
-			// Add selection to the selector 
-			class_selector.append(new_class);
-		}
-		
-	}
- ); 
-
-
-var family_names = "joe Family,Bob Family,jan family";
-
-$.post("../include_php/get-admin-stats-family.php",function (data) {
+/*
+* Goes into database and find all the users(families log in data) and updates the select family 
+* drop down menu.
+*/
+$.post("../include_php/get-admin-stats-family.php",function (data) 
+	{
 
 		/* Find the Family Selector ID*/
 		var family_selector = $("#family-selection");
 
-		//checking log
-		console.log(data);
 		// Extract family names 
 		var family_names_array = data.split(",");
+		family_names_array.pop();
 		
 		/* Go through the data retrieved from the database and create selections for each class */
 		for (var i = 0; i < family_names_array.length; i ++){
@@ -56,6 +31,16 @@ $.post("../include_php/get-admin-stats-family.php",function (data) {
 			family_selector.append(add_family);
 		}
 	}
+);
+
+
+
+
+
+
+
+
+
 
 
 /*test case when family name is selected and January and year is selected.*/
