@@ -35,7 +35,7 @@ class Family_Stats
 		
 		while($row = $results->fetch_assoc())
 		{
-			echo $row["username"] . ',';
+			echo $row["username"] . ' ' . $row["user_id"] .',';
 		}
 	}
 	/**
