@@ -4,9 +4,6 @@
 *------------------------------------------------*/
 
 jQuery(document).ready(function($){
-				
-	// This code loads the header 
-	$("body .main-container").load("adminHeader.html");
 	
 	// This code populates the family username selection 
 	$.post("../include_php/get-families.php", function(data){
