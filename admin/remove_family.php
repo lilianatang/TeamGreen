@@ -33,14 +33,17 @@ class delete_User
 			
 			$family_id = $_POST['family_id'];
 			
-			$sql = "Delete FROM users where family_id = $family_id";
-			if(mysqli_query($this->connection, $sql))
+			$sql = 
+				"DELETE FROM users WHERE user_id in (Select user_id from family where family_id = $family_id);
+				DELETE FROM family WHERE family_id = $family_id;";
+				
+			if(mysqli_multi_query($this->connection, $sql))
 			{
 				$_SESSION['message'] = "User successfully deleted";
 			}
 			else
 			{
-				die('Error: ' . mysqli_error($this->connection));
+				$_SESSION['message'] = 'Error: ' . mysqli_error($this->connection);
 			}
 			$this->connection->close();
 		}		
@@ -78,12 +81,14 @@ $use->delete_user();
 		<form action="../admin/remove_family.php" method="post" autocomplete="off" style = "text-align: center;" >
 		
 			<?= $_SESSION['message']  ?>
+			<br>
 			<label>Username to be deleted:</label> 
 			
 			<select id = "choose-family" select name="family_id">
 				<!-- This will be populated dynamically -->
 			</select>
 			
+			<br><br>
 			<input type="submit" value="Submit" name="Submit" />
 		
 		</form>
