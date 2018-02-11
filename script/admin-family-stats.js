@@ -111,7 +111,6 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 
 				// extract month selected
 				var month_selector = $('#month-selection').val();
-
 				// exctract year selected
 				var year_selector = $('#year-selection').val();
 
@@ -167,18 +166,19 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 );
 
 
+
 /*
 * Note -> probably a better way to organize code into functions but i just wanted to make sure this was working on time. 
-* I can possibly refactor later to make it better if there is time.
+* I can possibly refactor later to make it better if there is time -> at least for readablitiy.
 *
 * When User clicks submit button after choosing selection boxes values. Will populate Family info and Html table
 * based on those values.
 */
 
 function submit_button() {
-	console.log("hello world!");
+
 	//Clear all data from Family Info and html table.
-	$("#stats-table tbody").remove();
+	$("#stats-table tbody").empty();
 	$("#Facilitators-list").empty();
 	$("#Students-list").empty();
 	$("#monthly-total").empty();
@@ -192,41 +192,40 @@ function submit_button() {
 	// Take the  userID and get the family ids associated with userid
 	$.post("../include_php/get-admin-stats-family-id.php", {u_id: userID} ,function (data) 
 		{
-		//gets the family id based on user id.
-		var f_info = data.split(",");
-		f_info.pop();
+			//gets the family id based on user id.
+			var f_info = data.split(",");
+			f_info.pop();
 
 
-		// extracts family id from array
-		var family_id = f_info[0];
+			// extracts family id from array
+			var family_id = f_info[0];
 
-		/*
-		* updates the family information facilitator list based on default family selected value.
-		*
-		*/
-		$.post("../include_php/get-admin-stats-family-facilitators.php", {f_id: family_id} ,function (data) 
-		{
-			//gets familitators based on family_id
-			console.log(data);
-			var facilitators = data.split(",");
-			facilitators.pop();
+			/*
+			* updates the family information facilitator list based on default family selected value.
+			*
+			*/
+			$.post("../include_php/get-admin-stats-family-facilitators.php", {f_id: family_id} ,function (data) 
+				{
+					//gets familitators based on family_id
+					var facilitators = data.split(",");
+					facilitators.pop();
 
-			//find un-ordered list tag
-			f_list = $("#Facilitators-list");
+					//find un-ordered list tag
+					f_list = $("#Facilitators-list");
 
 
-			for (var i = 0; i < facilitators.length; i ++){
+					for (var i = 0; i < facilitators.length; i ++){
 
-				// Create a new facilitator to add to info list
-				var add_facilitator = $("<li>" + facilitators[i] + "</li>");
-					
-				// Add facilitator name to info list 
-				f_list.append(add_facilitator);
-			}
+						// Create a new facilitator to add to info list
+						var add_facilitator = $("<li>" + facilitators[i] + "</li>");
+							
+						// Add facilitator name to info list 
+						f_list.append(add_facilitator);
+					}
 
-			//end of callback function
-			}
-			// end of third post request
+				//end of callback function for populating family info -> facilitators 
+				}
+			// end of post for populating family info -> facilitators
 			);
 
 			/*
@@ -234,28 +233,27 @@ function submit_button() {
 			*
 			*/
 			$.post("../include_php/get-admin-stats-family-students.php", {f_id: family_id} ,function (data) 
-			{
-			//gets familitators based on family_id
-			console.log(data);
-			var students = data.split(",");
-			students.pop();
+				{
+					//gets familitators based on family_id
+					var students = data.split(",");
+					students.pop();
 
-			//find un-ordered list tag
-			s_list = $("#Students-list");
+					//find un-ordered list tag
+					s_list = $("#Students-list");
 
 
-			for (var i = 0; i < students.length; i ++){
+					for (var i = 0; i < students.length; i ++){
 
-				// Create a new facilitator to add to info list
-				var add_student = $("<li>" + students[i] + "</li>");
-					
-				// Add facilitator name to info list 
-				s_list.append(add_student);
-			}
+						// Create a new facilitator to add to info list
+						var add_student = $("<li>" + students[i] + "</li>");
+							
+						// Add facilitator name to info list 
+						s_list.append(add_student);
+					}
 
-			//end of callback function
-			}
-			// end of fourth post request
+				//end of callback function for populating family info -> students
+				}
+			// end of post for populating family info -> students
 			);
 
 			/*
@@ -265,60 +263,56 @@ function submit_button() {
 
 			// extract month selected
 			var month_selector = $('#month-selection').val();
-			console.log(month_selector);
+
 			// exctract year selected
 			var year_selector = $('#year-selection').val();
-			console.log(year_selector);
 
 			$.post("../include_php/get-admin-stats-family-history.php", {f_id: family_id, month: month_selector, year: year_selector} ,function (data) 
-			{
+				{
+					/*Find the Table selector*/
+					var table_selector = $("#stats-table");
 
-			/*Find the Table selector*/
-			var table_selector = $("#stats-table");
+					/*extract weekly data -> creates array of strings with weekly data information inside in string*/
+					var weekly_data = data.split("~");
+					weekly_data.pop();
 
-			/*extract weekly data -> creates array of strings with weekly data information inside in string*/
-			var weekly_data = data.split("~");
-			weekly_data.pop();
+					//month totaly to add to family information.
+					var monthly_total = 0;
 
-			//month totaly to add to family information.
-			var monthly_total = 0;
+					/*Go through the weekly data retrieved from the database and populate html table*/
+					for (var i = 0; i < weekly_data.length; i ++){
+						/*select the table body to add onto.*/
+						var table = $("#stats-table-body");
+						// Extract weekyly info
+						var weekly_info = weekly_data[i].split(",");
 
-			/*Go through the weekly data retrieved from the database and populate html table*/
-			for (var i = 0; i < weekly_data.length; i ++){
-				/*select the table body to add onto.*/
-				var table = $("#stats-table-body");
-				// Extract weekyly info
-				var weekly_info = weekly_data[i].split(",");
+						monthly_total += parseInt(weekly_info[3]);
 
-				monthly_total += parseInt(weekly_info[3]);
+						/*before building html string to add to table check if weekly hours are completed*/
+						/*completed > required -> if statement*/
+						if (parseInt(weekly_info[2]) > parseInt(weekly_info[3]) ){
 
-				/*before building html string to add to table check if weekly hours are completed*/
-				/*completed > required -> if statement*/
-				if (parseInt(weekly_info[2]) > parseInt(weekly_info[3]) ){
+							var add_week = $("<tr><td>" + weekly_info[0] + " to " + weekly_info[1] + "</td><td>" + weekly_info[3] + "</td><td>"  + "&#10003;" + "</td></tr");
+						}
+						else{
+							var add_week = $("<tr><td>" + weekly_info[0] + " to " + weekly_info[1] + "</td><td>" + weekly_info[3] + "</td><td>"  + "&#10005;" + "</td></tr");
+						}
+						table.append(add_week);
+					} // end of for loop
 
-					var add_week = $("<tr><td>" + weekly_info[0] + " to " + weekly_info[1] + "</td><td>" + weekly_info[3] + "</td><td>"  + "&#10003;" + "</td></tr");
+					//find selector for monthly total and update it.
+					month_span = $('#monthly-total');
+					month_span.append(monthly_total);
+
+				// end of callback function for html table family history post
 				}
-				else{
-					var add_week = $("<tr><td>" + weekly_info[0] + " to " + weekly_info[1] + "</td><td>" + weekly_info[3] + "</td><td>"  + "&#10005;" + "</td></tr");
-				}
-				table.append(add_week);
-			} // end of for loop
-
-			console.log(monthly_total);
-
-			//find selector for monthly total and update it.
-			month_span = $('#monthly-total');
-			month_span.append(monthly_total);
-			
-			}
-			// end of fifth post request
+			// end of html table family history post 
 			);
-
-		//end of second post call back function
+		//end of callback function for getting family id 
 		}
-		// end of second post request
-		);
-	// end of first post callback function
+	// end of post for getting family id
+	);
+//end of function
 }
 
 
