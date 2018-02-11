@@ -1,4 +1,4 @@
-
+DROP DATABASE carawayportal;
 CREATE database carawayportal;
 USE carawayportal;
 
@@ -39,6 +39,7 @@ CREATE table teachers(
 	first_name varchar(40),
 	last_name varchar(40),
 	user_id int(10),
+	classroom_id int(2),
 	INDEX (user_id),
 	FOREIGN KEY (user_id)
 	REFERENCES users(user_id)
@@ -47,12 +48,15 @@ CREATE table teachers(
 
 CREATE table classroom(
 	classroom_id int(2) primary key auto_increment,
-	class_color varchar(20) not null unique,
-	teacher_id int(6),
-	INDEX (teacher_id),
-	FOREIGN KEY (teacher_id)
-	REFERENCES teachers(teacher_id)
+	class_color varchar(20) not null unique
 );
+
+iNSERT INTO classroom(class_color) VALUES 
+("blue"),
+("purple"),
+("green"),
+("red"),
+("grey"); 
 
 CREATE table students(
 	student_id int(8) primary key auto_increment,
