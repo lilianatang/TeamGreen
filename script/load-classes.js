@@ -5,7 +5,6 @@
 
 jQuery(document).ready(function($){
 
-	/* This call queries the database and updates the list of classrooms to populate the class selector */
 	$.post("../include_php/get-classes.php",function (data) 
 		{ 
 			// Take the data from the database for this class, and store it in an array

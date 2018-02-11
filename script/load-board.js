@@ -1,11 +1,10 @@
 /*------------------------------------------------
-* This file is used to populate a choose-family selector 
+* This file is used to populate a choose-board selector 
 * Author: Komal
 *------------------------------------------------*/
 
 jQuery(document).ready(function($){
 	
-	// This code populates the family username selection 
 	$.post("../include_php/get-board.php", function(data){
 		
 		// Organize data from the query 
