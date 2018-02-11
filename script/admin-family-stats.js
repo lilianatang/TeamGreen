@@ -137,7 +137,7 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 
 							/*before building html string to add to table check if weekly hours are completed*/
 							/*completed > required -> if statement*/
-							if (parseInt(weekly_info[2]) > parseInt(weekly_info[3]) ){
+							if (parseInt(weekly_info[2]) >= parseInt(weekly_info[3]) ){
 
 								var add_week = $("<tr><td>" + weekly_info[0] + " to " + weekly_info[1] + "</td><td>" + weekly_info[3] + "</td><td>"  + "&#10003;" + "</td></tr");
 							}
@@ -290,7 +290,7 @@ function submit_button() {
 
 						/*before building html string to add to table check if weekly hours are completed*/
 						/*completed > required -> if statement*/
-						if (parseInt(weekly_info[2]) > parseInt(weekly_info[3]) ){
+						if (parseInt(weekly_info[2]) >= parseInt(weekly_info[3]) ){
 
 							var add_week = $("<tr><td>" + weekly_info[0] + " to " + weekly_info[1] + "</td><td>" + weekly_info[3] + "</td><td>"  + "&#10003;" + "</td></tr");
 						}
