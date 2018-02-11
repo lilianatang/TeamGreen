@@ -113,6 +113,7 @@ $use->create_user();
 			}
 			);
 		</script>
+		<!-- This script populates the choose-family selector  -->
 		<script type="text/javascript" src = "../script/load-families.js"> </script>
 
 	</body>
