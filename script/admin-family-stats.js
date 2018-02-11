@@ -9,11 +9,12 @@
 /*
 * When page first loads up.
 * Goes into database and find all the users(families log in data) and updates the select family 
-* drop down menu.
+* drop down menu. also loads default values that are in the selection boxes: family,Month,Year
 */
 
 $.post("../include_php/get-admin-stats-family.php",function (data) 
 	{
+
 
 		/* Find the Family Selector ID*/
 		var family_selector = $("#family-selection");
@@ -40,15 +41,26 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 
 		// Take the  userID and get the family ids associated with userid
 		$.post("../include_php/get-admin-stats-family-id.php", {u_id: userID} ,function (data) 
-		{
+			{
 			//gets the family id based on user id.
-			console.log(data);
 			var f_info = data.split(",");
 			f_info.pop();
-			// gets the family id.
-			var family_id = f_info[0];
-			console.log(family_id);
 
+
+			// extracts family id from array
+			var family_id = f_info[0];
+
+			// extract month selected
+			var month_selector = $('#month-selection').val();
+			console.log(month_selector);
+			// exctract year selected
+			var year_selector = $('#year-selection').val();
+			console.log(year_selector);
+
+			/*
+			* updates the family information facilitator list based on default family selected value.
+			*
+			*/
 			$.post("../include_php/get-admin-stats-family-facilitators.php", {f_id: family_id} ,function (data) 
 			{
 			//gets familitators based on family_id
@@ -67,14 +79,54 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 					
 				// Add facilitator name to info list 
 				f_list.append(add_facilitator);
-
 			}
 
-
-			//end of third post call back function
+			//end of callback function
 			}
 			// end of third post request
 			);
+
+			/*
+			* updates the family information student list based on default family select value.
+			*
+			*/
+			$.post("../include_php/get-admin-stats-family-students.php", {f_id: family_id} ,function (data) 
+			{
+			//gets familitators based on family_id
+			console.log(data);
+			var students = data.split(",");
+			students.pop();
+
+			//find un-ordered list tag
+			s_list = $("#Students-list");
+
+
+			for (var i = 0; i < students.length; i ++){
+
+				// Create a new facilitator to add to info list
+				var add_student = $("<li>" + students[i] + "</li>");
+					
+				// Add facilitator name to info list 
+				s_list.append(add_student);
+			}
+
+			//end of callback function
+			}
+			// end of fourth post request
+			);
+
+			/*
+			* updates HTML table based on default values.
+			*
+			*/
+
+
+
+
+
+
+
+
 		//end of second post call back function
 		}
 		// end of second post request
