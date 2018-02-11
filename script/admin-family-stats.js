@@ -34,8 +34,8 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 			family_selector.append(add_family);
 		}
 
+		//gets the user id from family select
 		var userID = $('#family-selection').val();
-		//console.log(userID);
 
 		// Take the  userID and get the family ids associated with userid
 		$.post("../include_php/get-admin-stats-family-id.php", {u_id: userID} ,function (data) 
@@ -54,14 +54,14 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 				*/
 				$.post("../include_php/get-admin-stats-family-facilitators.php", {f_id: family_id} ,function (data) 
 					{
-						//gets familitators based on family_id
+						//gets facilitators based on family_id
 						var facilitators = data.split(",");
 						facilitators.pop();
 
 						//find un-ordered list tag
 						f_list = $("#Facilitators-list");
 
-
+						// go through facilitators provided by data
 						for (var i = 0; i < facilitators.length; i ++){
 
 							// Create a new facilitator to add to info list
@@ -71,9 +71,9 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 							f_list.append(add_facilitator);
 						}
 
-					//end of callback function
+					//end of callback function for family info -> populating list with facilitators
 					}
-				// end of post
+				// end of post for family info -> psopulating list with facilitators
 				);
 
 				/*
@@ -99,9 +99,9 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 							s_list.append(add_student);
 						}
 
-					//end of callback function
+					//end of callback function for family info -> populating list with students
 					}
-					// end of post 
+					// end of post for family info -> populating list with students
 				);
 
 				/*
@@ -151,18 +151,18 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 						month_span = $('#monthly-total');
 						month_span.append(monthly_total);
 					
-					// end of callback function
+					// end of callback function for filling html with data from history
 					}
-					// end of post request
+					// end of post request for filling html with data from history
 				);
 
-			//end of second post call back function
+			//end of call back function for getting family ids
 			}
-		// end of second post request
+		// end of post for getting family ids
 		);
-	// end of first post callback function
+	// end of callback function for filling family select dropdown menu
 	}
-// end of first post
+// end of post for filling family select dropdown menu
 );
 
 
@@ -201,7 +201,7 @@ function submit_button() {
 			var family_id = f_info[0];
 
 			/*
-			* updates the family information facilitator list based on default family selected value.
+			* updates the family information facilitator list based on family selected value.
 			*
 			*/
 			$.post("../include_php/get-admin-stats-family-facilitators.php", {f_id: family_id} ,function (data) 
@@ -229,7 +229,7 @@ function submit_button() {
 			);
 
 			/*
-			* updates the family information student list based on default family select value.
+			* updates the family information student list based on family select value.
 			*
 			*/
 			$.post("../include_php/get-admin-stats-family-students.php", {f_id: family_id} ,function (data) 
@@ -257,7 +257,7 @@ function submit_button() {
 			);
 
 			/*
-			* updates HTML table based on default values of selectors -> family,month,year.
+			* updates HTML table based on values of selectors -> family,month,year.
 			*
 			*/
 
