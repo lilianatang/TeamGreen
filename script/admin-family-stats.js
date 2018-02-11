@@ -50,13 +50,6 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 			// extracts family id from array
 			var family_id = f_info[0];
 
-			// extract month selected
-			var month_selector = $('#month-selection').val();
-			console.log(month_selector);
-			// exctract year selected
-			var year_selector = $('#year-selection').val();
-			console.log(year_selector);
-
 			/*
 			* updates the family information facilitator list based on default family selected value.
 			*
@@ -120,6 +113,38 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 			*
 			*/
 
+			// extract month selected
+			var month_selector = $('#month-selection').val();
+			console.log(month_selector);
+			// exctract year selected
+			var year_selector = $('#year-selection').val();
+			console.log(year_selector);
+
+			$.post("../include_php/get-admin-stats-family-students.php", {f_id: family_id} ,function (data) 
+			{
+			//gets familitators based on family_id
+			//console.log(data);
+			//var students = data.split(",");
+			//students.pop();
+
+			//find un-ordered list tag
+			//s_list = $("#Students-list");
+
+
+			//for (var i = 0; i < students.length; i ++){
+
+				// Create a new facilitator to add to info list
+			//	var add_student = $("<li>" + students[i] + "</li>");
+					
+				// Add facilitator name to info list 
+			//	s_list.append(add_student);
+			//}
+
+			//end of callback function
+			}
+			// end of fifth post request
+			);
+
 
 
 
@@ -135,13 +160,6 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 	}
 // end of first post
 );
-
-
-
-
-
-
-
 
 
 
