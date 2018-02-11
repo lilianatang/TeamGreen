@@ -1,6 +1,6 @@
 <?php
 
-/* This file will be used to update the facilitation days available on the index screen */
+/* This file will be used to update classrooms list */
 
 require_once 'db_calendar.php';
 

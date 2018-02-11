@@ -29,16 +29,16 @@ class delete_User
 	{
 		if ($_SERVER['REQUEST_METHOD'] ==  "POST")
 		{
-			$username = $this->connection->real_escape_string($_POST['username']);
+			$user_id = $this->connection->real_escape_string($_POST['board-member']);
 			
-			$sql = "Delete FROM users where username = '$username'";
+			$sql = "Delete FROM users where user_id = '$user_id'";
 			if(mysqli_query($this->connection, $sql))
 			{
 				$_SESSION['message'] = "User successfully deleted";
 			}
 			else
 			{
-				die('Error: ' . mysqli_error($mysqli));
+				$_SESSION['message'] = 'Error: ' . mysqli_error($this->connection);
 			}
 			$this->connection->close();
 		}		
@@ -47,7 +47,9 @@ class delete_User
 $use = new delete_User();
 $use->delete_user();
 ?>
-<head>
+<!DOCTYPE html>
+<html>
+	<head>
 	
 		<meta charset="UTF-8">
 		
@@ -65,24 +67,35 @@ $use->delete_user();
 	</head>
 	
 	<!--
-	main_div_pages - containers i used to move around the layout.
+	main_div_pages - containers I used to move around the layout.
 	- using google as a place holder for the hyperlink to our own pages for the <q> tages
 	-->
 	<body>
-	<div class="main-container">
-	</div>
-	<h1>Board Member Deletion</h1>
-	<form action="../admin/remove_board.php" method="post" autocomplete="off" style = "text-align: center;" />
-	<?= $_SESSION['message']  ?>
-	<p>Username to be deleted: <input type="text" name="username" required /></p>
-	<input type="submit" value="Submit" name="Submit" />
-	</form>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+		<div class="main-container"> <!-- Header will be inserted here --> 	</div>
+		
+		<h1>Board Member Deletion</h1>
+		
+		<form action="../admin/remove_board.php" method="post" autocomplete="off" style = "text-align: center;" />
+
+			<?= $_SESSION['message']  ?>
+			<br>
+			<label>Username to be deleted: </label>
+			
+			<select name = 'board-member' id = "choose-board" > <!-- Will be populated dynamically --></select>
+			<br><br>
+			<input type="submit" value="Submit" name="Submit" />
+			
+		</form>
+		
+		<!-- Insert the header -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
 		<script type="text/javascript"> 
-		jQuery(document).ready(function($){
-			$("body .main-container").load("adminHeader.html");
-			console.log("000000");
-		});
+			jQuery(document).ready(function($){
+				$("body .main-container").load("adminHeader.html");
+			});
 		</script>
-</body>
+		<script type="text/javascript" src = "../script/load-board.js"> </script>
+		
+		
+	</body>
 </html>

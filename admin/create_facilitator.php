@@ -111,7 +111,9 @@ $use->create_user();
 				// This code loads the header 
 				$("body .main-container").load("adminHeader.html");
 			}
+			);
 		</script>
+		<!-- This script populates the choose-family selector  -->
 		<script type="text/javascript" src = "../script/load-families.js"> </script>
 
 	</body>

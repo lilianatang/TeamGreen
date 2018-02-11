@@ -5,13 +5,12 @@
 
 jQuery(document).ready(function($){
 	
-	// This code populates the family username selection 
 	$.post("../include_php/get-teachers.php", function(data){
 		
 		// Organize data from the query 
 		var teacher_info = data.split(",");
 		teacher_info.pop();
-		console.log(data);
+		
 		// Go through each piece of data and create a selection out of it
 		for (var i = 0; i < teacher_info.length; i ++){
 			
