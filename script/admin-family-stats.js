@@ -105,7 +105,8 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 				);
 
 				/*
-				* updates HTML table based on default values of selectors -> family,month,year.
+				* updates family info based on year and family id-> yearly total hours.
+				*
 				*
 				*/
 
@@ -113,6 +114,25 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 				var month_selector = $('#month-selection').val();
 				// exctract year selected
 				var year_selector = $('#year-selection').val();
+
+
+				$.post("../include_php/get-admin-stats-family-yearlyhours.php", {f_id: family_id, year: year_selector} ,function (data)
+					{
+						//extract yearly total
+						var yearhours = data.split(",");
+						yearhours.pop();
+
+						//find selector for monthly total and update it.
+						month_span = $('#yearly-total');
+						month_span.append(yearhours[0]);
+
+					}
+				);
+
+				/*
+				* updates HTML table based on default values of selectors -> family,month,year.
+				*
+				*/
 
 				$.post("../include_php/get-admin-stats-family-history.php", {f_id: family_id, month: month_selector, year: year_selector} ,function (data) 
 					{
@@ -137,7 +157,7 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 
 							/*before building html string to add to table check if weekly hours are completed*/
 							/*completed > required -> if statement*/
-							if (parseInt(weekly_info[2]) >= parseInt(weekly_info[3]) ){
+							if (parseInt(weekly_info[2]) <= parseInt(weekly_info[3]) ){
 
 								var add_week = $("<tr><td>" + weekly_info[0] + " to " + weekly_info[1] + "</td><td>" + weekly_info[3] + "</td><td>"  + "&#10003;" + "</td></tr");
 							}
@@ -290,7 +310,7 @@ function submit_button() {
 
 						/*before building html string to add to table check if weekly hours are completed*/
 						/*completed > required -> if statement*/
-						if (parseInt(weekly_info[2]) >= parseInt(weekly_info[3]) ){
+						if (parseInt(weekly_info[2]) <= parseInt(weekly_info[3]) ){
 
 							var add_week = $("<tr><td>" + weekly_info[0] + " to " + weekly_info[1] + "</td><td>" + weekly_info[3] + "</td><td>"  + "&#10003;" + "</td></tr");
 						}

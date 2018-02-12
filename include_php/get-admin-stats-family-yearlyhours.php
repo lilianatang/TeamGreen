@@ -13,7 +13,7 @@ $famID = $_POST['f_id'];
 $year = $_POST['year'];
 
 //runs php function to get family id based on user id.
-$family_stats->getFamilyHistory($famID,$year);
+$family_stats->getYearlyHours($famID,$year);
 }
 //echo issue if id is empty
 else{
