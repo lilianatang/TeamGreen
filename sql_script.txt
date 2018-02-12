@@ -1,4 +1,4 @@
-INSERT INTO `users` (`user_id`, `username`, `encrypted_password`, `role_id`) VALUES ('23', 'bob', 'password', '2');
+INSERT INTO `users` (`username`, `encrypted_password`, `role_id`) VALUES ('23', 'bob', 'password', '2');
 INSERT INTO `users` (`user_id`, `username`, `encrypted_password`, `role_id`) VALUES ('11', 'john', 'password', '2');
 INSERT INTO `users` (`user_id`, `username`, `encrypted_password`, `role_id`) VALUES ('22', 'jane', 'password', '2');
 
