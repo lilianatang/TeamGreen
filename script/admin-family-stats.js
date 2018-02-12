@@ -104,18 +104,19 @@ $.post("../include_php/get-admin-stats-family.php",function (data)
 					// end of post for family info -> populating list with students
 				);
 
-				/*
-				* updates family info based on year and family id-> yearly total hours.
-				*
-				*
-				*/
-
+				
+				// assign some variable for the next post calls.
 				// extract month selected
 				var month_selector = $('#month-selection').val();
 				// exctract year selected
 				var year_selector = $('#year-selection').val();
 
 
+				/*
+				* updates family info based on year and family id-> yearly total hours.
+				*
+				*
+				*/
 				$.post("../include_php/get-admin-stats-family-yearlyhours.php", {f_id: family_id, year: year_selector} ,function (data)
 					{
 						//extract yearly total
@@ -202,6 +203,8 @@ function submit_button() {
 	$("#Facilitators-list").empty();
 	$("#Students-list").empty();
 	$("#monthly-total").empty();
+	$('#yearly-total').empty();
+
 
 
 	// refills family info and tables based on new inputs.
@@ -276,16 +279,37 @@ function submit_button() {
 			// end of post for populating family info -> students
 			);
 
-			/*
-			* updates HTML table based on values of selectors -> family,month,year.
-			*
-			*/
-
+			
+			// variables used for the next two post functions-> yearly hours and history.
 			// extract month selected
 			var month_selector = $('#month-selection').val();
 
 			// exctract year selected
 			var year_selector = $('#year-selection').val();
+
+
+			/*
+			* updates family info based on year and family id-> yearly total hours.
+			*
+			*
+			*/
+			$.post("../include_php/get-admin-stats-family-yearlyhours.php", {f_id: family_id, year: year_selector} ,function (data)
+				{
+					//extract yearly total
+					var yearhours = data.split(",");
+					yearhours.pop();
+
+					//find selector for monthly total and update it.
+					month_span = $('#yearly-total');
+					month_span.append(yearhours[0]);
+
+				}
+			);
+
+			/*
+			* updates HTML table based on values of selectors -> family,month,year.
+			*
+			*/
 
 			$.post("../include_php/get-admin-stats-family-history.php", {f_id: family_id, month: month_selector, year: year_selector} ,function (data) 
 				{
