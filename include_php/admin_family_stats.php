@@ -126,6 +126,32 @@ class Family_Stats
 			echo $row["start_date"] . ',' . $row["end_date"] . ',' . $row["required_hours"] . ',' . $row["completed_hours"] . '~' ;
 		}
 	}
+
+	/**
+	*
+	* getYearlyHours sums all the completed hours for a family
+	*
+	* parameters: family_id, year sum,
+	* return: none
+	*/
+	function getYearlyHours($famID,$year)
+	{
+		$query = "select SUM(completed_hours) as value
+				 from history
+				 where year(history.start_date) = $year 
+				 and history.family_id = $famID";
+				 
+		$results = $this->connection->query($query) or die ("Error getting students.");
+			
+		while($row = $results->fetch_assoc())
+		{
+			echo $row["value"] . ',' ;
+		}
+	}
+
+
+
+
 }
 
 /* Testing to make sure that core functions work
