@@ -29,35 +29,33 @@
 			<!-- The header will be inserted here -->
 		</div>
 	
-		<div id="page-container">
+		<div id="main-selection-container">
 			
 			<h1 class = "page-title"> Family Statistics </h1>
 			
 			<div id = "selections">  <!-- Selection Containers -->
 				
 				<!-- Family Selection -->
-				<div class = "selection" id = "family-selection">
-					<label >Select a family: </label>
-					<br><br>
-					<select>
-						<option value = "insert-familyid-here"> Family Name </option>
+				<div class = "selection">
+					<label>Select a family: </label>
+					<select class = "select" id = "family-selection" >
+						<!-- family selection data will be inserted here -->
 					</select>
 				</div>
 				
 				<!-- Month Selection -->
-				<div class = "selection" id = "month-selection">
+				<div class = "selection" >
 					<label>Select a month: </label>	
-					<br><br>
-					<select>
-						<option value = 1> January </option>
-						<option value = 2> February </option>
-						<option value = 3> March </option>
-						<option value = 4> April </option>
-						<option value = 5> May </option>
-						<option value = 6> June </option>
-						<option value = 7> July </option>
-						<option value = 8> August </option>
-						<option value = 9> September </option>
+					<select class = "select" id = "month-selection">
+						<option value = 01> January </option>
+						<option value = 02> February </option>
+						<option value = 03> March </option>
+						<option value = 04> April </option>
+						<option value = 05> May </option>
+						<option value = 06> June </option>
+						<option value = 07> July </option>
+						<option value = 08> August </option>
+						<option value = 09> September </option>
 						<option value = 10> October </option>
 						<option value = 11> November </option>
 						<option value = 12> December </option>
@@ -65,68 +63,87 @@
 				</div>
 			
 				<!-- Year Selection -->
-				<div class = "selection" id = "year-selection">
-					<label class = "year-select">Select a year: </label>
-					<br><br>
-					<select class = "year-select">
-						<option value = 1>Year here... </option>
+				<div class = "selection">
+					<label>Select a year: </label>
+					<select class = "select" id ="year-selection">
+						<option value = 2017>2017</option>
+						<option value = 2018>2018</option>
+						<option value = 2019>2019</option>
+						<option value = 2020>2020</option>
+						<option value = 2021>2021</option>
+						<option value = 2022>2022</option>
 					</select>
 				</div>
 			
-			</div> <!-- Selection Containers End -->
+		</div> <!-- Selection Containers End -->
+
+		<div id = "button-container">
+			<!-- <button onclick="myFunction()">Click me</button> -->
+			<button onclick="submit_button()">Submit</button>
+
+		</div>
+
+
+		</div> <!-- main selection container -->
+
+		<div id="main-info-container">
 			
-			<br><br><br><br>
+			
 			<!-- Text that appears upon selection of a family -->
-			<div id = "family-info">
-				
-				<h2> Family Information </h2>
-				
-				<!-- List of facilitators in the family -->
-				<h3> Facilitators: </h3>
-				<ul>
-					<li> Facilitator name here ... </li>
-				</ul>
-				
-				<!-- List of students in the family -->
-				<h3> Students: </h3>
-				<ul>
-					<li> Student name and class here ... </li>
-				</ul>
-				
-				<!-- Yearly and monthly totals for the family -->
-				<h3> Monthly Total: <span> INSERT TOTAL HERE </span> </h3> 
-				<h3> Yearly Total: <span> INSERT TOTAL HERE </span> </h3>
-				
+				<div id="family-info" class="main-info-sub-container">
+					
+					<h2> Family Information </h2>
+					
+					<!-- List of facilitators in the family -->
+					<h3> Facilitators: </h3>
+					<ul id = "Facilitators-list">
+						<!--List of facilitators goes here. -->
+					</ul>
+					
+					<!-- List of students in the family -->
+					<h3> Students: </h3>
+					<ul id = "Students-list">
+						<!--List of students goes here -->
+					</ul>
+					
+					<!-- Yearly and monthly totals for the family -->
+					<h3> Monthly Total: <span id = "monthly-total"> </span> </h3> 
+					<h3> Yearly Total: <span id = "yearly-total"> </span> </h3>
+					
+				</div>
+
+			<div class="main-info-sub-container">
+				<table id="stats-table">
+					<thead>
+						<th>Week</th>
+						<th>Total Hours</th>
+						<th>Requirements Met</th>
+					</thead>
+					<tbody id="stats-table-body">
+						<!--Table data will be inserted here -->
+
+					</tbody>
+				</table>
+
 			</div>
 
-			<br><br>
-		<div id = "table" >
-			<table >
-				<tr>
-					<th>Week</th>
-					<th>Total Hours</th>
-					<th>Requirements Met</th>
-				</tr>
-				<tr>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-				</tr>
-			
-			</table>
-		
-		</div>
-			
-		</div>
-		
+		</div> <!--end of main info container -->
 
 		<!-- This section of code inserts the admin header for the page -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+
 		<script type="text/javascript"> 
 		jQuery(document).ready(function($){
 			$("body .main-container").load("adminHeader.html");
 		});
 		</script>
-		
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+		<script>
+			if( !window.jQuery ) document.write('<script src="../script/jquery-3.0.0.min.js"><\/script>');
+		</script>
+
+		<script type = "text/javascript" src="../script/admin-family-stats.js"></script> <!-- Resource jQuery -->
 	</body>
 </html>

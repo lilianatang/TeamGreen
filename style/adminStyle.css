@@ -1,51 +1,71 @@
-/* Admin style page */
-/* Source for 'The magic Float Center Code' https://codepen.io/alexandredees/pen/ojaFr*/
 
-#selections {
-	margin-top: 20px;
-	margin-bottom: 40px;
-	margin-right: 50px;
 
-	/* The Magic Float Center Code */
-	float: right;
-	position: relative;
-	left: -50%; /* or right 50% */
-	text-align: left;
+
+/* selection container css */
+
+#main-selection-container{
+	text-align: center;
 	
-	/* background-color: blue; */
 }
 
-/* The Magic Float Center Code */
-#selections > .selection {
-  position: relative;
-  left: 50%;
+
+#selections{
+	display: inline-block;
 }
 
-#family-info{
-	/* float: bottom; */
-	float: left;
-	background-color: orange;
-	margin-left: 50px;
-}
 
-#table {
-	float: right;
-	background-color: yellow;
-	
-	margin-right: 50px;
-}
-
+/* sub containers of selections */
 .selection{
-	text-align: left;
-	margin-left: 100px;
-	overflow: hidden;
+	margin-right: 10px;
+	display: inline-block;
 	float: left;
 }
 
-select {
-	font-size: 15px;
+
+/* styl for the section boxs*/
+.select{
+	height: 25px;
+	width: 130px;
+	/* code to get semi-round select button look */
+	-webkit-border-radius: 5px;
+  	-moz-border-radius: 5px;
+   	border-radius: 5px;
 }
 
-table {
-	border: black;
+
+/*button container */
+#button-container{
+	margin-top: 20px;
+}
+
+/* family info and table css */
+
+#main-info-container{
+	margin-top: 10px;
+	text-align: center;
+
+
+}
+
+.main-info-sub-container{
+	display: inline-block;
+	
+	margin: 20px;
+}
+
+
+#stats-table{
+	border-collapse: collapse;
+}
+
+#stats-table th{
+	padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #51ca1e;
+}
+
+#stats-table td, #stats-table th{
+	border: 1px solid #ddd;
+    padding: 8px;
 }
