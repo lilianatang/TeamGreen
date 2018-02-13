@@ -75,7 +75,7 @@ jQuery(document).ready(function() {
 				for (var i = 0; i < new_days.length; i ++){
 					
 					/* Adjust the event count accordingly */
-					if (date === prev_date){
+					if (count < 4){
 						count ++;
 					}
 					else {

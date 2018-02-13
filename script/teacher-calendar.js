@@ -56,10 +56,11 @@ jQuery(document).ready(function($){
 
 		// Clear any facilitator data that may be present already
 		$facilitator_list.html("");
-		
+		console.log(slot_id);
 		// Go gather a list of facilitators and their notes from the database 
 		$.post("../include_php/get-facilitators-from-slot-id.php", { s_id: slot_id }, function (data){
 		
+			console.log(data);
 			var facilitator_info = data.split(",");
 			facilitator_info.pop();
 			
